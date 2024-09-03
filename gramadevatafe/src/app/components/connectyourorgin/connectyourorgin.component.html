@@ -1,0 +1,68 @@
+<ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+			type="ball-spin-clockwise">
+		</ngx-spinner>
+ <form nz-form [formGroup]="validatorForm" class="connect-your-village-form">
+    
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-md-6">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please select a state">
+                        <label>State</label>
+                        <select formControlName="state" class="form-control">
+                            <label for="state">state</label>
+                            <option value="" disabled selected>Select state</option>
+                            <option *ngFor="let option of StateOptions" [value]="option.value">{{ option.label }}</option>
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col-md-6">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please select a district">
+                        <label>District/City</label>
+                        <select formControlName="district" class="form-control">
+                            <option value="" disabled selected>Select district</option>
+                            <option *ngFor="let option of DistrictOptions" [value]="option.value">{{ option.label }}</option>
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please select a mandal">
+                        <label>Block/Mandal/Town</label>
+                        <select formControlName="mandal" class="form-control">
+                            <option value="" disabled selected>Select mandal</option>
+                            <option *ngFor="let option of MandalOptions" [value]="option.value">{{ option.label }}</option>
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="col-md-6">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please select a village">
+                        <label>Village/Area</label>
+                        <select formControlName="village" class="form-control">
+                            <option value="" disabled selected>Select village</option>
+                            <option *ngFor="let option of VillageOptions" [value]="option.value">{{ option.label }}</option>
+                        </select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div class="text-center">
+            <button nz-button  class="login-form-button login-form-margin btn-primary" (click)="OnSubmit()" [nzType]="'primary'">Submit</button>
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-8 text-end">
+                <a>Don't find a village you're looking for ?</a>
+            </div>
+            <div class="col-md-4">
+                <button (click)="navigate()"><i class="fa-solid fa-house"></i>Add your village</button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,22 @@
+.fixed-tree-view {
+    position: fixed;
+    top: 18vh; /* Adjust as needed */
+    left: 0;
+    width: 25%; /* Adjust as needed */
+    height: 100%; /* Adjust as needed */
+    overflow-y: auto;
+}
+
+
+.responsive-img {
+    width: 15vw;
+    height: 20vh;
+
+    margin: 10px 0px 10px 0px;
+  }
+  
+  @media (max-width: 767.98px) {
+    .responsive-img {
+      width: 100%; 
+    }
+  }

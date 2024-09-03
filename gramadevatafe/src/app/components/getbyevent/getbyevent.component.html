@@ -1,0 +1,40 @@
+<div class="container mt-5 mb-5">
+    <div class="row" style="margin-top: 100px;">
+        <div *ngFor="let temple of templedata" class="col-12 mb-5">
+            <h4 class="mb-5 text-center">Detailed View of {{ temple.name }}</h4>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <div class="image-container mb-5">
+                        <a>
+                            <img [src]="temple.image_location ? 'data:image/jpeg;base64,' + temple.image_location : 'assets/ohm.jpg'" 
+                                 alt="image" 
+                                 class="img-fluid rounded"
+                                 style="height:400px;width:500px;max-width:100%;">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="details" style="margin-top: 50px;">
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Name:</b></span> {{ temple.name }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Address:</b></span> {{ temple.address }}
+                        </div>
+                        <div class="detail">
+                            <span class="detail-label"><b>Map Location:</b></span>
+                            <a (click)="openMap(temple.temple_map_location)" href="Temple Map Location">Temple Map Location</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-12">
+                <h4>Comments</h4>
+                <textarea class="textarea form-control mb-3"></textarea>
+                <div>
+                    <button class="btn my-4 text-primary" style="border-radius: 10px; border: 2px solid #FF6800;">Add Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

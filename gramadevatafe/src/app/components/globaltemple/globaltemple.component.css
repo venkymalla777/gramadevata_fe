@@ -1,0 +1,23 @@
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+.responsive-img {
+  width: 15vw;
+  height: auto;
+
+  margin: 10px 0px 10px 0px;
+}
+
+@media (max-width: 767.98px) {
+  .responsive-img {
+    width: 100%; 
+  }
+}
+  
+  

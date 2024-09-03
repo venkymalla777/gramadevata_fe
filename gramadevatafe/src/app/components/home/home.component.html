@@ -1,0 +1,289 @@
+
+<div>
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+			type="ball-spin-clockwise">
+		</ngx-spinner>
+    <div class="container mt-5 ">
+        <div class="row mb-5 text-center">
+            <div class="col-12 " style="margin-top: 70px;">
+                <img src="../../../assets/Gramadevata banner (1).png" class="img-fluid responsive-image" alt="Temple Image" style="border-radius: 31px; text-align: center;">
+            </div>
+        </div>
+        
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 col-md-5  order-md-1 text-center">
+                <img src="../../../assets/gramadevata2.jpg" style="border-radius: 31px; text-align: center;" class="gramadevatha-image"   alt="Temple Image">
+            </div>
+            <div class="col-12 col-md-7 order-md-2">
+                <h1 style="font-size: 30px; font-weight: bold; text-align: justify;" class="mt-2 mb-4">Our Village - Our Temple - Our Deity</h1>
+                <p class="text-left " style="font-size: 18px; text-align: justify">Here’s where heritage meets heart, and roots intertwine with reverence. 
+                    In the hustle and bustle of our modern lives, the echoes of tradition and the whispers of our ancestors often fade away.
+                     But here in Gramadevata, in this sacred space, we invite you on a journey to rediscover the essence of your origins, 
+                     to connect with the spiritual tapestry that weaves through generations. 
+                 </p>
+                
+                <!-- <button (click)="navigateTo('aboutus')" class="p-2 mt-3" style="border:none; background-color:rgb(235, 117, 6); border-radius: 25px; color: white; width:150px;">Read More</button> -->
+                <a class = "text-white" href="../../../assets/Gramadevata Foundation note.pdf" target="_blank">
+                    <!-- <button class="btn btn-primary px-4 me-md-2 text-white" >Read more</button> -->
+                    <button class="btn btn-primary px-4 me-md-2 text-white" style="background-color: orange; border-color: orange;">Read more</button>
+    
+                  </a>
+            </div>
+        </div>
+        </div>
+          <br>
+            <!-- connect Your orgini -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Connect Your Origin</h1>
+                            <div class="row text-center">
+                                <div *ngFor="let village of villages; let i = index" class="col-6 col-md-3 mt-3">
+                                    <a  (click)="navigateToVillageDetail(village._id)">
+                                        <img [src]="'../../../assets/village' + (i + 1) + '.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class="img-fluid img-thumbnail mx-2" [alt]="'Village ' + (i + 1) + ' Image'">
+                                    </a>
+                                    <p class="text-center">{{ village.name }}</p>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center mt-3">
+                                <p>All villages, towns, and cities in India</p>
+                                <button (click)="openVillageDialog()" class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;">Connect Your origin</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   
+        <br>
+               <!-- temples -->
+                
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                               <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Temples</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div *ngFor="let templeCategory of templeCategories" class="col-6 col-md-3">
+                                <div class="text-center">
+                                    <a  (click)="navigateToCategoryDetail(templeCategory)">
+                                        <!-- <img [src]="templeCategory.pic ? 'data:image/jpeg;base64,' + templeCategory.pic : 'assets/ohm.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class="img-fluid img-thumbnail mx-2" alt="image"> -->
+                                        <img [src]="templeCategory.pic ? templeCategory.pic : 'assets/ohm.jpg'"
+                                            alt="image"
+                                            class="img-fluid img-thumbnail mx-2"
+                                            style="height: 25vh; width: 30vh; border-radius:20px;"
+                                            (error)="handleImageError($event)">
+                                    </a>
+                                    <p class="text-center">{{ templeCategory.name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+            
+                <div class="col-12 text-center mt-3">
+                  
+                   
+                    <button (click)="navigateToTempleFilters()" class="p-2" style="border-width: 0px; background-color: rgb(241, 124, 15); border-radius: 20px; color: white; margin-right: 10px;">
+                        View more Temples
+                      </button>
+                      
+                      
+            </div>
+               
+                
+                
+<!-- goshalas -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 style="font-size: 30px;font-weight: bold;" class="text-center mt-3">Goshalas</h1>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div *ngFor="let goshalaCategory of goshalaCategories" class="col-6 col-md-3 mt-3">
+            <a (click)="navigateToGoshalaCategoryDetail()">
+                <!-- <img [src]="goshalaCategory.pic ? 'data:image/jpeg;base64,' + goshalaCategory.pic : 'assets/ohm.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class="img-fluid img-thumbnail mx-2" alt="image"> -->
+                <img [src]="goshalaCategory.pic ? goshalaCategory.pic : 'assets/ohm.jpg'"
+                alt="image"
+                class="img-fluid img-thumbnail mx-2"
+                style="height: 25vh; width: 30vh; border-radius:20px;"
+                (error)="handleImageError($event)">
+            </a>
+            <p class="text-center">{{goshalaCategory .name }}</p>
+            
+        </div>
+        <div class="col-12 text-center mt-3">
+            
+            <button (click)="navigateToGoshalaCategoryDetail()" class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;">View more Goshalas</button>
+           
+        </div>
+    </div>
+</div>
+
+              
+        <br>
+                <!-- events -->
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 style="font-size: 30px;font-weight: bold;" class="text-center mt-3">Events</h1>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div *ngFor="let eventcategorydata of eventCategories" class="col-6 col-md-3 mt-3">
+                            <a (click)="navigateToEventsCategoryDetail()">
+                                <!-- <img [src]="eventcategorydata.pic ? 'data:image/jpeg;base64,' + eventcategorydata.pic : 'assets/ohm.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class=" img-fluid img-thumbnail mx-2" alt="image"> -->
+                                 <img [src]="eventcategorydata.pic ? eventcategorydata.pic : 'assets/ohm.jpg'"
+                                 alt="image"
+                                 class="img-fluid img-thumbnail mx-2"
+                                 style="height: 25vh; width: 30vh; border-radius:20px;"
+                                 (error)="handleImageError($event)">
+                            </a>
+                            <p class="text-center">{{eventcategorydata .name }}</p>
+                            
+                        </div>
+                        <div class="col-12 text-center mt-3">
+                            <!-- <p>All villages, towns, and cities in India</p> -->
+                            <button (click)="navigateToEventsCategoryDetail()" class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;">View More Events</button>
+                           
+                        </div>
+                    </div>
+                </div>
+
+
+
+    
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 style="font-size: 30px;font-weight: bold;" class="text-center mt-3">Your Connections</h1>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div *ngFor="let connectiondata of connectiondata" class="col-6 col-md-3 mt-3">
+                            <a (click)="navigateTempleDetail(connectiondata.temple._id)">
+                                <!-- <img [src]="connectiondata.temple.image_location ? 'data:image/jpeg;base64,' + connectiondata.temple.image_location : 'assets/ohm.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class=" img-fluid img-thumbnail mx-2" alt="image"> -->
+                                <img [src]="connectiondata.temple.image_location ? connectiondata.temple.image_location : 'assets/ohm.jpg'"
+                                 alt="image"
+                                 class="img-fluid img-thumbnail mx-2"
+                                 style="height: 25vh; width: 30vh; border-radius:20px;"
+                                 (error)="handleImageError($event)">
+                            </a>
+                            <p class="text-center">{{connectiondata.temple.name }}</p>
+                            
+                        </div>
+                        <div class="col-12 text-center mt-3">
+                            <button class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;" (click)="navigateTo('connections')">View Your Connections</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+                <!-- <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 style="font-size: 30px;font-weight: bold;" class="text-center mt-3">Your Connections</h1>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 d-flex justify-content-center align-items-center flex-wrap mt-3">
+                            <img src="../../../assets/village2.jpg" alt="image" class="img-fluid img-thumbnail mx-2" style="height: 25vh; width: 30vh; border-radius:20px;">
+                            <img src="../../../assets/Kamakshi_Ambal_Temple-1024x576.jpeg" alt="image" class="img-fluid img-thumbnail mx-2" style="height: 25vh; width: 30vh; border-radius:20px;">
+                            <img src="../../../assets/brahmotsavam.jpg" alt="image" class="img-fluid img-thumbnail mx-2" style="height: 25vh; width: 30vh; border-radius:20px;">
+                            <img src="../../../assets/g1.jpg" alt="image" class="img-fluid img-thumbnail mx-2" style="height: 25vh; width: 30vh; border-radius:20px;">
+                        </div>
+                        <div class="col-12 text-center mt-3">
+                            <button class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;" (click)="navigateTo('connections')">View Your Connections</button>
+                        </div>
+                    </div>
+                </div> -->
+                
+                
+
+                    
+                
+      
+                
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h5>Can't find what you are looking for?</h5>
+                        <p>If you are unable to find your temple, village or goshala, kindly add it here.</p>
+                        
+                            <button (click)="navigateTo('addtemple')" class="m-2 mr-5" style="border-width: 1px;background-color:rgb(238, 141, 51);border-radius: 25px;color:black;width:170px;height: 65px;font-size: 18px;">
+                                <i class="fas fa-gopuram faicon"></i>
+                                Add Temple
+                            </button>
+                       
+                       
+                        
+                            <button (click)="navigateTo('addgoshala')" class="p-2 m-2 mr-5" style="border-width: 1px;background-color:rgb(238, 141, 51);border-radius: 25px;color:black;width:170px;height: 65px;font-size:18px;">
+                                <i class="fa-solid fa-cow"></i>
+                                Add Goshala
+                            </button>
+                          
+                        
+                        <button (click)="navigateTo('addevent')" class="p-2 m-2 mr-5" style="border: 1px solid rgb(238, 141, 51); background-color: rgb(238, 141, 51); border-radius: 25px; color: black; width: 170px; height: 65px; font-size: 18px;">
+                            <i class="fas fa-calendar-alt faicon"></i>
+                            Add Event
+                        </button>
+                     
+                        <div class="mt-2 text-center d-flex justify-content-center align-items-center">
+                            <p class="m-0">Invite your Friends and Family members</p>
+                            <a href="#" class="ml-3"><i class="fas fa-share-alt text-info"></i></a>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+
+            <!-- <div class="container vh-10 d-flex justify-content-center align-items-center mb-3">
+                <div class="row">
+                    <div class="col text-center">
+                        <img src="../../../assets/HINDU PULSE logo.png" alt="HINDU PULSE logo" style="width: 70px; height: 70px;">
+                        <img src="../../../assets/OM SANATANA  logo.png" alt="OM SANATANA logo" style="width: 70px; height: 70px;">
+                        <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="THE HINDU'S WORLD logo" style="width: 70px; height: 70px;">
+                        <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" style="width: 70px; height: 70px;">
+                    </div>
+                </div>
+            </div>          -->
+
+            <!-- <div class="container vh-10 d-flex justify-content-center align-items-center">
+                <div class="row">
+                    <div class="col text-center">
+                        
+                        <img src="../../../assets/HINDU PULSE logo.png" alt="HINDU PULSE logo" class="d-none d-lg-inline" style="width: 100px; height: 100px;">
+                        <img src="../../../assets/OM SANATANA  logo.png" alt="OM SANATANA logo" class="d-none d-lg-inline" style="width: 100px; height: 100px;">
+                        <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="THE HINDU'S WORLD logo" class="d-none d-lg-inline" style="width: 100px; height: 100px;">
+                        <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" class="d-none d-lg-inline" style="width: 100px; height: 100px;">
+        
+                        
+                        <img src="../../../assets/HINDU PULSE logo.png" alt="HINDU PULSE logo" class="d-none d-md-inline d-lg-none" style="width: 70px; height: 70px;">
+                        <img src="../../../assets/OM SANATANA  logo.png" alt="OM SANATANA logo" class="d-none d-md-inline d-lg-none" style="width: 70px; height: 70px;">
+                        <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="THE HINDU'S WORLD logo" class="d-none d-md-inline d-lg-none" style="width: 70px; height: 70px;">
+                        <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" class="d-none d-md-inline d-lg-none" style="width: 70px; height: 70px;">
+        
+                        
+                        <img src="../../../assets/HINDU PULSE logo.png" alt="HINDU PULSE logo" class="d-inline d-md-none" style="width: 50px; height: 50px;">
+                        <img src="../../../assets/OM SANATANA  logo.png" alt="OM SANATANA logo" class="d-inline d-md-none" style="width: 50px; height: 50px;">
+                        <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="THE HINDU'S WORLD logo" class="d-inline d-md-none" style="width: 50px; height: 50px;">
+                        <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" class="d-inline d-md-none" style="width: 50px; height: 50px;">
+                    </div>
+                </div>
+            </div> -->
+</div>
+
+
+    
+
+
+

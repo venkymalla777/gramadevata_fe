@@ -1,0 +1,50 @@
+
+
+
+            <div class="container mt-5 mb-5">
+                <div class="row" style="margin-top: 100px;">
+                    <div  class="col-12 mb-5">
+                        <h4 class="mb-5 text-center">Detailed View of {{ goshaladata.name }}</h4>
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <div class="image-container mb-5">
+                                    <a>
+                                        <img [src]="goshaladata.image_location ? 'data:image/jpeg;base64,' + goshaladata.image_location : 'assets/ohm.jpg'" 
+                                             alt="image" 
+                                             style="height:400px;width:500px;border-radius: 20px;">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-left">
+                                <div class="details " style="margin-top: 170px;">
+                                    <div class="detail mb-3">
+                                        <span class="detail-label"><b>Name:</b></span>   {{ goshaladata.name }}
+                                    </div>
+                                    <div class="detail mb-3">
+                                        <span class="detail-label"><b>Address:</b></span>   {{ goshaladata.address }}
+                                    </div>
+                                    <div class="detail">
+                                        <span class="detail-label"><b>Map Location:</b></span>
+                                        <a (click)="openMap(goshaladata.map_location)" href="Temple Map Location">    Temple Map Location</a>
+                                    </div>
+                                    
+                                       
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="container ">
+                            <h4>Comments</h4>
+                            <textarea class="large-textarea"></textarea>
+                            <div>
+                                <button class="btn my-4 text-primary" style="border-radius: 10px; border: 2px solid #FF6800;"> Add Comment</button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+

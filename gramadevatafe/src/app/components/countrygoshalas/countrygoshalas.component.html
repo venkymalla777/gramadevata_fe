@@ -1,0 +1,27 @@
+
+
+<div class="container mt-5">
+    <div class="row" style="margin-top: 70px;">
+        <div class="col-12">
+            <h1 style="font-size: 30px; font-weight: bold;" class="text-center">{{ countriesdata.name }} Goshalas</h1>
+        </div>
+    </div>
+    <div class="row">
+        <ng-container *ngIf="countrydata && countrydata.length > 0; else noDataTemplate">
+            <div *ngFor="let goshala of countrydata" class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3">
+                <a (click)="navigategoshaladata(goshala)">
+                    <img [src]="goshala.image_location ? 'data:image/jpeg;base64,' + goshala.image_location : 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                </a>
+                <p class="text-center">{{ goshala.name }}</p>
+            </div>
+        </ng-container>
+        <ng-template #noDataTemplate>
+            <div class="col-12 text-center " style="margin-top: 50px; margin-bottom: 50px;">
+                <img src="../../../assets/not _found.jpg" alt="No Data Found" style="height: 300px; width: auto;">
+                <p>No Data Found</p>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+

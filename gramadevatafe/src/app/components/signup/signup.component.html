@@ -1,0 +1,125 @@
+<!-- 
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="mt-5">
+  <div class="container" >
+    <div class="row justify-content-center overflow-auto">
+      <div class="col-md-8">
+        <div>
+          <div class="card-header">
+            <h3>Sign In</h3>
+          </div>
+          <div class="card-body">
+
+            <div class="mb-3">
+              <div>
+                <label for="username" class="form-label">Username:</label>
+                <input id="username" formControlName="username" type="text" class="form-control" />
+                
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="password" class="form-label">Password:</label>
+                <input id="password" formControlName="password" type="password" class="form-control" />
+                <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)" class="text-danger">
+                  Password is required (min 6 characters).
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="confirmPassword" class="form-label">Confirm Password:</label>
+                <input id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control" />
+                <div *ngIf="signupForm.get('confirmPassword')?.invalid && (signupForm.get('confirmPassword')?.dirty || signupForm.get('confirmPassword')?.touched)" class="text-danger">
+                  Confirm Password is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="first_name" class="form-label">First Name:</label>
+                <input id="first_name" formControlName="first_name" type="text" class="form-control" />
+                <div *ngIf="signupForm.get('first_name')?.invalid && (signupForm.get('first_name')?.dirty || signupForm.get('first_name')?.touched)" class="text-danger">
+                  First name is required.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="last_name" class="form-label">Last Name:</label>
+                <input id="last_name" formControlName="last_name" type="text" class="form-control" />
+                <div *ngIf="signupForm.get('last_name')?.invalid && (signupForm.get('last_name')?.dirty || signupForm.get('last_name')?.touched)" class="text-danger">
+                  Last name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="dob" class="form-label">Date of Birth:</label>
+                <input id="dob" formControlName="dob" type="date" class="form-control" />
+                <div *ngIf="signupForm.get('dob')?.invalid && (signupForm.get('dob')?.dirty || signupForm.get('dob')?.touched)" class="text-danger">
+                  Date of Birth is required.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="gotram" class="form-label">Gotram:</label>
+                <input id="gotram" formControlName="gotram" type="text" class="form-control" />
+                <div *ngIf="signupForm.get('gotram')?.invalid && (signupForm.get('gotram')?.dirty || signupForm.get('gotram')?.touched)" class="text-danger">
+                  Gotram is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-5 text-center">
+              <button type="submit" class="btn btn-outline-warning">Register</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> -->
+
+
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="mt-3">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10" style="width: 350px;">
+        <div>
+          <div class="text-center" style="color: orange; font-size: 22px;">
+            <p>
+              <img src="../../../assets/icon.jpg" alt="Logo" style="border-radius: 50%; width: 50px; height: 50px; vertical-align: middle; margin-right: 10px;">
+              Welcome to Gramdevatha
+            </p>
+          </div>
+          <div class="text-center">
+            <h3>Sign in</h3>
+          </div>
+          <div>
+            <div class="mb-3 card">
+              <!-- <div class="text-center">
+                
+                <input id="username" formControlName="username" placeholder="Enter Email or Phone Number" type="text" class="form-control" />
+              </div> -->
+              <div class="text-center">
+                <input
+                  id="username"
+                  formControlName="username"
+                  placeholder="Enter Email or Phone Number"
+                  type="text"
+                  class="form-control"
+                />
+                <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched" class="text-danger">
+                  Please enter a valid email address or phone number.
+                </div>
+              </div>
+              
+              
+            </div>
+            <div class="mb-5 text-center">
+              <button type="submit" class="btn btn-outline-warning">Continue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

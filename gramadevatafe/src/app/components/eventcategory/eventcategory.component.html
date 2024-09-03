@@ -1,0 +1,23 @@
+
+
+    <div class="container" style="margin-top: 100px;">
+        <div class="row">
+            <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Events catagory</h1>
+        </div>
+        <div class="row">
+            <div *ngFor="let eventcategorydata of eventcategorydata" class="col-md-6 col-lg-3">
+                
+                    <a (click)="navigateToeventCategoryDetail(eventcategorydata)">
+                        <img [src]="eventcategorydata.pic ? 'data:image/jpeg;base64,' + eventcategorydata.pic : 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                    </a>
+                    <p class="text-center">{{ eventcategorydata.name }}</p>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+ 
+    
+    

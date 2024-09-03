@@ -1,0 +1,120 @@
+<div class="container p-4" *ngIf="!userservice.isMemberIn;" >
+    <form [formGroup]="memberform">
+        <div >
+            <div class="row">
+                <h3 class="text-center">Pujari Registration</h3>
+            </div>
+
+            <div class="row ">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Full Name*</label>
+                        <input type="text" class="form-control" formControlName="full_name" placeholder="Enter the Full Name">
+                        <div *ngIf="memberform.get('full_name')?.invalid && (memberform.get('full_name')?.dirty || memberform.get('full_name')?.touched)" class="text-danger">
+                            Full name required
+                          </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="surname">Father Name*</label>
+                        <input type="text" class="form-control" formControlName="father_name" placeholder="Enter the Father's Name">
+                        <div *ngIf="memberform.get('father_name')?.invalid && (memberform.get('father_name')?.dirty || memberform.get('father_name')?.touched)" class="text-danger">
+                            Father's Name required
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="father_name">Date of birth*</label>
+                        <input type="date" class="form-control" formControlName="dob" placeholder="Enter the Date of birth">
+                        <div *ngIf="memberform.get('full_name')?.invalid && (memberform.get('full_name')?.dirty || memberform.get('full_name')?.touched)" class="text-danger">
+                            Date of Birth required
+                          </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="contact_number">Contact Number</label>
+                        <input type="text" class="form-control" formControlName="contact_number" placeholder="Enter the contact number">
+                        <div *ngIf="memberform.get('full_name')?.invalid && (memberform.get('full_name')?.dirty || memberform.get('full_name')?.touched)" class="text-danger">
+                            Contact Number required
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="you_belongs_to_the_village">pujari certificate</label>
+                        <input type="text" class="form-control" formControlName="pujari_certificate" placeholder="Enter the pujari certificate Number">
+                        <div *ngIf="memberform.get('pujari_certificate')?.invalid && (memberform.get('pujari_certificate')?.dirty || memberform.get('pujari_certificate')?.touched)" class="text-danger">
+                            pujari certificate required
+                          </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="working_temple">Working Temple</label>
+                        
+                            <input type="text" class="form-control" formControlName="working_temple" placeholder="Enter the pujari working temple">
+                            <div *ngIf="memberform.get('working_temple')?.invalid && (memberform.get('working_temple')?.dirty || memberform.get('working_temple')?.touched)" class="text-danger">
+                                Working Temple required
+                              </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 text-center" >
+                    <button (click)="onSubmit()">Submit</button>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</div>
+
+
+
+<div class="container p-4" *ngIf="userservice.isMemberIn;" >
+    <form [formGroup]="memberform">
+        <div >
+            <div class="row">
+                <h3 class="text-center">Pujari Registration</h3>
+            </div>
+
+            
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="you_belongs_to_the_village">pujari certificate</label>
+                        <input type="text" class="form-control" formControlName="pujari_certificate" placeholder="Enter the pujari certificate Number">
+                        <div *ngIf="memberform.get('pujari_certificate')?.invalid && (memberform.get('pujari_certificate')?.dirty || memberform.get('pujari_certificate')?.touched)" class="text-danger">
+                            pujari certificate required
+                          </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="working_temple">Working Temple</label>
+                        
+                            <input type="text" class="form-control" formControlName="working_temple" placeholder="Enter the pujari working temple">
+                            <div *ngIf="memberform.get('working_temple')?.invalid && (memberform.get('working_temple')?.dirty || memberform.get('working_temple')?.touched)" class="text-danger">
+                                Working Temple required
+                              </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 text-center" >
+                    <button (click)="onSubmit()">Submit</button>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</div>

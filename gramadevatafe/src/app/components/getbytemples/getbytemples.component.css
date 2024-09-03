@@ -1,0 +1,17 @@
+.large-textarea {
+    width: 1200px;
+    height: 100px; /* Adjust the height as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+}
+
+
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }

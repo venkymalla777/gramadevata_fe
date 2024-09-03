@@ -1,0 +1,116 @@
+<!-- 
+
+
+<div class="d-flex flex-row">
+    <div class="container w-25 px-5" style="padding-top: 93px; overflow: auto; height: 100%;">
+       
+        <div class="overflow-y-scroll" style="height: 100vh; overflow-y: auto;">
+
+                <div *ngFor="let countries of countries">
+                    <label (click)="navigatecontrybytemples(countries)" class="py-2" >{{countries.name}}</label>
+                </div>  
+        </div>
+    </div>
+
+    <div class="container text-center mt-3" >
+        <h1 style="margin-top: 70px;">Global Events</h1>
+        <div class="row " style="overflow-y: auto; height: calc(100vh - 93px);">
+            <div *ngFor="let event of globalevent" class="col-6 col-lg-3 text-center" style="margin-top: 21px;">
+                <div class="image-container text-center">
+                    <a (click)="navigateEventdata(event)">
+                        <img [src]="event.image_location ? 'data:image/jpeg;base64,' + event.image_location : 'assets/ohm.jpg'" style="height: 30vh; width: 30vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                    </a>
+                    <p>{{ event.name }}</p>
+                   
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</div> -->
+
+
+<section class="header-m">
+    
+    <div class="container-fluid p-5 mt-5 ">
+        <div class="row text-center">
+            <!-- <h1><h1>WorldWide Events</h1></h1> -->
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-lg-2">
+                <app-tree-view (nodeClick)="onLocationClick($event)"  [treeType]="'global'"></app-tree-view>
+            </div>
+            <div class="col-md-8 col-lg-8" style="overflow-y: scroll; height: 80vh;">
+                <section>
+                    <div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-12 col-lg-4 col-sm-12 mb-3 text-center ">
+                                <img [src]="country.image_location ? 'data:image/jpeg;base64,' + country.image_location : 'assets/ohm.jpg'" 
+                                     alt="image" 
+                                     class="img-fluid" 
+                                     style="height: 25vh; width: 15vw; ">
+                            </div>
+                            <div class="col-lg-8">
+                                <h4 class="text-left times-new-roman mt-3 mt-lg-0 mb-2 mb-lg-3" style="font-size: 24px;"><b>{{ country.name }} Events</b></h4>
+                                <p class="text-left times-new-roman" style="font-size: 20px; color: rgb(216, 29, 29);">Capital:  {{ country.capital }}</p>
+                                <p class="text-left times-new-roman " style="font-size: 20px; color: orangered ">Hindu Population {{ country.hindu_population }}</p>
+                                <p class="text-left times-new-roman" style="font-size: 20px; color:rgb(33, 90, 155)">Total Population {{ country.overall_population }}</p>
+
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="container">
+                            <div class="row">
+                              
+                            </div>
+                            <div class="slider-div">
+                                <ng-container *ngIf="globalevent && globalevent.length > 0; else noData">
+                                    <div class="row">
+                                        <div *ngFor="let event of globalevent" class="col-12 col-sm- col-md-4 col-lg-3 mb-4">
+                                            <div class="image-container text-center">
+                                                <a (click)="navigateEventdata(event)" >
+                                                    <img [src]="event.image_location ? 'data:image/jpeg;base64,' + event.image_location : 'assets/ohm.jpg'" 
+                                                         alt="image" 
+                                                         class="img-fluid"
+                                                         style="height: 20vh; width: 30vw; object-fit: cover;">
+                                                </a>
+                                                <p class="my-2">{{ event.name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #selectionTemplate>
+                        <div class="container">
+                            <div class="row text-center">
+                                <p>Select the state from filters for temples</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template #noData>
+                        <div class="row text-center">
+                            <div class="col">
+                                <img src="../../../assets/not _found.jpg" alt="No Data" class="img-fluid" style="width: 30%;" />
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col">
+                                <p>No Data Found</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </section>
+            </div>
+            <div class="col-md-3 col-lg-2">
+                <app-tree-view (nodeClick)="onCategoryClick($event)" [treeType]="'eventcategory'"></app-tree-view>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

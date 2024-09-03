@@ -1,0 +1,5 @@
+.image-container img {
+    height: 200px; /* Adjust the height as per your requirement */
+    width: 100%; /* Ensures the image takes up the full width of its container */
+    object-fit: cover; /* Maintains aspect ratio and covers the entire container */
+}

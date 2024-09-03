@@ -1,0 +1,80 @@
+<!-- <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="mt-3">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10" style="width: 350px;">
+          <div>
+            <div class="text-center" style="color: orange; font-size: 22px;">
+              <p>     
+                OTP Verification
+              </p>
+            </div>
+            <div class="text-center">
+              <p>Check text messages for your OTP</p>
+            </div>
+            <div>
+              <div class="mb-3 card">
+               
+
+                <input 
+                    id="verification_otp" 
+                    formControlName="verification_otp" 
+                    placeholder="Enter verification otp" 
+                    type="text" 
+                    class="form-control"
+                  />
+                  <div *ngIf="verificationForm.get('verification_otp').touched">
+                    <div *ngIf="verificationForm.get('verification_otp').hasError('required')">
+                      OTP is required.
+                    </div>
+                    <div *ngIf="verificationForm.get('verification_otp').hasError('pattern')">
+                      OTP must be exactly 6 digits.
+                    </div>
+
+                
+                  </div>
+              <div class="mb-5 text-center">
+                <button type="submit" class="btn btn-outline-warning">Continue</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form> -->
+
+
+  <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="mt-3">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10" style="width: 350px;">
+          <div class="text-center" style="color: orange; font-size: 22px;">
+            <p>OTP Verification</p>
+          </div>
+          <div class="text-center">
+            <p>Check text messages for your OTP</p>
+          </div>
+          <div class="mb-3 card">
+            <input 
+              id="verification_otp" 
+              formControlName="verification_otp" 
+              placeholder="Enter verification otp" 
+              type="text" 
+              class="form-control"
+            />
+            <div *ngIf="verifyForm.get('verification_otp')?.touched && verifyForm.get('verification_otp')?.invalid" class="text-danger">
+              <div *ngIf="verifyForm.get('verification_otp')?.hasError('required')">
+                OTP is required.
+              </div>
+              <div *ngIf="verifyForm.get('verification_otp')?.hasError('pattern')">
+                OTP must be exactly 6 digits.
+              </div>
+            </div>
+            <div class="mb-5 text-center">
+              <button type="submit" class="btn btn-outline-warning">Continue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  

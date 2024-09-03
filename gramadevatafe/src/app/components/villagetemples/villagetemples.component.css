@@ -1,0 +1,17 @@
+.scroll-container {
+    overflow-x: auto; 
+    white-space: nowrap; 
+    padding: 10px;
+  }
+  
+  .scroll-row {
+    display: flex; 
+    flex-wrap: nowrap; 
+    gap: 1rem;
+  }
+  
+
+  *::-webkit-scrollbar {
+    width: 0px !important;
+    background-color: white !important;
+  }

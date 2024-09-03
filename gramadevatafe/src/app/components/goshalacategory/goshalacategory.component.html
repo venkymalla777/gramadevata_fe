@@ -1,0 +1,42 @@
+
+
+<!-- 
+    <div class="row" style="overflow: hidden;">
+        <div class="container">
+            <h1 style="font-size: 30px;font-weight: bold; margin: 100px;" class="text-center">Goshalacatagory</h1>
+            <div class="row">
+                <div *ngFor="let goshalacategory of goshalacategoryies" class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <a>
+                            <img [src]="goshalacategory.pic ? 'data:image/jpeg;base64,' + goshalacategory.pic : 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                        </a>
+                        <p class="text-center">{{ goshalacategory.name }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+            <h1 style="font-size: 30px;font-weight: bold; margin: 100px;" class="text-center">Goshalacatagory</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngFor="let goshalacategory of goshalacategoryies" class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <a (click)="navigateToGoshalaCategoryDetail(goshalacategory)">
+                        <img [src]="goshalacategory.pic ? 'data:image/jpeg;base64,' + goshalacategory.pic : 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                    </a>
+                    <p class="text-center">{{ goshalacategory.name }}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+
+
+    

@@ -1,0 +1,51 @@
+
+<div class="d-flex flex-row">
+    <div class="container w-25 px-5" style="padding-top: 93px; overflow: auto; ">
+       
+        <div class="overflow-y-scroll" style="height: 100vh; overflow-y: auto;">
+
+                <div>
+                    <p><b>{{blockdata.name}}</b></p>
+                    <div *ngFor="let village of villages">
+                        <label class="px-4 py-2" (click)="navigatetovillageGoshals(village)">{{village.name}}</label>
+                    </div>
+                </div>
+                         
+            
+        </div>
+    </div>
+
+    <div class="container text-center mt-5" >
+        <h1 class="fixed-heading mt-4">{{blockdata.name}} Goshalas</h1>
+        <div class="row" style="overflow-y: auto; height: calc(100vh - 93px);">
+            <ng-container *ngIf="blockgoshalas && blockgoshalas.length > 0; else noData">
+            <div *ngFor="let goshala of blockgoshalas" class="col-6 col-lg-3 text-center" style="margin-top: 51px;">
+                <div class="image-container text-center">
+                    <a (click)="navigategoshaladata(goshala)">
+                        <img [src]="goshala.image_location ? 'data:image/jpeg;base64,' + goshala.image_location : 'assets/ohm.jpg'" style="height: 30vh; width: 30vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                    </a>
+                    <p>{{ goshala.name }}</p>
+                    <!-- <p>{{ indiatemples.address }}</p> -->
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #noData>
+            <div class="col-12 text-center mt-5">
+                <img src="../../../assets/img not found2.png" alt="" style="height: 300px; width: 300px;">
+                <p>NO Data Found</p>
+            </div>
+        </ng-template>
+        </div>
+
+        <!-- <div *ngIf="isLoadingNextPage" class="text-center mt-3">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,30 @@
+/* Ensure this CSS is loaded in your project */
+
+/* Styles for overlay icons */
+.overlay-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    border-radius: 20px; /* Match the image border radius */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.2s; /* Smooth fade-in effect */
+  }
+  
+  .position-relative:hover .overlay-icons {
+    opacity: 1; /* Show icons on hover */
+  }
+  
+  /* Styles for individual icons */
+  .icon-view-delete {
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  
+  
+  

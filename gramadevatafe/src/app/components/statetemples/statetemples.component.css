@@ -1,0 +1,11 @@
+.equal-height-containers {
+    display: flex;
+}
+
+.equal-height-containers > .container {
+    flex: 1;
+}
+
+.overflow-y-scroll {
+    overflow-y: scroll;
+}

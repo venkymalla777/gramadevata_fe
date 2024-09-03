@@ -1,0 +1,108 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 ">
+                <h1 style="font-size: 30px;font-weight: bold; margin-top: 50px;" class="text-center">Events In India</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngFor="let eventcategorydata of Eventcategories" class="col-md-6 col-lg-3">
+                <div class="image-container text-center">
+                    <a (click)="navigateToeventCategoryDetail(eventcategorydata)">
+                    <img [src]="eventcategorydata.pic ? 'data:image/jpeg;base64,' + eventcategorydata.pic : 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                    </a>
+                    <p class="text-center">{{ eventcategorydata.name }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center mt-3">
+            <button (click)="navigateToGoshalaCategoryFilters()"  class="btn btn-warning" style="border-radius: 3px; color: white;">View More Events</button>
+        </div>
+    </div>
+
+    <!-- Indian events -->
+<!-- <div class="container mt-5">
+    <ng-container *ngIf="indianevents && indianevents.length >0; else noindiaeventsdata">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Indian Events</h1>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div *ngFor="let event of indianevents" class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3">
+                <a (click)="navigateEventdata(event._id)">
+                    <img [src]="event.image_location ? 'data:image/jpeg;base64,' + event.image_location : 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                </a>
+                <p class="text-center">{{ event.name }}</p>
+            </div>
+        
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-3">
+               
+                <button (click)="navigateTo('IndiaeventsComponent')" class="btn btn-warning" style="border-radius: 3px; color: white;">View More Indian Events</button>
+            </div>
+        </div>
+    </ng-container>
+</div> -->
+
+    <!-- Global events -->
+    <div class="container mt-5">
+        <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+			type="ball-spin-clockwise">
+		</ngx-spinner>
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size: 30px;font-weight: bold;" class="text-center">World Wide Events</h1>
+            </div>
+        </div>
+        <ng-container *ngIf=" globalevents && globalevents.length > 0; else noglobaldata">
+        
+        <div class="row">
+          
+            <div *ngFor="let event of globalevents" class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3">
+                <a (click)="navigateEventdata(event._id)">
+                    <img [src]="event.image_location ? 'data:image/jpeg;base64,' + event.image_location : 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                </a>
+                <p class="text-center">{{ event.name }}</p>
+            </div>
+          
+          
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-3 mb-5">
+                <button (click)="navigateToGlobaltemples()"  class="btn btn-warning" style="border-radius: 3px; color: white;">View More Global Events</button>
+            </div>
+        </div> 
+    </ng-container>
+    </div>
+    <ng-template #noglobaldata>
+        <div class = "row"> 
+            <p> We do not have Event  Please do add by clicking below </p>
+        </div>
+        <div >
+            <div >
+                <div class="text-center mb-5">
+                    <button type="button" (click)="navigateTo('addevent')"  class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white;">Add a Event</button>
+                </div>
+            </div>
+        </div>
+      </ng-template>
+
+      <ng-template #noindiaeventsdata>
+        <div class = "row"> 
+            <p> We do not have Event  Please do add by clicking below </p>
+        </div>
+        <div >
+            <div >
+                <div class="text-center mb-5">
+                    <button type="button" (click)="navigateTo('addevent')" class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white;">Add a Event</button>
+                </div>
+            </div>
+        </div>
+      </ng-template>
+    
+</div>
+
+

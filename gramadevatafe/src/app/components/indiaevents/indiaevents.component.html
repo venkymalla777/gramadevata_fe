@@ -1,0 +1,30 @@
+
+
+<div class="d-flex flex-row">
+    <div class="container w-25 px-5" style="padding-top: 93px; overflow: auto; height: 100%;">
+       
+        <div class="overflow-y-scroll" style="height: 100vh; overflow-y: auto;">
+
+                <div *ngFor="let statedata of states">
+                    <label (click)="navigateTostateventss(statedata)" class="py-2" >{{statedata.name}}</label>
+                </div>
+        </div>
+    </div>
+
+    <div class="container text-center mt-5" >
+        <h1 style="margin-top: 40px;">India Events</h1>
+        <div class="row " style="overflow-y: auto; height: calc(100vh - 93px);">
+            <div *ngFor="let event of eventsdata" class="col-6 col-lg-3 text-center" style="margin-top: 21px;">
+                <div class="image-container text-center">
+                    <a (click)="navigateEventdata(event)">
+                        <img [src]="event.image_location ? 'data:image/jpeg;base64,' + event.image_location : 'assets/ohm.jpg'" style="height: 30vh; width: 30vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                    </a>
+                    <p>{{ event.name }}</p>
+                    <!-- <p>{{ indiatemples.address }}</p> -->
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</div>

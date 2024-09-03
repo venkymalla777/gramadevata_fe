@@ -1,0 +1,90 @@
+<div>
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+			type="ball-spin-clockwise">
+		</ngx-spinner>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 ">
+                <h1 style="font-size: 30px;font-weight: bold; margin-top: 50px;" class="text-center">Goshalas In India</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngFor="let goshalaCategory of categoriesdata" class="col-md-6 col-lg-3">
+                <div class="image-container text-center">
+                    <a (click)="navigateToGoshalaCategoryDetail(goshalaCategory)">
+                    <img [src]="goshalaCategory.pic ? 'data:image/jpeg;base64,' + goshalaCategory.pic : 'assets/g5.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                    </a>
+                    <p class="text-center">{{ goshalaCategory.name }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center mt-3">
+            <button (click)="navigateToGoshalaCategoryFilters()" class="btn btn-warning" style="border-radius: 3px; color: white;">Goshalas In India</button>
+        </div>
+    </div>
+
+    <!-- Indian Goshalas -->
+    <!-- <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Indian Goshalas</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngFor="let goshala of indiangoshalasdata" class="col-md-6 col-lg-3">
+                <a (click)="navigateTotempleDetail(goshala._id)">
+                    <img [src]="goshala.image_location ? 'data:image/jpeg;base64,' + goshala.image_location : 'assets/g5.jpg'" style="height: 30vh; width: 30vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                </a>
+                <p class="text-center">{{ goshala.name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-3">
+               
+                <button (click)="navigateTo('indiagoshalas')" class="btn btn-warning" style="border-radius: 3px; color: white;">View More Indian Goshalas</button>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Global Goshalas -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size: 30px;font-weight: bold;" class="text-center">World Wide Goshalas</h1>
+            </div>
+        </div>
+        <ng-container *ngIf=" globalgoshalasdata && globalgoshalasdata.length > 0; else noglobaldata">
+        
+        <div class="row">
+          
+            <div *ngFor="let goshala of globalgoshalasdata" class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3">
+                <a (click)="navigateTotempleDetail(goshala._id)">
+                    <img [src]="goshala.image_location ? 'data:image/jpeg;base64,' + goshala.image_location : 'assets/g5.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                </a>
+                <p class="text-center">{{ goshala.name }}</p>
+            </div>
+          
+          
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-3 mb-5">
+                <button (click)="navigateToGlobaltemples()" class="btn btn-warning" style="border-radius: 3px; color: white;">View More Global Goshalas</button>
+            </div>
+        </div> 
+    </ng-container>
+    </div>
+    <ng-template #noglobaldata>
+        <div class = "row"> 
+            <p> We do not have temples from your village, Please do add by clicking below </p>
+        </div>
+        <div >
+            <div >
+                <div class="text-center mb-5">
+                    <button type="button" (click)="navigateTo('addgoshala')" class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white;">Add a Goshala</button>
+                </div>
+            </div>
+        </div>
+      </ng-template>
+    
+</div>
+

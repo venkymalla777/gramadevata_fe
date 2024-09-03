@@ -1,0 +1,72 @@
+<div>
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+			type="ball-spin-clockwise">
+		</ngx-spinner>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 ">
+                <h1 style="font-size: 30px;font-weight: bold; margin-top: 50px;" class="text-center">Temples In India
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngFor="let templeCategory of templeCategory" class="col-md-6 col-lg-3">
+                <div class="image-container text-center">
+                    <a (click)="navigateToCategoryDetail(templeCategory)">
+                    <img [src]="templeCategory.pic? 'data:image/jpeg;base64,' + templeCategory.pic : 'assets/ohm.jpg' " style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                    </a>
+                    <p class="text-center">{{ templeCategory.name }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center mt-3">
+            <button (click)="navigateToTempleFilters('indian')" type="button" class="btn btn-warning" style="border-radius: 3px; color: white;">View More Temples</button>
+        </div>
+    </div>
+
+    <!-- Indian temples -->
+    <!-- <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Indian Temples</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngFor="let temple of indiantemple" class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3">
+                <a (click)="navigateTotempleDetail(temple._id)">
+                    
+                    <img [src]="temple.image_location ? 'data:image/jpeg;base64,' + temple.image_location : 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius:20px;" class="img-fluid rounded" alt="image">
+                </a>
+                <p class="text-center">{{ temple.name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-3">
+               
+                <button (click)="navigateTo('indiatemples')" class="btn btn-warning" style="border-radius: 3px; color: white;">View More Indian Temples</button>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Global Temples -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size: 30px;font-weight: bold;" class="text-center">World Wide Temples</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngFor="let temple of globaltemple" class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3">
+                <a (click)="navigateTotempleDetail(temple._id)">
+                    <img [src]="temple.image_location? 'data:image/jpeg;base64,' + temple.image_location: 'assets/ohm.jpg'" style="height: 40vh; width: 40vh; border-radius: 10px;" class="img-fluid rounded" alt="image">
+                </a>
+                <p class="text-center">{{ temple.name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-3 mb-5">
+                <button (click)="navigateToTempleFilters('global')" class="btn btn-warning" style="border-radius: 3px; color: white;">View More Global Temples</button>
+            </div>
+        </div>
+    </div>
+</div>
