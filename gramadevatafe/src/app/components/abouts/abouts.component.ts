@@ -46,7 +46,7 @@ export class AboutsComponent {
       title:'Founder & CEO',
       name:'Dr. Nalabolu Vishnu Roy',
       image:'../../../assets/founder.jpg',
-      bio:'Dr. Nalabolu Vishnu Roy is the founder of Sathayush Tech Solutions, a company dedicated to providing innovative technology solutions. With a passion for driving technological advancements and fostering growth, Vishnu Roy has led the company with a vision to create impactful tech solutions that address real-world challenges. Under his leadership, Sathayush Tech Solutions has achieved significant milestones and continues to be at the forefront of technological innovation.',
+      bio:'Dr. Nalabolu Vishnu Roy is the founder of Gramadevata Foundation, a company dedicated to providing innovative technology solutions. With a passion for driving technological advancements and fostering growth, Vishnu Roy has led the company with a vision to create impactful tech solutions that address real-world challenges. Under his leadership, Sathayush Tech Solutions has achieved significant milestones and continues to be at the forefront of technological innovation.',
     },
 
     {
