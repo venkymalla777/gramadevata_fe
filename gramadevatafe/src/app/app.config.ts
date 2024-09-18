@@ -6,6 +6,7 @@ import { importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { tokenInterceptor } from './interceptors/token.interceptor';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { HttpClientModule } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
