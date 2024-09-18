@@ -22,6 +22,8 @@ export class VerifyComponent {
   verifyForm!: FormGroup;
   username:string;
   memberstatus: any;
+  isDisabled = false;
+  countdown: number=0;
 
   constructor(private userService:UserService,
      private fb:FormBuilder,
@@ -40,6 +42,43 @@ export class VerifyComponent {
       verification_otp: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]]
     });
   }
+
+
+  resendOtp(): void {
+    // Disable button and start countdown
+    this.isDisabled = true;
+    this.countdown = 30;
+  
+    // Start countdown
+    const interval = setInterval(() => {
+      this.countdown--;
+  
+      if (this.countdown === 0) {
+        clearInterval(interval);
+        this.isDisabled = false;
+      }
+    }, 1000);
+  
+    // Prepare the user data for the OTP resend request
+    const userData = {
+      username: this.username,  // Assuming `this.username` is already defined
+    };
+  
+    console.log(userData, "Resend OTP Request Data");
+  
+    // Call the resend OTP service
+    this.userService.signup(userData).subscribe(
+      response => {
+        console.log('Resend OTP successful', response);
+        // Handle successful OTP resend response
+      },
+      error => {
+        console.error('Resend OTP failed', error);
+        // Handle resend OTP error
+      }
+    );
+  }
+  
 
 
 
@@ -70,6 +109,8 @@ export class VerifyComponent {
           ? localStorage.setItem('username', loginRresponsees.username)
           : null;
           loginRresponsees?.is_member
+          ? localStorage.setItem('is_member', loginRresponsees.is_member)
+          : null;
 
           this.memberstatus= response.is_member
           this.userService.isMemberIn = this.memberstatus === true;

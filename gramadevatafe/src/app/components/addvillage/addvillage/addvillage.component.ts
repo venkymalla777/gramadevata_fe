@@ -222,11 +222,13 @@ export class AddvillageComponent {
   }
 
   onSubmit() {
+    this.spinner.show();
     if (this.templeForm.valid) {
       const { country, state, district, mandal, ...templeData } = this.templeForm.value;
       console.log(this.templeForm, "999999999999999999")
       this.villageservice.addvillage(templeData)
         .subscribe(response => {
+          this.spinner.hide();
           console.log('Temple added successfully:', response);
           this.villageid = this.templeForm.value.object_id
           console.log(this.villageid)

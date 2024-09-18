@@ -1,7 +1,8 @@
 
             <div class="container mt-5 mb-5">
+                
                 <div class="row" style="margin-top: 100px;">
-                    <div *ngFor="let temple of templedata" class="col-8 mb-5">
+                    <div *ngFor="let temple of templedata" class="col-lg-8 mb-5">
                         <h4 class="mb-5 text-center">Detailed View of {{ temple?.name }}</h4>
                         <div class="row">
                             <div class="col-md-6 text-center">
@@ -53,16 +54,16 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-4 col-4 d-flex justify-content-end align-items-center">
+                                <div class="col-sm-12 col-md-4 col-lg-4 d-flex justify-content-end align-items-center">
 
                                     <div class="text-center mb-3" *ngIf="!userservice.isMemberIn">
-                                        <button type="button" (click)="OpenAddmemberDilog(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem;">
+                                        <button type="button" (click)="OpenAddmemberDilog(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem; margin-right: 10px;">
                                             Connect as Member
                                         </button>
                                     </div>
-                                    <div class="text-center mb-3" *ngIf="userservice.isMemberIn">
-                                        <button type="button" (click)="isMemberconnect(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem;">
-                                            Connected as Member1
+                                    <div class="text-center mb-3 " *ngIf="userservice.isMemberIn">
+                                        <button type="button" (click)="isMemberconnect(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem; margin-right: 10px;">
+                                            Connected as Member
                                         </button>
                                     </div>
                                     <div class="text-center mb-3" *ngIf="!userservice.isPujariIn">
@@ -129,6 +130,34 @@
                             </div>
                             
                         </div>
+                        <hr>
+                        <div class="col-sm-12 d-lg-none">
+                            <h6 ><i class="fas fa-gopuram faicon mt-1 "></i> Nearby Temples</h6>
+                        <div class=" hide-scrollbar" style="overflow-x: auto; white-space: nowrap;">
+                            
+                            <div class="d-inline-flex" style="height: 100px;">
+                                <div class="card mx-2" style="width: 100px;" *ngFor="let temple of nearbytemples">
+                                    <a (click)="navigatetemple(temple._id)">
+                                        <img [src]="temple.image_location ? temple.image_location : 'assets/ohm.jpg'"
+                                            alt="Temple Image"
+                                            class="card-img-top"
+                                            style="height: 60px; object-fit: cover;"
+                                            (error)="handleImageError($event)">
+                                    </a>
+                                    <div class="card-body" style=" margin: 0; padding: 0;">
+                                        <p class="card-title text-truncate" title="{{ temple?.name }}" style="font-size: 10px; margin: 0; padding: 0;">
+                                            <b>{{ temple?.name }}</b>
+                                        </p>
+                                        <p class="card-text text-truncate" title="{{ temple?.address }}" style="font-size: 8px; margin: 0; padding: 0;">
+                                            <b>{{ temple?.address }}</b>
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
 
                        
                         
@@ -152,19 +181,9 @@
 
                         </div>
                         <hr>
-                <div class="row col-12">
-                            <!-- <h4>Comments</h4> -->
-
-                    <!-- <div class="row">
-                          
-                        <div [formGroup]="commentform" class="col-8">
-                            <input class="textarea form-control " formControlName="body" placeholder="Share your your Experience">
-                        </div>
-                            <div class="col-4">
-                                <button (click)="onSubmit()" class="btn  text-primary" style="border-radius: 10px; border: 2px solid #FF6800;">Add Comment</button>
-                            </div>
-                        </div> -->
-                            <div *ngIf="temple">
+                <div class="container col-12">
+                     
+                            <div class="row" *ngIf="temple">
                                 <ul>
                                   <!-- <div *ngFor="let comment of temple.comments">
                                     
@@ -184,7 +203,7 @@
                                           </div>
                                           <div class="card-body">
                                             <div class="mb-3">
-                                              <textarea class="form-control" formControlName="body" placeholder="Add a comment..."  rows="3"></textarea>
+                                              <textarea class="form-control" formControlName="body" placeholder="Add a comment..."  rows="2"></textarea>
                                               <button class="btn btn-primary mt-2" (click)="onSubmit()">Post Comment</button>
                                             </div>
                                       
@@ -218,16 +237,13 @@
                               </div>
                         </div>
                     </div>
-                    <div class="col-4 hide-scrollbar" style="overflow-y: scroll; height: 100vh;">
+                    <div class="col-4 hide-scrollbar d-none d-md-block" style="overflow-y: scroll; height: 100vh;">
                         <h5 class=""><i class="fas fa-gopuram faicon mt-2"></i> Near By Temples</h5>
                         <div class="container " >
                             <div class="  text-center" style="height: 250px; width: 250px;" *ngFor="let temple of nearbytemples">
                                 <div class="card" >
                                     <a (click)="navigatetemple(temple._id)">
-                                    <!-- <img [src]="temple?.image_location ? 'data:image/jpeg;base64,' + temple?.image_location : 'assets/ohm.jpg'"
-                                         alt="Temple Image"
-                                         class="card-img-top"
-                                         style="height: 130px; object-fit: cover;"> -->
+                                    
                                          <img [src]="temple.image_location ? temple.image_location : 'assets/ohm.jpg'"
                                                 alt="Temple Image"
                                                 class="card-img-top"

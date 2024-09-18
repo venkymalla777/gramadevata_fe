@@ -209,7 +209,7 @@ export class TemplesComponent {
     const connectdata = this.ConnectForm.value;
     const contactedmember = {
       temple: templeid,
-      user: connectdata.user,
+      user: localStorage.getItem('user'),
       connected_as: 'MEMBER'
     };
   
@@ -229,7 +229,7 @@ export class TemplesComponent {
     const connectdata = this.ConnectForm.value;
     const contactedPujari = {
       temple : templeId,
-      user : connectdata.user,
+      user : localStorage.getItem('user'),
       connected_as:'PUJARI'
 
     }

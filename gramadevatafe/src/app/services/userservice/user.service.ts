@@ -2,31 +2,59 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { URL } from '../../constants';
+import { MatDialog } from '@angular/material/dialog';
+import { OnlymemberComponent } from '../../components/member/onlymember/onlymember.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+
+
   isMemberIn = false
 
   isPujariIn = false
   
   
 
-  constructor(private httpclient:HttpClient) { 
-  let isMemberIn = localStorage.getItem('isMemberIn');
-  this.isMemberIn = isMemberIn === 'true';
+  constructor(private httpclient:HttpClient,private dialog:MatDialog,) { 
+    const storedIsMemberIn = localStorage.getItem('isMemberIn');
+    this.isMemberIn = storedIsMemberIn !== null && storedIsMemberIn === 'true';
 
-  let isPujariIn = localStorage.getItem('isPujariIn');
-  this.isPujariIn = isPujariIn === 'true';
+    const storedIsPujariIn = localStorage.getItem('isPujariIn');
+    this.isPujariIn = storedIsPujariIn !== null && storedIsPujariIn === 'true';
   }
+
+
+
+  
 
   isMemberUser() {
     return this.isMemberIn;
   }
 
   isPujariUser() {
-    return this.isMemberIn;
+    return this.isPujariIn;
+  }
+
+
+  showMemberModal(): void {
+    this.openmemberDialog();
+  }
+
+
+  openmemberDialog(): void {
+    console.log('sssssssssss');
+    const dialogRef = this.dialog.open(OnlymemberComponent, {
+      data: { displayName: 'signup' },
+      autoFocus: false,
+      backdropClass: 'dialog-backdrop',
+    });
+  
+    dialogRef.afterClosed().subscribe(() => {
+      // Handle after dialog close actions here
+    });
   }
 
   
@@ -50,6 +78,18 @@ export class UserService {
   GetConnections(id:string):Observable<any>{
     return this.httpclient.get(URL+'connect?user='+id)
   }
+
+
+  
+
+  updateprofile(memberData: any, userId: any): Observable<any> {
+    const url = `${URL}profile/`+userId;
+    const data = { ...memberData,  };
+  
+    return this.httpclient.put(url, data);
+  }
+
+
 
 
 }

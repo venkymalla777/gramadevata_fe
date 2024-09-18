@@ -8,7 +8,7 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxSpinner,NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerService,NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -42,6 +42,7 @@ export class AddeventComponent {
     private fb:FormBuilder,
     private router:Router,
     private locationservice:LocationService,
+    private spinner: NgxSpinnerService,
     
   ){}
 
@@ -261,6 +262,7 @@ export class AddeventComponent {
   }
 
   onSubmit() {
+    this.spinner.show();
     if(this.eventform.valid){
     
       const { country, state, district, mandal, ...EventData } = this.eventform.value;
@@ -268,6 +270,7 @@ export class AddeventComponent {
       // this.router.navigate(["villages",GoshalaData.object_id])
       
       .subscribe(response =>{
+        this.spinner.hide();
         console.log("goshala added succesw fully",response)
         this.router.navigate(["villages",EventData.object_id])
         },

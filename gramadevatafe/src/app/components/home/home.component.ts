@@ -186,11 +186,19 @@ navigateToCategoryDetail(templeCategory: any): void {
 
 
 navigateTo(route: string): void {
-  const ismemberin = this.userservice.isMemberIn;
-  if (ismemberin === false) {
-    this.openmemberDialog();
-  } else {
+  
+  const isMemberIn = localStorage.getItem("is_member") === "true"; // Convert the string to a boolean
+  let userId = this.authenticationService.getCurrentUser();
+    if (userId == undefined || userId == null) {
+      this.authenticationService.showLoginModal()
+      return;
+    }
+  
+  if (isMemberIn) {
     this.router.navigate([route]);
+  } else {
+    
+    this.userservice.showMemberModal();
   }
 }
 
@@ -216,7 +224,7 @@ navigateToTempleFilters():void{
   this.templeservice.gettemplecategorybyname("Ayyappa Swamy").subscribe(
     data=>{
       this.categorydata =data._Id
-      this.router.navigate(["globaltemples",''])
+      this.router.navigate(["globaltemples",'AllTemples'])
 
     }
   )
@@ -229,7 +237,7 @@ navigateToGoshalaCategoryDetail():void{
       this.authenticationService.showLoginModal()
       return;
     }
-  this.router.navigate(["goshala",''])
+  this.router.navigate(["goshala",'AllGoshalas'])
   .then(() => console.log("Navigation successful"))
     .catch(error => console.error("Navigation failed:", error));
 }
@@ -244,7 +252,7 @@ navigateToEventsCategoryDetail():void{
       this.authenticationService.showLoginModal()
       return;
     }
-  this.router.navigate(["events",""])
+  this.router.navigate(["events","AllEvents"])
   .then(()=> console.log("navigation succesfull"))
   .catch(eroror =>console.error("navigation failed"));
 }

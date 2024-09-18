@@ -291,7 +291,7 @@ export class GetbytemplesComponent {
     const connectdata = this.ConnectForm.value;
     const contactedmember = {
       temple: templeid,
-      user: connectdata.user,
+      user: localStorage.getItem('user'),
       connected_as: 'MEMBER'
     };
   
@@ -312,7 +312,7 @@ export class GetbytemplesComponent {
     const connectdata = this.ConnectForm.value;
     const contactedPujari = {
       temple : templeid,
-      user : connectdata.user,
+      user : localStorage.getItem('user'),
       connected_as:'PUJARI'
 
     }

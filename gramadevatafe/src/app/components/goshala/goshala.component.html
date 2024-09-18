@@ -197,7 +197,7 @@
 
             <div [ngClass]="{'d-none': !filtersVisible, 'd-md-block': true}" class="col-md-3 col-xl-2 mt-3 mb-4">
               <div class="card mb-4">
-                <div style="height: 300px; overflow-y: auto;">
+                <div style="height: 250px; overflow-y: auto;">
                
                   <div class="card-header" style="background: linear-gradient(to right, #ff5500, #FF8c00); color: white;">
                     <h6 class="mb-0">Goshala Categories Filters</h6>
@@ -366,7 +366,7 @@
                                          <img [src]="temple.image_location ? temple.image_location : 'assets/g4.jpg'"
                                                        alt="image"
                                                        class="img-fluid img-thumbnail "
-                                                       style="height: 10vw; width: 10vw; min-width: 70px; min-height: 100px; object-fit: cover;"
+                                                       style="height: 10vw; width: 100vw; min-width: 70px; min-height: 100px; object-fit: cover;"
                                                        (error)="handleImageError($event)">
                                   </a>
                                   <p class="my-2" style="font-size: 12px;">{{ temple.name }}</p>

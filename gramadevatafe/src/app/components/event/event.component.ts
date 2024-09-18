@@ -1,44 +1,3 @@
-// import { Component } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { EventService } from '../../services/eventservice/event.service';
-// import { Router,ActivatedRoute } from '@angular/router';
-
-// @Component({
-//   selector: 'app-event',
-//   standalone: true,
-//   imports: [CommonModule],
-//   templateUrl: './event.component.html',
-//   styleUrl: './event.component.css'
-// })
-// export class EventComponent {
-
-//   categoryId:any;
-//   eventdata:any;
-//   picdata:any;
-//   eventcategorydata:any
-  
-//   constructor(private route:ActivatedRoute, private eventservice:EventService){ }
-
-//   ngOnIt():void{
-
-//   }
-
-//   fetchevents():void{
-    
-//     this.categoryId = this.route.snapshot.paramMap.get('id')
-//     console.log(this.categoryId,"777777777777777777777777")
-//     this.eventcategorydata = history.state.eventcategorydata;
-    
-
-//     this.eventservice.getEvents(this.categoryId)
-//     .subscribe(data=>{
-//       this.eventdata=data
-//     })
-//   }
-
-
-// }
-
 
 
 import { Component, OnInit ,HostListener} from '@angular/core';
@@ -102,6 +61,10 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     
     this.selectedCategoryId = this.route.snapshot.paramMap.get('id');
+    if (this.selectedCategoryId ==='AllEvents') {
+      console.log(this.selectedCategoryId,"poiuy")
+      this.selectedCategoryId = '';
+    }
     
     this.loadlocations()
    
@@ -109,9 +72,6 @@ export class EventComponent implements OnInit {
       this.applyFilters();
      
     }
-
-
-    
   }
 
   updateTab(tab: string) {
@@ -131,6 +91,10 @@ export class EventComponent implements OnInit {
     this.selectedCategoryId = event.node?.origin?.key; 
     console.log(this.selectedCategoryId,"1111111111111")
     this.router.navigate(["events", this.selectedCategoryId])
+    if (this.selectedCategoryId ==='AllEvents') {
+      console.log(this.selectedCategoryId,"poiuy")
+      this.selectedCategoryId = '';
+    }
     
 
     this.applyFilters();
@@ -294,6 +258,11 @@ export class EventComponent implements OnInit {
       if (CountryID){
         this.selectedLocationId = CountryID; // Store state ID
         this.applyFilters()
+        this.resetFormControls();
+        this.StateOptions = [];
+        this.DistrictOptions = [];
+        this.MandalOptions = [];
+        this.VillageOptions = [];
         console.log('State ID selected:', this.selectedLocationId);
         console.log("qsdfbg")
         this.locationservice.getbyStates(CountryID).subscribe(
@@ -304,8 +273,10 @@ export class EventComponent implements OnInit {
                 value: state._id
               }));
               this.StateOptions.sort((a, b) => a.label.localeCompare(b.label));
+              this.resetFormControls();
             } else {
               console.error("Response is not an array type", res);
+              this.resetFormControls();
             }
           },
           (err) => {
@@ -398,8 +369,10 @@ export class EventComponent implements OnInit {
                 value: village._id
               }));
               this.VillageOptions.sort((a, b) => a.label.localeCompare(b.label));
+              this.resetVillage();
             } else {
               console.error("Response is not an array type", res);
+              this.resetVillage();
             }
           },
           (err) => {

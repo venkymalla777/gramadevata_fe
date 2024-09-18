@@ -25,6 +25,15 @@
     font-size: 1.5em;
     cursor: pointer;
   }
+
+  .temple-name {
+    font-size: 0.7rem; /* Default font size */
+    margin-top: 5px; /* Space between image and text */
+    max-width: 100%; /* Ensure text does not overflow the container */
+    word-break: break-word; /* Break long words */
+    overflow-wrap: break-word; /* Ensure text wraps within the container */
+    hyphens: auto; /* Hyphenate text when needed */
+}
   
   
   

@@ -91,9 +91,26 @@
           (nzExpandChange)="nzEvent($event)"
           (nzSearchValueChange)="nzEvent($event)"
           nzBlockNode
-          nzVirtualHeight="33vh"
+          nzVirtualHeight="28vh"
         ></nz-tree>
       </ng-container>
+
+      <ng-container *ngIf="treeType == 'subreligions'">
+        <div class="mb-2 text-center" *ngFor="let node of nodes">
+          <button class="btn btn-orange btn-sm btn-block responsive-btn"   (click)="onCategoryClick(node.key)">
+            {{ node.title }}
+          </button>
+        </div>
+      </ng-container>
+      
+      
+        
+          
+
+
+
+ 
+
       <ng-container *ngIf="treeType == 'eventcategory'">
         <nz-tree
           [nzData]="nodes"
@@ -113,7 +130,7 @@
           (nzExpandChange)="nzEvent($event)"
           (nzSearchValueChange)="nzEvent($event)"
           nzBlockNode
-          nzVirtualHeight="30vh"
+          nzVirtualHeight="26vh"
         ></nz-tree>
       </ng-container>
   
