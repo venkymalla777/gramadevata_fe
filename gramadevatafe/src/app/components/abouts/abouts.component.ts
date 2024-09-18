@@ -44,9 +44,10 @@ export class AboutsComponent {
 
     {
       title:'Founder & CEO',
-      name:'Dr. Nalabolu Vishnu Roy',
+      name:'Nalabolu Vishnu Roy',
       image:'../../../assets/founder.jpg',
-      bio:'Dr. Nalabolu Vishnu Roy is the founder of Gramadevata Foundation, a company dedicated to providing innovative technology solutions. With a passion for driving technological advancements and fostering growth, Vishnu Roy has led the company with a vision to create impactful tech solutions that address real-world challenges. Under his leadership, Sathayush Tech Solutions has achieved significant milestones and continues to be at the forefront of technological innovation.',
+      // bio:'Nalabolu Vishnu Roy is the founder of Gramadevata Foundation, a company dedicated to providing innovative technology solutions. With a passion for driving technological advancements and fostering growth, Vishnu Roy has led the company with a vision to create impactful tech solutions that address real-world challenges. Under his leadership, Sathayush Tech Solutions has achieved significant milestones and continues to be at the forefront of technological innovation.',
+      bio:' Mr. Vishnu, with a Master’s degree from Osmania University (1994), has been driven by a passion for both technology and social service. Beginning as a Software Consultant, Vishnu mentored over 2500+ graduates, guiding them to successful careers. Over the past 20 years, Vishnu’s focus has shifted to working closely with social organizations, NGOs, and the media to bring about positive change. His work has included organizing medical camps, contributing to community-based educational programs, and advocating for cultural preservation. Vishnu remains committed to addressing important social issues while preserving cultural and spiritual heritage through these efforts. Looking to the future, Vishnu aims to expand his initiatives further, striving to create sustainable solutions and foster greater social impact.'
     },
 
     {
