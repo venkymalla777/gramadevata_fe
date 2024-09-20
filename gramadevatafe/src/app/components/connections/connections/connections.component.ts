@@ -5,6 +5,7 @@ import { ConnectyourorginComponent } from '../../connectyourorgin/connectyourorg
 import { MatDialog } from '@angular/material/dialog';
 import { ConnectyourtempleComponent } from '../../connectyourtemple/connectyourtemple/connectyourtemple.component';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../services/authenticationservice/authentication.service';
 
 
 
@@ -22,7 +23,12 @@ export class ConnectionsComponent {
   villageconnections: any;
 
 
-  constructor(private ConnectionsService:ConnectionsService,private dialog:MatDialog, private router:Router){}
+  constructor(
+    private ConnectionsService:ConnectionsService,
+    private dialog:MatDialog,
+     private router:Router,
+     private authenticationService:AuthenticationService
+    ){}
 
 
   ngOnInit():void{
@@ -50,6 +56,11 @@ export class ConnectionsComponent {
   }
 
   openVillageDialog(): void {
+    let userId = this.authenticationService.getCurrentUser();
+    if (userId == undefined || userId == null) {
+      this.authenticationService.showLoginModal()
+      return;
+    }
     // this.spinner.show();
     const dialogRef = this.dialog.open(ConnectyourorginComponent, {
       data: { displayName: 'connectorgin' }, 
@@ -64,6 +75,11 @@ export class ConnectionsComponent {
   }
 
   openTempleDialog(): void {
+    let userId = this.authenticationService.getCurrentUser();
+    if (userId == undefined || userId == null) {
+      this.authenticationService.showLoginModal()
+      return;
+    }
     // this.spinner.show();
     const dialogRef = this.dialog.open(ConnectyourtempleComponent, {
       data: { displayName: 'connectorgin' }, 

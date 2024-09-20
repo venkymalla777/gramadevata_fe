@@ -51,6 +51,10 @@ import { ProfileComponent } from './components/profile/profile/profile.component
 import { ConnectionsComponent } from './components/connections/connections/connections.component';
 import { TemplechatComponent } from './components/chatroom/templechat/templechat.component';
 import { AddvillageComponent } from './components/addvillage/addvillage/addvillage.component';
+import { ConnectyourtempleComponent } from './components/connectyourtemple/connectyourtemple/connectyourtemple.component';
+import { VisionmissionComponent } from './components/vision/mission/visionmission/visionmission.component';
+import { UpdateprofileComponent } from './components/updateprofile/updateprofile.component';
+import { UserService } from './services/userservice/user.service';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -100,11 +104,14 @@ export const routes: Routes = [
     {path:"chatroom/:id",component:ChatroomComponent},
     {path: 'addpujari',component:PujariComponent},
     {path: 'verify',component:VerifyComponent},
-    {path: 'profile',component:ProfileComponent},
+    // {path: 'profile',component:ProfileComponent},
     {path: 'connections',component:ConnectionsComponent},
     {path: 'templechat/:id',component:TemplechatComponent},
     {path: 'addvillage',component:AddvillageComponent},
-
+    {path:'connectyourtemple',component:ConnectyourtempleComponent},
+    {path: 'vision/mision',component:VisionmissionComponent},
+    {path: 'updateprofile',component:UpdateprofileComponent},
+    
 
 
     {
@@ -151,4 +158,11 @@ export const routes: Routes = [
         canActivate: [LoggedinguardGuard],
       },
 
-];
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [UserService],
+      },
+
+
+      ];

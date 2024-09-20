@@ -12,6 +12,7 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -19,7 +20,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 @Component({
   selector: 'app-globaltemple',
   standalone: true,
-  imports: [CommonModule,TreeViewComponent,NzTreeModule,ReactiveFormsModule,NzSelectModule,NzFormModule],
+  imports: [CommonModule,TreeViewComponent,NzTreeModule,ReactiveFormsModule,NzSelectModule,NzFormModule,NgxSpinnerModule],
   templateUrl: './globaltemple.component.html',
   styleUrl: './globaltemple.component.css'
 })
@@ -51,11 +52,18 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
               private templeserviceservice:TempleserviceService,
               private locationservice:LocationService,
               private route:ActivatedRoute,
-               private fb:FormBuilder
+               private fb:FormBuilder,
+               private spinner: NgxSpinnerService,
               ){ }
 
   ngOnInit():void{
     this.selectedCategoryId = this.route.snapshot.paramMap.get('id');
+    console.log(this.selectedCategoryId,"poiuy")
+
+    if (this.selectedCategoryId ==='AllTemples') {
+      console.log(this.selectedCategoryId,"poiuy")
+      this.selectedCategoryId = '';
+    }
     // Load category details
 
     this.loadlocations();
@@ -74,8 +82,21 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     this.selectedCategoryId = event.node?.origin?.key; 
     console.log(this.selectedCategoryId,"1111111111111")
     this.router.navigate(["globaltemples", this.selectedCategoryId])
+    if (this.selectedCategoryId ==='AllTemples') {
+      console.log(this.selectedCategoryId,"poiuy")
+      this.selectedCategoryId = '';
+    }
+    
     this.applyFilters();
     
+  }
+
+  onSubCategoryClick(categoryId: string): void {
+    this.selectedCategoryId = categoryId; 
+    console.log('Category clicked:', categoryId);
+    this.router.navigate(["globaltemples", categoryId])
+    // Add your logic to handle the click event here
+    this.applyFilters();
   }
 
 
@@ -138,13 +159,14 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
 
 
   loadFilteredTemples() {
-    // this.spinner.show()
+    this.spinner.show()
     if (this.selectedCategoryId && this.selectedLocationId) {
       console.log(this.selectedCategoryId,this.selectedLocationId,"sdfg")
         this.templeserviceservice.filtertemples(this.selectedCategoryId, this.selectedLocationId, this.currentPage).subscribe(
             (response) => {
                 this.globaltemples = [...this.globaltemples, ...response.results];
                 console.log(this.globaltemples, "Filtered Temples with Category and Location");
+                this.spinner.hide()
             },
             (error) => {
                 console.error('Error fetching Filtered Temples with Category and Location:', error);
@@ -156,6 +178,7 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
             (response) => {
                 this.globaltemples = [...this.globaltemples, ...response.results];
                 console.log(this.globaltemples, "Filtered Temples with Category");
+                this.spinner.hide()
             },
             (error) => {
                 console.error('Error fetching Filtered Temples with Category:', error);
@@ -166,6 +189,7 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
           (response) => {
               this.globaltemples = [...this.globaltemples, ...response.results];
               console.log(this.globaltemples, "Filtered Temples with Location");
+              this.spinner.hide()
           },
           (error) => {
               console.error('Error fetching Filtered Temples with Location:', error);
@@ -210,22 +234,73 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     });
 
 
+
+
     // this.locationservice.GetAllCountries().subscribe(
-    //   (res)=>{
+    //   (res) => {
     //     if (Array.isArray(res)) {
-    //       this.CountryOptions = res.map((country:any) => ({
-    //         label:country.name,
-    //         value:country._id
+    //       this.CountryOptions = res.map((country: any) => ({
+    //         label: country.name,
+    //         value: country._id
     //       }));
     //       this.CountryOptions.sort((a, b) => a.label.localeCompare(b.label));
+    
+    //       // Find the country object with the label "India"
+    //       const defaultCountry = this.CountryOptions.find(option => option.label === 'India');
+          
+    //       // Set the default country if found
+    //       if (defaultCountry) {
+    //         this.validatorForm.controls['country'].setValue(defaultCountry.value);
+    //       }
     //     } else {
     //       console.error("Response is not an array type", res);
+          
     //     }
     //   },
+      
     //   (err) => {
     //     console.log(err);
     //   }
-    // )
+      
+    // );
+    // this.CountryFormControls();
+  
+    // this.validatorForm.get('country')?.valueChanges.subscribe(CountryID => {
+    //   if (CountryID){
+    //     this.selectedLocationId = CountryID; // Store state ID
+    //     this.applyFilters()
+    //     console.log('State ID selected:', this.selectedLocationId);
+    //     console.log("qsdfbg")
+    //     this.locationservice.getbyStates(CountryID).subscribe(
+    //       (res) => {
+    //         if (Array.isArray(res)) {
+    //           this.StateOptions = res.map((state: any) => ({
+    //             label: state.name,
+    //             value: state._id
+    //           }));
+    //           this.StateOptions.sort((a, b) => a.label.localeCompare(b.label));
+    //           this.resetFormControls();
+              
+
+    //         } else {
+    //           console.error("Response is not an array type", res);
+    //           this.resetFormControls();
+    //         }
+    //       },
+    //       (err) => {
+    //         console.log(err);
+    //       }
+    //     );
+
+    //   }
+
+    // })
+   
+    
+  
+    // // Initialize form control states
+    // this.resetFormControls();
+    
 
     this.locationservice.GetAllCountries().subscribe(
       (res) => {
@@ -238,29 +313,37 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     
           // Find the country object with the label "India"
           const defaultCountry = this.CountryOptions.find(option => option.label === 'India');
-          
+    
           // Set the default country if found
           if (defaultCountry) {
             this.validatorForm.controls['country'].setValue(defaultCountry.value);
           }
         } else {
           console.error("Response is not an array type", res);
-          this.CountryFormControls();
         }
       },
-      
       (err) => {
         console.log(err);
       }
     );
     
-  
+    // Handle country changes
     this.validatorForm.get('country')?.valueChanges.subscribe(CountryID => {
-      if (CountryID){
-        this.selectedLocationId = CountryID; // Store state ID
-        this.applyFilters()
-        console.log('State ID selected:', this.selectedLocationId);
-        console.log("qsdfbg")
+      if (CountryID) {
+        this.selectedLocationId = CountryID; // Store country ID
+        this.applyFilters();
+    
+        // Reset states, districts, mandals, and villages when country changes
+        this.resetFormControls();
+        this.StateOptions = [];
+        this.DistrictOptions = [];
+        this.MandalOptions = [];
+        this.VillageOptions = [];
+        
+        // Disable the dependent form controls until new options are loaded
+       
+    
+        // Fetch states for the selected country
         this.locationservice.getbyStates(CountryID).subscribe(
           (res) => {
             if (Array.isArray(res)) {
@@ -269,6 +352,9 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
                 value: state._id
               }));
               this.StateOptions.sort((a, b) => a.label.localeCompare(b.label));
+    
+              // Enable the state form control once states are loaded
+              this.validatorForm.controls['state'].enable();
             } else {
               console.error("Response is not an array type", res);
             }
@@ -277,15 +363,12 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
             console.log(err);
           }
         );
-
       }
-
-    })
-   
+    });
     
-  
-    // Initialize form control states
-    this.resetFormControls();
+    // Other code for handling state, district, mandal, and village changes stays the same
+    
+    
   
     // Handle state changes
     this.validatorForm.get('state')?.valueChanges.subscribe(stateID => {
@@ -369,6 +452,7 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
           }
         );
         this.validatorForm.get('village')?.enable();
+        this.resetVillage();
       } else {
         this.resetVillage();
       }
@@ -407,6 +491,10 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     this.validatorForm.get('district')?.reset();
     this.validatorForm.get('mandal')?.reset();
     this.validatorForm.get('village')?.reset();
+    // this.StateOptions=[]
+    // this.DistrictOptions=[]
+    // this.MandalOptions=[]
+    // this.VillageOptions=[]
     
     // this.validatorForm.get('district')?.disable();
     // this.validatorForm.get('mandal')?.disable();
@@ -418,6 +506,10 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     this.validatorForm.get('mandal')?.reset();
     this.validatorForm.get('village')?.reset();
     
+    // this.DistrictOptions=[]
+    // this.MandalOptions=[]
+    // this.VillageOptions=[]
+    
     // this.validatorForm.get('mandal')?.disable();
     // this.validatorForm.get('village')?.disable();
   }
@@ -426,16 +518,18 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     this.validatorForm.get('mandal')?.reset();
     this.validatorForm.get('village')?.reset();
     
+    // this.MandalOptions=[]
+    // this.VillageOptions=[]
+    
     // this.validatorForm.get('village')?.disable();
   }
   
   resetVillage(): void {
     this.validatorForm.get('village')?.reset();
+    this.VillageOptions=[]
   }
 
 
-
-  
 
 
 
@@ -444,19 +538,6 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   navigateTempleDetail(_id:string):void{

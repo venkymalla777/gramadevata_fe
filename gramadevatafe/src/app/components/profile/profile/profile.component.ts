@@ -9,6 +9,8 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MemberService } from '../../../services/memberservice/member.service';
+import { UpdateprofileComponent } from '../../updateprofile/updateprofile.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -42,11 +44,12 @@ export class ProfileComponent {
 
 
   constructor(
-     protected UserService:UserService,
+     private UserService:UserService,
      private chatservice:ChatService,
      private router:Router,
      private fb:FormBuilder,
-     private memberservice:MemberService
+     private memberservice:MemberService,
+     private dialog:MatDialog,
     ){}
   ngOnInit():void{
     this.fetchprofiledata();
@@ -85,7 +88,7 @@ export class ProfileComponent {
         this.familyimages = data.family_images
         this.goshaladata = data.goshalas
         this.eventdata = data.events
-        console.log(this.userdata, "userdata");
+        console.log(this.familyimages, "familyimages");
         this.villageconnections = [];
           this.templeconnections = [];
           this.addedtemples = [];
@@ -95,14 +98,14 @@ export class ProfileComponent {
         this.connectedTemplescount = this.templeconnections.length
         this.connectdvillgescount = this.villageconnections.length
   
-        if (Array.isArray(data)) {
+        if ((data)) {
           this.useraddedtemples = data;
           
           
   
           // Assuming `Connections` should be fetched from each user in the array
           
-          this.familyimages =[];
+          // this.familyimages =[];
   
           this.useraddedtemples.forEach((user: any) => {
             console.log("swdefrgth")
@@ -111,7 +114,8 @@ export class ProfileComponent {
               this.templeconnections.push(...user.Connections.filter((conn: any) => conn.village === null));
               this.connectedTemplescount = this.templeconnections.length
               this.connectdvillgescount = this.villageconnections.length
-              this.familyimages =user.family_images
+              // this.familyimages =user.family_images
+              
 
 
             }
@@ -148,7 +152,7 @@ export class ProfileComponent {
           console.log(this.addedtemples, "addedtemples");
         }
   
-        console.log(this.useraddedtemples, "useraddedtemples");
+        console.log(this.useraddedtemples, "useraddedtemples1");
       },
       error => {
         console.error("Error fetching profile data", error);
@@ -156,6 +160,10 @@ export class ProfileComponent {
     );
   }
   
+  handleImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/ohm.jpg';
+  }
 
 
 
@@ -264,15 +272,42 @@ navigateToVillageDetail(_id:any):void{
   this .router.navigate(['villages',_id])
 }
 
-onsubmit():void{
-  this.userid = localStorage.getItem('user');
-  this.imagesdata = this.imagesform.value
-  console.log(this.imagesdata,"this.imagesdata")
-  this.memberservice.AddFamilyImages(this.imagesdata,this.userid).subscribe(
-    data =>{
-      console.log("images added", data)    }
-  )
+onsubmit(): void {
+  const userId = localStorage.getItem('user');
+  if (!userId) {
+    console.error('User ID not found in localStorage');
+    return;
+  }
+
+  const imagesData = this.imagesform.value;
+  console.log('Images data:', imagesData);
+
+  this.memberservice.AddFamilyImages(imagesData, userId).subscribe({
+    next: (data) => {
+      console.log('Images added:', data);
+      this.fetchprofiledata();
+      this.bannerFileList = [];
+    },
+    error: (err) => {
+      console.error('Error adding images:', err);
+    }
+  });
 }
+
+
+openmemberDialog(): void {
+  console.log('sssssssssss');
+  const dialogRef = this.dialog.open(UpdateprofileComponent, {
+    data: { displayName: 'updateprofile' },
+    autoFocus: false,
+    backdropClass: 'dialog-backdrop',
+  });
+
+  dialogRef.afterClosed().subscribe(() => {
+    // Handle after dialog close actions here
+  });
+}
+
 
 navigateTogoshaladetail(_id: string): void {
   console.log("Clicked", _id);

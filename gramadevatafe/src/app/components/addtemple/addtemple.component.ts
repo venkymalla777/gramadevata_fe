@@ -310,6 +310,7 @@ export class AddtempleComponent implements OnInit {
   // formGroup: FormGroup;
 
   onSubmit() {
+    this.spinner.show();
     if (this.templeForm.valid) {
       const { country, state, district, mandal, ...templeData } = this.templeForm.value;
       console.log(this.templeForm, "999999999999999999")
@@ -319,6 +320,7 @@ export class AddtempleComponent implements OnInit {
           this.villageid = this.templeForm.value.object_id
           console.log(this.villageid)
           this.router.navigate(["villages",templeData.object_id])
+          this.spinner.hide()
           // this.router.navigate(['home']);
           // Handle response or redirect to another page
         }, error => {
@@ -328,6 +330,7 @@ export class AddtempleComponent implements OnInit {
     } else {
       this.templeForm.markAllAsTouched();
       console.log('Form is invalid.');
+      this.spinner.hide();
     }
   }
 

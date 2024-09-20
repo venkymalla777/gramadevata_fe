@@ -7,12 +7,13 @@ import { TreeViewComponent } from '../tree-view/tree-view.component';
 import { finalize, interval, takeUntil,switchMap,Subscription } from 'rxjs';
 import { Subject } from 'rxjs';
 import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
+import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 
 
 @Component({
   selector: 'app-globalgoshalas',
   standalone: true,
-  imports: [CommonModule, TreeViewComponent],
+  imports: [CommonModule, TreeViewComponent,NgxSpinnerModule],
   templateUrl: './globalgoshalas.component.html',
   styleUrl: './globalgoshalas.component.css'
 })
@@ -27,7 +28,12 @@ export class GlobalgoshalasComponent {
   destroy$: Subject<void> = new Subject<void>();
   country:any;
 
-  constructor(private locationservice:LocationService , private goshalaservice:GoshalaService , private router:Router,private route:ActivatedRoute ){ }
+  constructor(private locationservice:LocationService
+     , private goshalaservice:GoshalaService ,
+      private router:Router,
+      private route:ActivatedRoute ,
+      private spinner: NgxSpinnerService,
+    ){ }
 
   ngOnInit():void{
     this.countrydata();
@@ -117,11 +123,13 @@ applyFilters() {
 }
 
 loadFilteredTemples() {
+  this.spinner.show()
   if (this.selectedCategoryId && this.selectedLocationId) {
     this.goshalaservice.filterGoshalas(this.selectedCategoryId, this.selectedLocationId, this.currentPage).subscribe(
       (response) => {
         this.globalgoshala = [...this.globalgoshala, ...response.results];
         console.log(this.globalgoshala, "33333333333333333333");
+        this.spinner.hide()
       },
       (error) => {
         console.error('Error fetching filtered temples:', error);

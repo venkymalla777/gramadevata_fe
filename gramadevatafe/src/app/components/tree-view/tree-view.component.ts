@@ -500,9 +500,12 @@ export class TreeViewComponent implements OnInit {
   @Input() treeType: string = '';
   @Input() disabled: boolean = false;
   @Output() nodeClick = new EventEmitter<any>();
+  @Output() categoryClick = new EventEmitter<string>();
+
 
   treeType1 = 'india';
   showTree = false;  // Flag to toggle the visibility
+  SubcategoryList: any;
 
   // Method to toggle the visibility of the nz-tree component
   toggleTree() {
@@ -530,33 +533,74 @@ convertToNzTreeNode(nodes: NzTreeNodeOptions[]): NzTreeNode[] {
   ) {}
 
   ngOnInit(): void {
+    
+
     // if (this.treeType === 'templecategory') {
     //   this.templeCategoryService.GetallCategories().subscribe(
     //     (res: any[]) => {
     //       this.categoryList = res;
-    //       this.nodes = this.createNodeTree(this.categoryList);
+    //       this.categoryList = this.categoryList.filter(category => 
+    //         category.name !== 'Buddist Temples' && 
+    //         category.name !== 'Gurudwara Temples' && 
+    //         category.name !== 'Jain Temples'
+    //       );
           
+          
+    //       this.nodes = this.createNodeTree(this.categoryList);
+    
+    //       // Append the "All Temples" node with a key
+    //       this.nodes.push({ key: 'AllTemples', title: 'All Temples', value: 'AllTemples' });
+    
+    //       // Sort the nodes alphabetically
     //       this.nodes.sort((a, b) => a.title.localeCompare(b.title));
     //     },
     //     (err: any) => console.error('Error loading category data:', err)
     //   );
     // }
-
-    if (this.treeType === 'templecategory') {
+  
       this.templeCategoryService.GetallCategories().subscribe(
         (res: any[]) => {
           this.categoryList = res;
+          if (this.treeType === 'templecategory') {
+          this.categoryList = this.categoryList.filter(category => 
+            category.name !== 'Buddist Temples' && 
+            category.name !== 'Gurudwara Temples' && 
+            category.name !== 'Jain Temples'
+          );
+          
+          
           this.nodes = this.createNodeTree(this.categoryList);
     
           // Append the "All Temples" node with a key
-          this.nodes.push({ key: '', title: 'All Temples', value: '' });
+          this.nodes.push({ key: 'AllTemples', title: 'All Temples', value: 'AllTemples' });
     
           // Sort the nodes alphabetically
           this.nodes.sort((a, b) => a.title.localeCompare(b.title));
+        }
+        if (this.treeType === 'subreligions'){
+
+          this.SubcategoryList = this.categoryList.filter(category => 
+            category.name === 'Buddist Temples' || 
+            category.name === 'Gurudwara Temples' || 
+            category.name === 'Jain Temples'
+          );
+
+          this.nodes = this.createNodeTree(this.SubcategoryList);
+          this.nodes.sort((a, b) => a.title.localeCompare(b.title));
+          console.log(this.nodes,"this.SubcategoryList")
+        
+        }
         },
         (err: any) => console.error('Error loading category data:', err)
       );
-    }
+
+     
+
+
+      
+      
+      
+      
     
     
 
@@ -565,7 +609,7 @@ convertToNzTreeNode(nodes: NzTreeNodeOptions[]): NzTreeNode[] {
         (res: any[]) => {
           this.categoryList = res;
           this.nodes = this.createNodeTree(this.categoryList);
-          this.nodes.push({ key: '', title: 'All Goshalas', value: '' });
+          this.nodes.push({ key: 'AllGoshalas', title: 'All Goshalas', value: 'AllGoshalas' });
           this.nodes.sort((a, b) => a.title.localeCompare(b.title));
         },
         (err: any) => console.error('Error loading category data:', err)
@@ -577,7 +621,7 @@ convertToNzTreeNode(nodes: NzTreeNodeOptions[]): NzTreeNode[] {
         (res: any[]) => {
           this.categoryList = res;
           this.nodes = this.createNodeTree(this.categoryList);
-          this.nodes.push({ key: '', title: 'All Events', value: '' });
+          this.nodes.push({ key: 'AllEvents', title: 'All Events', value: '' });
           this.nodes.sort((a, b) => a.title.localeCompare(b.title));
         },
         (err: any) => console.error('Error loading category data:', err)
@@ -727,6 +771,10 @@ convertToNzTreeNode(nodes: NzTreeNodeOptions[]): NzTreeNode[] {
 //     }
 //   });
 // }
+
+onCategoryClick(categoryId: string): void {
+  this.categoryClick.emit(categoryId);
+}
 
 // In your component.ts file
 nzEvent(event: NzFormatEmitEvent): void {

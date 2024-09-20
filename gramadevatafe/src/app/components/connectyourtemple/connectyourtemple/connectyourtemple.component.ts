@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgxSpinnerModule,NgxSpinnerService } from "ngx-spinner";
 import { INDIA } from '../../../constants';
+import { AuthenticationService } from '../../../services/authenticationservice/authentication.service';
 
 
 
@@ -36,7 +37,8 @@ export class ConnectyourtempleComponent {
     private fb:FormBuilder,
     private router : Router,
     public dialogRef: MatDialogRef<ConnectyourtempleComponent>,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private authenticationService:AuthenticationService
    ) { }
 
    ngOnInit(){
@@ -177,6 +179,11 @@ export class ConnectyourtempleComponent {
   }
 
   navigate():void{
+    let userId = this.authenticationService.getCurrentUser();
+    if (userId == undefined || userId == null) {
+      this.authenticationService.showLoginModal()
+      return;
+    }
     this.router.navigate(["addvillage"])
     this.dialogRef.close();
 

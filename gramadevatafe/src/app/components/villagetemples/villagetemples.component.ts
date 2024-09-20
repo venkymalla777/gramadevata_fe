@@ -16,6 +16,8 @@ import { NgxSpinnerModule,NgxSpinnerService } from "ngx-spinner";
 import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
 
 import { Subscription } from 'rxjs';
+import { NotificationHelper } from '../commons/notification';
+
 
 
 @Component({
@@ -56,7 +58,8 @@ export class VillagetemplesComponent {
        protected userservice:UserService,
        protected sharedService: SharedService,
        private memberservice:MemberService,
-       private spinner: NgxSpinnerService
+       private spinner: NgxSpinnerService,
+       private notificationHelper:NotificationHelper
       ){ }
 
 
@@ -168,13 +171,19 @@ export class VillagetemplesComponent {
   }
   
 
-  isconnect():void{
+  isconnect(): void {
     const connectdata = this.ConnectForm.value;
     this.memberservice.connect(connectdata).subscribe(
       response => {
         console.log(response);
-      })
-  }
+        this.fetchvillages(); // Call fetchvillages() after a successful response
+      },
+      error => {
+        console.error('Error:', error); // Handle any errors if necessary
+      }
+    );
+}
+
 
 
 
@@ -300,10 +309,10 @@ navigateEventdata(event:string):void{
 //   this.router.navigate(['chatroom',this.village_id])
 // }
 NavigateToChatRoom(): void {
-  let userId = this.authenticationService.getCurrentUser();
+  const userId = this.authenticationService.getCurrentUser();
 
   // Check if user is logged in
-  if (userId == undefined || userId == null) {
+  if (!userId) {
     this.authenticationService.showLoginModal();
     return;
   }
@@ -311,26 +320,34 @@ NavigateToChatRoom(): void {
   const isMemberIn = this.userservice.isMemberIn;
 
   // Check if user is a member
-  if (isMemberIn === false) {
-    this.openmemberDialog();
+  if (!isMemberIn) {
+    // this.openmemberDialog();
+    this.notificationHelper.showSuccessNotification('please Conects as member in this village than Chat with vilage Members', '');
     return;
-
   }
 
-  if (this.isConnected === false) {
-    this.openmemberDialog();
+  // Check if the user is connected
+  if (!this.isConnected) {
+    // this.openmemberDialog();
+    this.notificationHelper.showSuccessNotification('please Conects as member in this village than Chat with vilage Members', '');
     return;
-    
   }
 
   // Get village ID from the route parameters
   this.village_id = this.route.snapshot.paramMap.get("_id");
+
+  // Handle case if village_id is not found
+  if (!this.village_id) {
+    console.error("Village ID not found in route parameters");
+    return;
+  }
 
   console.log(this.village_id, "village id");
 
   // Navigate to chatroom with village ID
   this.router.navigate(['chatroom', this.village_id]);
 }
+
 
 
 

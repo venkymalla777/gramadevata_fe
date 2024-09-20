@@ -1,65 +1,59 @@
-<section class="header-m" style="margin-top: 120px;">
-    <div class="container col-xxl-8 px-3 py-2">
-      <div class="row justify-content-center align-items-center g-5 py-2">
-        <div class="col-10 col-sm-8 col-lg-6">
-          <img src="../../../assets/durga.jpg" class="d-block mx-lg-auto img-fluid" style="border-radius: 50px;"
-            alt="Bootstrap Themes" width="500" height="300" loading="lazy">
-        </div>
-  
-        <div class="col-lg-6">
-          <!-- <h4 class="fw-bold lh-1 mb-3 text-primary">Our Village - Our Temple - Our Deity</h4> -->
-          <h4 class="fw-bold lh-1 mb-3" style="color: orange;">Our Village - Our Temple - Our Deity</h4>
+<div class="container mt-5" >
+  <div class="text-center mb-5" style="color: black">
+    <img src="../../../assets/icon.jpg" style="height: 230px; width: 250px;" alt="">
+    <!-- <h1 class="fw-bold text-warning mt-5">Gramadevata Foundation</h1> -->
+    
+  </div>
 
-          <p class="lead">Here’s where heritage meets heart, and roots intertwine with reverence. In the hustle and bustle
-            of our modern lives, the echoes of tradition and the whispers of our ancestors often fade away. But here in
-            Gramadevata, in this sacred space, we invite you on a journey to rediscover the essence of your origins, to
-            connect with the spiritual tapestry that weaves through generations.</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start px-2">
-              <a class = "text-white" href="../../../assets/Gramadevata Foundation note.pdf" target="_blank">
-                <!-- <button class="btn btn-primary px-4 me-md-2 text-white" >Read more</button> -->
-                <button class="btn btn-primary px-4 me-md-2 text-white" style="background-color: orange; border-color: orange;">Read more</button>
+  
 
-              </a>
+
+  <div class="mb-5">
+    <!-- <h4 class="fw-bold text-warning">Chairman</h4> -->
+    <div class="row"  *ngFor="let founder of founders">
+      <h4 class="fw-bold text-warning">{{founder.title}}</h4>
+      <div class="d-flex flex-column flex-md-row align-items-center p-2 mb-3"   style="border: 1px solid orange; border-radius: 15px;">
+        
+        <div class="author d-flex flex-column flex-md-row align-items-center">
+          <div class="author-image mb-3 mb-md-0">
+            <img [src]="founder.image" [alt]="founder.name" class="img-fluid rounded-circle">
+            
           </div>
+          
+          <div class="author-description ms-0 ms-md-3">
+            <h6 >{{ founder.name }}</h6>
+            <p>{{ founder.bio }}</p>
           </div>
-      </div>
-  
-      <div class="row justify-content-center align-items-center mt-2">
-        <h4 class="fw-bold lh-1 " style="color: orange;">Vision</h4>
-        <p class="lead">Facilitate a platform for worldwide Hindus to connect, communicate and coordinate with one another
-          on spiritual Culture.</p>
-      </div>
-  
-      <div class="row justify-content-center align-items-center mt-2">
-        <h4 class="fw-bold lh-1 " style="color: orange;">Mission</h4>
-        <div class="container">
-          <ul class="list-group">
-            <li class="list-group-item">
-              <div class="row">
-                <p class="mb-0">To keep every Hindu connected, actively participate and communicating spiritual activities
-                  events in their origin villages from anywhere in the world.</p>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <p class="mb-0">To activate Sanatana and old traditional rituals in all villages in India.</p>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <p class="mb-0">To protect and prevent exploitation, destruction and neglect of scared temples in India.
-                </p>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <p class="mb-0">To keep family history of every individual to know their roots from generation to
-                  generations.</p>
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
-  
     </div>
-  </section>
+  </div>
+
+ 
+
+ 
+
+  <div class="mb-5">
+    <h3 class="fw-bold text-warning">Advisors</h3>
+    <div class="row">
+      <div class="d-flex flex-column flex-md-row align-items-center p-2 mb-3" *ngFor="let advisor of advisors"  style="border: 1px solid orange; border-radius: 15px;">
+        <div class="author d-flex flex-column flex-md-row align-items-center">
+          <div class="author-image mb-3 mb-md-0">
+            <img [src]="advisor.image" [alt]="advisor.name" class="img-fluid rounded-circle">
+          </div>
+          <div class="author-description ms-0 ms-md-3">
+            <h6 >{{ advisor.name }}</h6>
+            <p>{{ advisor.bio }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mb-4" style="color: black">
+    <h5 class="fw-bold text-warning">Get in Touch</h5>
+    <p>
+      For more information or to get involved, please contact us at <a href="mailto:info&#64;sathayushtech.com">info&#64;sathayushtech.com</a>.
+    </p>
+  </div>
+</div>

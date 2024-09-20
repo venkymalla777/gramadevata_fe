@@ -100,8 +100,13 @@ export class HeaderComponent {
   }
 
   openContectYourOrginDialog(): void {
+    let userId = this.authenticationService.getCurrentUser();
+    if (userId == undefined || userId == null) {
+      this.authenticationService.showLoginModal()
+      return;
+    }
     const dialogRef = this.dialog.open(ConnectyourorginComponent, {
-      data: { displayName: 'signup' }, 
+      data: { displayName: 'connectorgin' }, 
       autoFocus: false, 
       backdropClass: 'dialog-backdrop',
     });
@@ -113,6 +118,12 @@ export class HeaderComponent {
 
   openTempleDialog(): void {
     // this.spinner.show();
+
+    let userId = this.authenticationService.getCurrentUser();
+    if (userId == undefined || userId == null) {
+      this.authenticationService.showLoginModal()
+      return;
+    }
     const dialogRef = this.dialog.open(ConnectyourtempleComponent, {
       data: { displayName: 'connectorgin' }, 
       autoFocus: false, 
@@ -131,39 +142,37 @@ export class HeaderComponent {
   
 
   navigateToTempleFilters():void{
-        this.router.navigate(["globaltemples",''])  
+        this.router.navigate(["globaltemples",'AllTemples'])  
   }
 
   navigateToGoshalaFilters():void{
-    this.router.navigate(["goshala",''])  
+    this.router.navigate(["goshala",'AllGoshalas'])  
 }
 
 navigateToEventFilters():void{
-  this.router.navigate(["events",''])  
+  this.router.navigate(["events",'AllEvents'])  
 }
 
+openPdf() {
+  window.open("../../../assets/Gramadevata Foundation note.pdf");
+}
+
+
 navigateTo(route: string): void {
-  const ismemberin = this.userservice.isMemberIn;
-  if (ismemberin === false) {
-    this.openmemberDialog();
-  } else {
+  const isMemberIn = localStorage.getItem("is_member") === "true"; // Convert the string to a boolean
+
+
+  if (isMemberIn) {
     this.router.navigate([route]);
+  } else {
+    this.userservice.showMemberModal();
   }
 }
 
 
-openmemberDialog(): void {
-  console.log('sssssssssss');
-  const dialogRef = this.dialog.open(OnlymemberComponent, {
-    data: { displayName: 'signup' },
-    autoFocus: false,
-    backdropClass: 'dialog-backdrop',
-  });
 
-  dialogRef.afterClosed().subscribe(() => {
-    // Handle after dialog close actions here
-  });
-}
+
+
 
 }
 

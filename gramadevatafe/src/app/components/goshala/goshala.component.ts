@@ -60,6 +60,10 @@ export class GoshalaComponent {
   ngOnInit():void{
 
     this.selectedCategoryId = this.route.snapshot.paramMap.get('id');
+    if (this.selectedCategoryId ==='AllGoshalas') {
+      console.log(this.selectedCategoryId,"poiuy")
+      this.selectedCategoryId = '';
+    }
 
     // this.categorydetail();
     this.loadlocations();
@@ -100,6 +104,10 @@ export class GoshalaComponent {
     this.selectedCategoryId = event.node?.origin?.key; 
     console.log(this.selectedCategoryId,"1111111111111")
     this.router.navigate(["goshala", this.selectedCategoryId])
+    if (this.selectedCategoryId ==='AllGoshalas') {
+      console.log(this.selectedCategoryId,"poiuy")
+      this.selectedCategoryId = '';
+    }
     
 
     this.applyFilters();
@@ -226,6 +234,7 @@ export class GoshalaComponent {
           if (defaultCountry) {
             this.validatorForm.controls['country'].setValue(defaultCountry.value);
           }
+          
         } else {
           console.error("Response is not an array type", res);
           this.CountryFormControls();
@@ -242,6 +251,11 @@ export class GoshalaComponent {
       if (CountryID){
         this.selectedLocationId = CountryID; // Store state ID
         this.applyFilters()
+        this.resetFormControls();
+        this.StateOptions = [];
+        this.DistrictOptions = [];
+        this.MandalOptions = [];
+        this.VillageOptions = [];
         console.log('State ID selected:', this.selectedLocationId);
         console.log("qsdfbg")
         this.locationservice.getbyStates(CountryID).subscribe(
@@ -252,8 +266,10 @@ export class GoshalaComponent {
                 value: state._id
               }));
               this.StateOptions.sort((a, b) => a.label.localeCompare(b.label));
+              this.resetFormControls();
             } else {
               console.error("Response is not an array type", res);
+              this.resetFormControls();
             }
           },
           (err) => {
@@ -346,8 +362,10 @@ export class GoshalaComponent {
                 value: village._id
               }));
               this.VillageOptions.sort((a, b) => a.label.localeCompare(b.label));
+              this.resetVillage();
             } else {
               console.error("Response is not an array type", res);
+              this.resetVillage();
             }
           },
           (err) => {

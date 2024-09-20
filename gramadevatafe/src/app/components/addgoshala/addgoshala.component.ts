@@ -4,7 +4,7 @@ import { GoshalaService } from '../../services/goshalaservice/goshala.service';
 import { LocationService } from '../../services/location/location.service';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { TempleserviceService } from '../../services/templeservice/templeservice.service';
-import { NgxSpinner,NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerService,NgxSpinnerModule } from 'ngx-spinner';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -54,6 +54,7 @@ export class AddgoshalaComponent {
       private templeservice:TempleserviceService,
        private locationservice:LocationService,
        private router:Router,
+       private spinner: NgxSpinnerService,
       ){ }
 
 
@@ -260,6 +261,7 @@ export class AddgoshalaComponent {
   }
 
  onSubmit() {
+  this.spinner.show();
   if(this.goshalaForm.valid){
   
     const { country, state, district, mandal, ...GoshalaData } = this.goshalaForm.value;
@@ -267,6 +269,7 @@ export class AddgoshalaComponent {
     // this.router.navigate(["villages",GoshalaData.object_id])
     
     .subscribe(response =>{
+      this.spinner.hide();
       console.log("goshala added succesw fully",response)
       this.router.navigate(["villages",GoshalaData.object_id])
       },
