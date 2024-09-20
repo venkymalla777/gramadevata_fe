@@ -11,6 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MemberService } from '../../../services/memberservice/member.service';
 import { UpdateprofileComponent } from '../../updateprofile/updateprofile.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SharedService } from '../../../services/sharedservice/shared.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -21,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+  private subscription: Subscription = new Subscription();
   imagesform!:FormGroup;
   userdata: any;
   userid: any;
@@ -50,8 +53,14 @@ export class ProfileComponent {
      private fb:FormBuilder,
      private memberservice:MemberService,
      private dialog:MatDialog,
+     private sharedService:SharedService
     ){}
   ngOnInit():void{
+    this.subscription.add(
+      this.sharedService.triggerFetchVillageData$.subscribe(() => {
+        this.fetchprofiledata();
+      })
+    );
     this.fetchprofiledata();
     // this.connectiondata();
 
@@ -165,6 +174,10 @@ export class ProfileComponent {
     imgElement.src = 'assets/ohm.jpg';
   }
 
+  handleProfileImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/profile1.webp';
+  }
 
 
   onFileSelected(event: any) {

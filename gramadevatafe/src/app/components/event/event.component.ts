@@ -12,6 +12,8 @@ import { LocationService } from '../../services/location/location.service';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../../services/userservice/user.service';
+import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
 
 
 
@@ -55,7 +57,9 @@ export class EventComponent implements OnInit {
      private eventservice: EventService,
       private router:Router,
       private fb:FormBuilder,
-      private locationservice:LocationService
+      private locationservice:LocationService,
+      private authenticationService:AuthenticationService,
+      private userservice:UserService
     ) { }
 
   ngOnInit(): void {
@@ -446,6 +450,24 @@ export class EventComponent implements OnInit {
     this.subscription.unsubscribe();
     this.destroy$.next();
     this.destroy$.complete();
+  }
+  
+
+  navigateTo(route: string): void {
+  
+    const isMemberIn = localStorage.getItem("is_member") === "true"; // Convert the string to a boolean
+    let userId = this.authenticationService.getCurrentUser();
+      if (userId == undefined || userId == null) {
+        this.authenticationService.showLoginModal()
+        return;
+      }
+    
+    if (isMemberIn) {
+      this.router.navigate([route]);
+    } else {
+      
+      this.userservice.showMemberModal();
+    }
   }
 
 

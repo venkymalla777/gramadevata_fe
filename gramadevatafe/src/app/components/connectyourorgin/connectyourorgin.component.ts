@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgxSpinnerModule,NgxSpinnerService } from "ngx-spinner";
 import { INDIA } from '../../constants';
+import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
+import { UserService } from '../../services/userservice/user.service';
 
 
 
@@ -37,7 +39,9 @@ export class ConnectyourorginComponent {
      private fb:FormBuilder,
      private router : Router,
      public dialogRef: MatDialogRef<ConnectyourorginComponent>,
-     private spinner: NgxSpinnerService
+     private spinner: NgxSpinnerService,
+     private userservice:UserService,
+     private authenticationService:AuthenticationService
     ) { }
 
 
@@ -179,9 +183,27 @@ export class ConnectyourorginComponent {
     this.dialogRef.close();
 
   }
-  navigate():void{
-    this.router.navigate(["addvillage"])
-    this.dialogRef.close();
+  // navigate():void{
+  //   this.router.navigate(["addvillage"])
+  //   this.dialogRef.close();
 
+  // }
+
+  navigate(): void {
+  
+    const isMemberIn = localStorage.getItem("is_member") === "true"; // Convert the string to a boolean
+    let userId = this.authenticationService.getCurrentUser();
+      if (userId == undefined || userId == null) {
+        this.authenticationService.showLoginModal()
+        return;
+      }
+    
+    if (isMemberIn) {
+      this.router.navigate(["addvillage"])
+      this.dialogRef.close();
+    } else {
+      
+      this.userservice.showMemberModal();
+    }
   }
 }

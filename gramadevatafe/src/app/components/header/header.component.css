@@ -1,1 +1,19 @@
+.custom-active {
+    color: orange !important;  /* Text in orange when active */
+    font-family: 'Droid Serif';  /* Modern font */
+    font-weight: bold;  /* Make it bold */
+    
+}
+
+/* .nav-link:hover {
+    
+} */
+
+.header-font {
+    font-family: 'Droid Serif';
+    font-weight: bold;
+    font-size: 15px;  /* Adjust font size */
+}
+
+
 

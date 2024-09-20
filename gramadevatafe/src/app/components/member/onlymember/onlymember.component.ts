@@ -58,7 +58,7 @@ export class OnlymemberComponent {
       contact_number: ['',Validators.required],
       dob: ['',Validators.required],
       
-      temple: this.templeId,
+      
       user : localStorage.getItem('user')
       
     });

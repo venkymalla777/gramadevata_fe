@@ -13,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
+import { UserService } from '../../services/userservice/user.service';
+import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
 
 
 
@@ -54,6 +56,8 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
               private route:ActivatedRoute,
                private fb:FormBuilder,
                private spinner: NgxSpinnerService,
+               private userservice:UserService,
+               private authenticationService:AuthenticationService
               ){ }
 
   ngOnInit():void{
@@ -173,6 +177,7 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
             }
         );
     } else if (this.selectedCategoryId) {
+      this.spinner.show()
       console.log("sdfg123")
         this.templeserviceservice.filtertemples(this.selectedCategoryId, '').subscribe(
             (response) => {
@@ -185,6 +190,7 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
             }
         );
     }else if (this.selectedLocationId) {
+      this.spinner.show()
       this.templeserviceservice.filtertemples("",this.selectedLocationId, this.currentPage).subscribe(
           (response) => {
               this.globaltemples = [...this.globaltemples, ...response.results];
@@ -200,10 +206,12 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     
     
     else {
+      
         this.templeserviceservice.getalltemples().subscribe(
             (response) => {
                 this.globaltemples = [...this.globaltemples, ...response.results];
                 console.log(this.globaltemples, "Filtered Temples without Category or Location");
+                this.spinner.hide()
             },
             (error) => {
                 console.error('Error fetching filtered temples:', error);
@@ -214,7 +222,7 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
     this.templeserviceservice.getTempleCategorybyId(this.selectedCategoryId).subscribe(data => {
         this.templeCategorydata = data;
         console.log(this.templeCategorydata, "Temple Category Data");
-        // this.spinner.hide()
+        this.spinner.hide()
     });
 }
 
@@ -236,70 +244,6 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
 
 
 
-    // this.locationservice.GetAllCountries().subscribe(
-    //   (res) => {
-    //     if (Array.isArray(res)) {
-    //       this.CountryOptions = res.map((country: any) => ({
-    //         label: country.name,
-    //         value: country._id
-    //       }));
-    //       this.CountryOptions.sort((a, b) => a.label.localeCompare(b.label));
-    
-    //       // Find the country object with the label "India"
-    //       const defaultCountry = this.CountryOptions.find(option => option.label === 'India');
-          
-    //       // Set the default country if found
-    //       if (defaultCountry) {
-    //         this.validatorForm.controls['country'].setValue(defaultCountry.value);
-    //       }
-    //     } else {
-    //       console.error("Response is not an array type", res);
-          
-    //     }
-    //   },
-      
-    //   (err) => {
-    //     console.log(err);
-    //   }
-      
-    // );
-    // this.CountryFormControls();
-  
-    // this.validatorForm.get('country')?.valueChanges.subscribe(CountryID => {
-    //   if (CountryID){
-    //     this.selectedLocationId = CountryID; // Store state ID
-    //     this.applyFilters()
-    //     console.log('State ID selected:', this.selectedLocationId);
-    //     console.log("qsdfbg")
-    //     this.locationservice.getbyStates(CountryID).subscribe(
-    //       (res) => {
-    //         if (Array.isArray(res)) {
-    //           this.StateOptions = res.map((state: any) => ({
-    //             label: state.name,
-    //             value: state._id
-    //           }));
-    //           this.StateOptions.sort((a, b) => a.label.localeCompare(b.label));
-    //           this.resetFormControls();
-              
-
-    //         } else {
-    //           console.error("Response is not an array type", res);
-    //           this.resetFormControls();
-    //         }
-    //       },
-    //       (err) => {
-    //         console.log(err);
-    //       }
-    //     );
-
-    //   }
-
-    // })
-   
-    
-  
-    // // Initialize form control states
-    // this.resetFormControls();
     
 
     this.locationservice.GetAllCountries().subscribe(
@@ -542,6 +486,24 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
 
   navigateTempleDetail(_id:string):void{
     this.router.navigate(["getbytemples",_id])
+  }
+
+
+  navigateTo(route: string): void {
+  
+    const isMemberIn = localStorage.getItem("is_member") === "true"; // Convert the string to a boolean
+    let userId = this.authenticationService.getCurrentUser();
+      if (userId == undefined || userId == null) {
+        this.authenticationService.showLoginModal()
+        return;
+      }
+    
+    if (isMemberIn) {
+      this.router.navigate([route]);
+    } else {
+      
+      this.userservice.showMemberModal();
+    }
   }
 
 
