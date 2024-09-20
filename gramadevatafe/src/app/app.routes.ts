@@ -104,7 +104,7 @@ export const routes: Routes = [
     {path:"chatroom/:id",component:ChatroomComponent},
     {path: 'addpujari',component:PujariComponent},
     {path: 'verify',component:VerifyComponent},
-    // {path: 'profile',component:ProfileComponent},
+    {path: 'profile',component:ProfileComponent},
     {path: 'connections',component:ConnectionsComponent},
     {path: 'templechat/:id',component:TemplechatComponent},
     {path: 'addvillage',component:AddvillageComponent},
@@ -158,11 +158,11 @@ export const routes: Routes = [
         canActivate: [LoggedinguardGuard],
       },
 
-      {
-        path: 'profile',
-        component: ProfileComponent,
-        canActivate: [UserService],
-      },
+      // {
+      //   path: 'profile',
+      //   component: ProfileComponent,
+      //   canActivate: [UserService],
+      // },
 
 
       ];

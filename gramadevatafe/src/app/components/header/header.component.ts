@@ -39,7 +39,8 @@ import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule,
+  imports: [
+           RouterModule,
            CommonModule,
            NzModalModule,
            NzLayoutModule,
@@ -159,14 +160,12 @@ openPdf() {
 
 
 navigateTo(route: string): void {
-  const isMemberIn = localStorage.getItem("is_member") === "true"; // Convert the string to a boolean
+ 
 
 
-  if (isMemberIn) {
+
     this.router.navigate([route]);
-  } else {
-    this.userservice.showMemberModal();
-  }
+   
 }
 
 

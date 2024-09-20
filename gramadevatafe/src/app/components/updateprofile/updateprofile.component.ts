@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { SharedService } from '../../services/sharedservice/shared.service';
 
 
 
@@ -28,6 +29,7 @@ export class UpdateprofileComponent {
     private router: Router,
     private route: ActivatedRoute,
     public dialogRef: MatDialogRef<UpdateprofileComponent>,
+    private sharedservice:SharedService,
   ){}
 
 
@@ -71,8 +73,10 @@ export class UpdateprofileComponent {
   updateProfile() {
     if (this.profileForm.valid) {
       this.userservice.updateprofile(this.profileForm.value, this.userId).subscribe((response: any) => {
-        alert('Profile updated successfully!');
-        this.router.navigate(['/profile', this.userId]); // Redirect to the profile page after update
+        
+        this.router.navigate(['/profile', this.userId]);
+        this.sharedservice.fetchByProfiledata()
+        this.dialogRef.close();
       }, error => {
         console.log('Failed to update profile!');
       });

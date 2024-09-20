@@ -232,8 +232,8 @@ export class AddvillageComponent {
           console.log('Temple added successfully:', response);
           this.villageid = this.templeForm.value.object_id
           console.log(this.villageid)
-          this.router.navigate(["villages",templeData.object_id])
-          // this.router.navigate(['home']);
+          // this.router.navigate(["villages",templeData.object_id])
+          this.router.navigate(['home']);
           // Handle response or redirect to another page
         }, error => {
           console.error('Error adding temple:', error);

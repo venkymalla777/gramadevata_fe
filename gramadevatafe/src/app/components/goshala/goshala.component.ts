@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { UserService } from '../../services/userservice/user.service';
+import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
 
 
 @Component({
@@ -54,7 +56,9 @@ export class GoshalaComponent {
     private router:Router,
      private goshalaservice:GoshalaService,
      private locationservice:LocationService,
-     private fb:FormBuilder
+     private fb:FormBuilder,
+     private authenticationService:AuthenticationService,
+     private userservice:UserService
     ){}
 
   ngOnInit():void{
@@ -439,6 +443,23 @@ export class GoshalaComponent {
     this.subscription.unsubscribe();
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  navigateTo(route: string): void {
+  
+    const isMemberIn = localStorage.getItem("is_member") === "true"; // Convert the string to a boolean
+    let userId = this.authenticationService.getCurrentUser();
+      if (userId == undefined || userId == null) {
+        this.authenticationService.showLoginModal()
+        return;
+      }
+    
+    if (isMemberIn) {
+      this.router.navigate([route]);
+    } else {
+      
+      this.userservice.showMemberModal();
+    }
   }
 
 

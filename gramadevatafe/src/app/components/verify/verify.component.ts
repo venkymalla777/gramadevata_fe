@@ -116,7 +116,7 @@ export class VerifyComponent {
           this.userService.isMemberIn = this.memberstatus === true;
 
           console.log("swdefg",this.memberstatus)
-          if (this.memberstatus === true) {
+          if (this.userService.isMemberIn) {
             console.log("123456")
             this.userService.isMemberIn = true;
           }
