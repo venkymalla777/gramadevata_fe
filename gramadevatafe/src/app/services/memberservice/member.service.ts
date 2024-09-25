@@ -9,14 +9,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MemberService {
-  isMemberIn = false
+
   villageid: any;
 
   constructor(private  httpclient:HttpClient) { }
 
-  isMemberUser() {
-    return this.isMemberIn;
-  }
+
 
 
 

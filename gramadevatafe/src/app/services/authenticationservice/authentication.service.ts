@@ -7,6 +7,7 @@ import { SignupComponent } from '../../components/signup/signup.component';
 import { UserService } from '../userservice/user.service';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,8 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient,
      private router:Router,
     private dialog:MatDialog,
-    private userservice:UserService
+    private userservice:UserService,
+
 
   ) {
     let user = localStorage.getItem('user');
@@ -36,8 +38,10 @@ export class AuthenticationService {
     this.userservice.isMemberIn = false;
     this.userservice.isPujariIn =false;
     this.router.navigate(['home'])
-    localStorage.removeItem('isMemberIn');
-    localStorage.removeItem('isPujariIn');
+    localStorage.removeItem('profile_pic');
+
+    
+    
   }
 
   showLoginModal(): void {

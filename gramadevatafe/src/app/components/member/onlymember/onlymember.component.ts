@@ -21,6 +21,8 @@ export class OnlymemberComponent {
   memberform!: FormGroup;
   templeId:any;
   apicall: any;
+  isMemberIn = false
+  isPujariIn = false
 
 
 
@@ -45,9 +47,17 @@ export class OnlymemberComponent {
 
   ngOnInit():void{
     this.initializeForm()
-    
-
   }
+
+  isMemberUser() {
+    const isMemberIn = localStorage.getItem("is_member") === "true";
+  if (isMemberIn) {
+    this.isMemberIn = true
+  } else {
+    this.isMemberIn = false
+  } 
+}
+
   initializeForm(): void {
     console.log("wdefrgbh")
     this.memberform = this.fb.group({
@@ -58,7 +68,7 @@ export class OnlymemberComponent {
       contact_number: ['',Validators.required],
       dob: ['',Validators.required],
       
-      
+      temple: this.templeId,
       user : localStorage.getItem('user')
       
     });
@@ -125,16 +135,19 @@ export class OnlymemberComponent {
     this.memberservice.AddMember(connectdata, userId).subscribe(
       response => {
         console.log('Member added successfully:', response);
-        this.userservice.isMemberIn = true;
+        localStorage.setItem('is_member', 'true');
+        // this.userservice.isMemberIn = true;
         this.memberform.reset();
         this.dialogRef.close();
   
         // Make the connection call after successfully adding the member
+        if (this.templeId){
         this.memberservice.connect(connectdata).subscribe(
           connectResponse => {
             console.log('Connected successfully:', connectResponse);
             if (this.apicall === "Connection Temples") {
               this.sharedservice.fetchTempleData();
+              this.memberform.reset();
             } else {
               this.sharedservice.fetchByTempleData();
             }
@@ -144,6 +157,7 @@ export class OnlymemberComponent {
             // Handle connection error here
           }
         );
+      }
       },
       addMemberError => {
         console.error('Error adding member:', addMemberError);

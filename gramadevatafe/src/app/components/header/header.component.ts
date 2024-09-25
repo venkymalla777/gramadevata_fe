@@ -56,6 +56,8 @@ import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
 export class HeaderComponent {
 
   isSmallScreen = window.innerWidth < 992;
+  profile_pic:any;
+  username:any;
 
 
   constructor(
@@ -72,6 +74,18 @@ export class HeaderComponent {
     this.checkScreenSize();
   }
 
+  ngOnInit(){
+    this.profiledata()
+    
+  }
+
+
+  profiledata(){
+
+    this.profile_pic = localStorage.getItem('profile_pic')
+    this.username = localStorage.getItem('username')
+  }
+
   checkScreenSize(): void {
     this.isSmallScreen = window.innerWidth < 992;
   }
@@ -83,6 +97,15 @@ export class HeaderComponent {
       return ['btn', 'btn-primary', 'rounded-pill'];
     }
   }
+
+
+
+
+  handleProfileImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/profile1.webp';
+  }
+  
 
   // doLogout(){
   //   this.authenticationService.logout();
@@ -160,13 +183,15 @@ openPdf() {
 
 
 navigateTo(route: string): void {
- 
+  const ismember = localStorage.getItem('is_member') === 'true'; // Compare as string
 
-
-
+  if (ismember) {
     this.router.navigate([route]);
-   
+  } else {
+    this.userservice.showMemberModal();
+  }
 }
+
 
 
 

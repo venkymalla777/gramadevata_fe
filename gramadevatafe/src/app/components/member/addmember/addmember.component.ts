@@ -29,6 +29,8 @@ export class AddmemberComponent implements OnInit {
   villageid: any;
   connectdata:any;
   isMember=false;
+  isMemberIn=false
+
   
 
   constructor(
@@ -48,12 +50,23 @@ export class AddmemberComponent implements OnInit {
   ngOnInit(): void {
     this.initializeForm();
     this.connectionsForm();
+    this.isMemberUser();
   }
 
 
   get selectedCheckboxes(): FormArray {
     return this.memberform.get('belongs_as') as FormArray;
   }
+
+
+  isMemberUser() {
+    const isMemberIn = localStorage.getItem("is_member") === "true";
+  if (isMemberIn) {
+    this.isMemberIn = true
+  } else {
+    this.isMemberIn = false
+  } 
+}
 
 
   checkboxes = [
@@ -167,7 +180,8 @@ export class AddmemberComponent implements OnInit {
   // }
 
   onSubmit(): void {
-    if (this.userservice.isMemberIn === false) {
+    if (localStorage.getItem('is_member') === 'false') {
+
       const userId = localStorage.getItem('user');
       console.log(userId, "uuuuuuuuuuuuu");
       const { belongs_as, description, village, user, ...memberData } = this.memberform.value;
@@ -176,7 +190,8 @@ export class AddmemberComponent implements OnInit {
       this.memberservice.AddMember(memberData, userId).subscribe(
         response => {
           console.log('Member added successfully:', response);
-          this.userservice.isMemberIn = true
+          localStorage.setItem('is_member', 'true');
+          // this.userservice.isMemberIn = true
           this.memberform.reset();
           this.dialogRef.close();
           // this.memberservice.refreshvillagedata();

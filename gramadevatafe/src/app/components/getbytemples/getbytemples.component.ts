@@ -21,7 +21,6 @@ import { Subscription } from 'rxjs';
 
 
 
-
 @Component({
   selector: 'app-getbytemples',
   standalone: true,
@@ -47,6 +46,8 @@ export class GetbytemplesComponent {
   ConnectForm!:FormGroup;
   ConnectionData: any;
   isConnected= false;
+  isMemberIn = false
+  isPujariIn = false
 
   constructor(private route:ActivatedRoute,
     private router:Router ,
@@ -66,6 +67,7 @@ export class GetbytemplesComponent {
       this.sharedService.triggerFetchByTempleData$.subscribe(() => {
         this.templeId = this.route.snapshot.paramMap.get('id');
         this.fecthtempledata();
+        this.isPujariUser();
       })
     );
     this.fecthtempledata();
@@ -80,6 +82,8 @@ export class GetbytemplesComponent {
     console.log("templeId",this.templeId)
   //  this.fecthtempledata();
    this.connectionsForm();
+   this.isMemberUser();
+   this.isPujariUser();
 
 
     this.commentform = this.fb.group({
@@ -90,6 +94,27 @@ export class GetbytemplesComponent {
 
     }) 
   }
+
+
+  isMemberUser() {
+    const isMemberIn = localStorage.getItem("is_member") === "true";
+    console.log(isMemberIn,"isMemberIn")
+  if (isMemberIn) {
+    this.isMemberIn = true
+  } else {
+    this.isMemberIn = false
+  } 
+}
+
+isPujariUser() {
+  const isPujariIn = localStorage.getItem("type") === "PUJARI";
+  console.log(isPujariIn,"isPujariIn")
+if (isPujariIn) {
+  this.isPujariIn = true
+} else {
+  this.isPujariIn = false
+} 
+}
 
   connectionsForm(): void {
     this.ConnectForm = this.fb.group(
@@ -112,6 +137,10 @@ export class GetbytemplesComponent {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = 'assets/ohm.jpg';
   }
+
+
+
+ 
 
 
 
@@ -183,6 +212,7 @@ export class GetbytemplesComponent {
       }
     );
   }
+
   
   
   
@@ -192,11 +222,11 @@ export class GetbytemplesComponent {
 
 
   onSubmit() {
-    const ismemberin = this.userservice.isMemberIn
+    const ismemberin = localStorage.getItem("is_member") === "true";
     const commentdata  = this.commentform.value;
- if(ismemberin ===false){
-  this.openmemberDialog();
- }
+ if(ismemberin){
+  
+ 
 
     
   const comment = {
@@ -222,6 +252,9 @@ export class GetbytemplesComponent {
         // Handle error as needed
       }
     );
+  }else {
+    this.openmemberDialog();
+  }
   }
 
  
@@ -248,11 +281,11 @@ export class GetbytemplesComponent {
 
 
   OpenAddmemberDilog(templeid:any): void {
-    // let userId = this.authenticationService.getCurrentUser();
-    //   if (userId == undefined || userId == null) {
-    //     this.authenticationService.showLoginModal()
-    //     return;
-    //   }
+    let userId = this.authenticationService.getCurrentUser();
+      if (userId == undefined || userId == null) {
+        this.authenticationService.showLoginModal()
+        return;
+      }
     this.templeId = this.route.snapshot.paramMap.get("_id")
     console.log(this.templeId,"55454")
     const dialogRef = this.dialog.open(OnlymemberComponent, {
@@ -271,7 +304,7 @@ export class GetbytemplesComponent {
     this.templeId = templeid
     console.log(this.templeId,"55454")
     const dialogRef = this.dialog.open(PujariComponent, {
-      data: { displayName: 'addpujari', villageid: this.templeId },
+      data: { displayName: 'addpujari', templeId: this.templeId },
       autoFocus: false,
       backdropClass: 'dialog-backdrop'
     });

@@ -12,7 +12,8 @@
                             <img [src]="temple.image_location ? temple.image_location : 'assets/g5.jpg'" 
                                  alt="image" 
                                  class="img-fluid rounded"
-                                 style="height:400px;width:500px;max-width:100%;">
+                                 style="height:400px;width:500px;max-width:100%;"
+                                 (error)="handleImageError($event)">
                         </a>
                     </div>
                 </div>

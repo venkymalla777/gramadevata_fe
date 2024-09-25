@@ -43,6 +43,8 @@ export class TemplesComponent {
   validatorForm!:FormGroup;
   selectedLocationId: any;
   villagedata: any;
+  isMemberIn = false
+  isPujariIn = false
 
 
 
@@ -73,12 +75,35 @@ export class TemplesComponent {
     this.connectionsForm();
     this.fecthtempledata();
     this.loadlocations();
+    this.isMemberUser();
+    this.isPujariUser();
 
     this.selectedLocationId = this.route.snapshot.paramMap.get('id');
     if (this.selectedLocationId) {
       this.applyFilters();
     }
   }
+
+
+
+  isMemberUser() {
+    const isMemberIn = localStorage.getItem("is_member") === "true";
+  if (isMemberIn) {
+    this.isMemberIn = true
+  } else {
+    this.isMemberIn = false
+  } 
+}
+
+isPujariUser() {
+  const isPujariIn = localStorage.getItem("type") === "PUJARI";
+  console.log(isPujariIn,"isPujariIn")
+if (isPujariIn) {
+  this.isPujariIn = true
+} else {
+  this.isPujariIn = false
+} 
+}
 
   applyFilters() {
     this.templedata = [];
@@ -189,21 +214,35 @@ export class TemplesComponent {
   }
 
 
-  OpenPujariDilog(): void {
+  // OpenPujariDilog(): void {
+  //   let userId = this.authenticationService.getCurrentUser();
+  //     if (userId == undefined || userId == null) {
+  //       this.authenticationService.showLoginModal()
+  //       return;
+  //     }
+  //   this.templeId = this.route.snapshot.paramMap.get("_id")
+  //   console.log(this.templeId,"55454")
+  //   const dialogRef = this.dialog.open(PujariComponent, {
+  //     data: { displayName: 'addpujari', templeId: this.templeId },
+  //     autoFocus: false,
+  //     backdropClass: 'dialog-backdrop'
+  //   });
+  // }
+
+  OpenPujariDilog(templeid:any): void {
     let userId = this.authenticationService.getCurrentUser();
       if (userId == undefined || userId == null) {
         this.authenticationService.showLoginModal()
         return;
       }
-    this.templeId = this.route.snapshot.paramMap.get("_id")
+    this.templeId = templeid
     console.log(this.templeId,"55454")
     const dialogRef = this.dialog.open(PujariComponent, {
-      data: { displayName: 'addpujari', villageid: this.templeId },
+      data: { displayName: 'addpujari', templeId: this.templeId },
       autoFocus: false,
       backdropClass: 'dialog-backdrop'
     });
   }
-
 
   isMemberconnect(templeid:any): void {
     const connectdata = this.ConnectForm.value;

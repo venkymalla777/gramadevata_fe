@@ -39,12 +39,12 @@ export class SharedService {
   private triggerFetchTempleData = new Subject<void>();
   private triggerFetchVillageData = new Subject<void>();
   private triggerFetchByTempleData = new Subject<void>();
-  private triggerFetchprofile = new Subject<void>();
+  private triggerFetchprofileData = new Subject<void>();
 
   triggerFetchTempleData$ = this.triggerFetchTempleData.asObservable();
   triggerFetchVillageData$ = this.triggerFetchVillageData.asObservable();
   triggerFetchByTempleData$ = this.triggerFetchByTempleData.asObservable();
-  triggerFetchprofile$ = this.triggerFetchprofile.asObservable(); // Added '$' at the end for consistency
+  triggerFetchprofileData$ = this.triggerFetchprofileData.asObservable(); 
 
   fetchTempleData() {
     this.triggerFetchTempleData.next();
@@ -59,7 +59,7 @@ export class SharedService {
   }
 
   fetchByProfiledata() { // Added method to trigger fetchByTempleData
-    this.triggerFetchprofile.next();
+    this.triggerFetchprofileData.next();
   }
 }
 
