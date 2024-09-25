@@ -6,6 +6,7 @@ import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationHelper } from '../commons/notification';
 import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
 import { otpValidator } from '../otpverify';
+import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 // import { HeaderComponent } from '../header/header.component';
 
 
@@ -15,7 +16,7 @@ import { otpValidator } from '../otpverify';
 @Component({
   selector: 'app-verify',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,NgxSpinnerModule],
   templateUrl: './verify.component.html',
   styleUrl: './verify.component.css'
 })
@@ -33,6 +34,7 @@ export class VerifyComponent {
      private notificationHelper: NotificationHelper,
      private authenticationService: AuthenticationService,
      private userservice:UserService,
+     private spinner: NgxSpinnerService,
     //  private headercomponent:HeaderComponent
      
     ){
@@ -88,6 +90,7 @@ export class VerifyComponent {
 
   onSubmit(): void {
     if (this.verifyForm.valid) {
+      this.spinner.show();
       const verificationData = {
         username: this.username,
         verification_otp: this.verifyForm.value.verification_otp
@@ -138,6 +141,7 @@ export class VerifyComponent {
  
         this.authenticationService.isLoggedIn = true;
         this.dialogRef.close()
+        this.spinner.hide()
         
         // this.router.navigate(['/home']);
         },
@@ -145,11 +149,13 @@ export class VerifyComponent {
           console.error('Error verifying OTP', error);
           this.notificationHelper.showErrorNotification('Invalid Otp');
           this.verifyForm.markAllAsTouched();
+          this.spinner.hide()
          
         }
       );
     } else {
       this.markAllAsTouched();
+      this.spinner.hide()
     }
   }
 
