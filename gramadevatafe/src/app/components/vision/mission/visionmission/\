@@ -1,0 +1,116 @@
+<section class="header-m" style="margin-top: 120px; ">
+    <div class="container col-xxl-8 px-3 py-2">
+      <div class="row justify-content-center align-items-center g-5 py-2">
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img src="../../../assets/durga.jpg" class="d-block mx-lg-auto img-fluid" style="border-radius: 50px;"
+            alt="Bootstrap Themes" width="500" height="300" loading="lazy">
+        </div>
+  
+        <div class="col-lg-6">
+          
+          <h4 class="fw-bold lh-1 mb-3" style="color: orange;">Our Village - Our Temple - Our Deity</h4>
+
+          <p class="lead">Gramadevata Foundation is a pioneering organization dedicated to the revival, preservation, and promotion of Sanatana Dharma and Hindu cultural heritage. Rooted in the ancient Indian principle of "Vasudhaiva Kutumbakam" (The World is One Family), the foundation's core philosophy revolves around creating a unified global Hindu Community that is deeply connected to its spiritual roots. The foundation’s efforts span across multiple domains, including temple preservation, community engagement, cultural education, and rural upliftment, all designed to foster a strong, vibrant, interconnected and an Empowered Hindu society.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start px-2">
+              <a class = "text-white" href="../../../assets/Gramadevata Foundation note.pdf" target="_blank">
+                
+                <button class="btn btn-primary px-4 me-md-2 text-white" style="background-color: orange; border-color: orange;">Read more</button>
+
+              </a>
+          </div>
+          </div>
+      </div>
+  
+      <div class="row justify-content-center align-items-center mt-2">
+        <h4 class="fw-bold lh-1 " style="color: orange;">Vision</h4>
+        <p class="lead">The vision of Gramadevata Foundation is to "Connect, Communicate, and
+          Coordinate" with the spiritual and cultural roots of Sanatana Dharma. The
+          foundation aims to cultivate a sense of family and unity among Hindus
+          worldwide by bridging the gap between modern life and ancient traditions. By
+          leveraging technology and community-driven initiatives, the foundation
+          envisions a world where every Hindu remains connected to their heritage,
+          actively participates in spiritual and cultural activities, and contributes to the
+          global Hindu community.</p>
+      </div>
+  
+      <div class="row justify-content-center align-items-center mt-2">
+        <h4 class="fw-bold lh-1 " style="color: orange;">Mission</h4>
+        <div class="container">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="row">
+                <p class="mb-0">Gramadevata Foundation’s mission is multifaceted, focusing on empowering
+                  Hindutva through various platforms that cater to different aspects of Hindu life.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <p class="mb-0">Protecting and revitalizing sacred
+                  temples across India, ensuring they
+                  remain active centers of spiritual
+                  practice and community engagement</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <p class="mb-0">Encouraging the practice of traditional
+                  rituals and customs in villages and
+                  urban areas alike, helping to sustain
+                  these practices for future generations.
+                </p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <p class="mb-0">Building a global network of Sanatana
+                  Dharma organizations to collaborate on
+                  cultural, trade, and political initiatives,
+                  thus amplifying the impact of Hindu
+                  values on the world stage.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <p class="mb-0">Providing access to knowledge and
+                  resources on Hinduism, including
+                  scriptures, rituals, cultural arts, and
+                  traditional crafts, to educate and
+                  empower individuals.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <p class="mb-0">Supporting rural artisans and
+                  small-scale producers by providing
+                  them with platforms to sell their
+                  products, thereby preserving
+                  traditional crafts and improving
+                  livelihoods.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+    </div>
+  </section> -->
+
+
+
+
+  <!-- <div class="pdf-container mt-5" style="height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 200px;">
+    <iframe src="../../../assets/Gramadevata Foundation note.pdf" class="pdf-frame" style="border: none;"></iframe>
+  </div>
+  <!-- <div class="pdf-container ">
+    <iframe 
+      src="../../../assets/Gramadevata Foundation note.pdf" 
+      class="pdf-frame"
+      style="border: none;"></iframe>
+  </div> -->
+  
+  
+
+
+
+  
+  
