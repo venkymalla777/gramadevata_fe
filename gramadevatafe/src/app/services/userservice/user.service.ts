@@ -99,6 +99,14 @@ export class UserService {
   }
 
 
+  updateroots(memberData: any, userId: any): Observable<any> {
+    const url = `${URL}updateroots/`+userId;
+    const data = { ...memberData,  };
+  
+    return this.httpclient.put(url, data);
+  }
+
+
 
 
 }

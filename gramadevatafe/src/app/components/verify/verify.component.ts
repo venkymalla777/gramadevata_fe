@@ -122,6 +122,10 @@ export class VerifyComponent {
           loginRresponsees?.profile_pic
           ? localStorage.setItem('profile_pic', loginRresponsees.profile_pic)
           : null;
+
+          loginRresponsees?.full_name
+          ? localStorage.setItem('full_name', loginRresponsees.profile_pic)
+          : null;
           // this.headercomponent.profiledata()
 
           // this.memberstatus= response.is_member

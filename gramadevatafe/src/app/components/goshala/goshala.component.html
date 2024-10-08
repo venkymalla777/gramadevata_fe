@@ -8,13 +8,13 @@
 
             <div [ngClass]="{'d-none': !filtersVisible, 'd-md-block': true}" class="col-md-3 col-xl-2 mt-3 mb-4">
               <div class="card mb-4">
-                <div style="height: 250px; overflow-y: auto;">
+                <div class="hide-scrollbar" style="height: 250px; overflow-y: auto; ">
                
                   <div class="card-header" style="background: linear-gradient(to right, #ff5500, #FF8c00); color: white;">
                     <h6 class="mb-0">Goshala Categories Filters</h6>
                 </div>
         
-                  <div class="card-body">
+                  <div class="card-body ">
                     <app-tree-view
                       (nodeClick)="onCategoryClick($event)"
                       [treeType]="'goshalacategory'">
@@ -100,7 +100,7 @@
 
 
             
-          <div class="col-md-8 col-lg-8" style="overflow-y: scroll; height: 80vh;">
+          <div class="col-md-8 col-lg-8 hide-scrollbar" style="overflow-y: scroll; height: 80vh;">
               <section>
                   <div>
                       
@@ -124,7 +124,7 @@
                                         >
                               </div>
                               <div class="col-md-8 d-flex flex-column justify-content-center p-3">
-                                  <h4 class="card-title mb-2 " style="font-size: 24px; color: #ff4500;"><b>{{ goshalaCategorydata?.name }} Goshalas</b></h4>
+                                  <h4 class="card-title mb-2 " style="font-size: 24px; color: #ff4500;"><b>{{ goshalaCategorydata?.name }}</b></h4>
 
                                   <p class="card-text" style="font-size: 18px;">{{ goshalaCategorydata?.desc }}</p>
                               </div>
@@ -190,8 +190,14 @@
                       </div>
                   </ng-template>
               </section>
+
           </div>
-          
+          <div class="col-md-2 d-none d-md-block">
+                <div class="ad-space-container " >
+                  <app-add-space class="mb-4"></app-add-space>
+                  
+                </div>
+              </div>
       </div>
   </div>
 </section>

@@ -2,159 +2,278 @@
 <div>
     <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
 			type="ball-spin-clockwise">
-		</ngx-spinner>
-    <div class="container mt-5 ">
-        <div class="row mb-5 text-center">
+	</ngx-spinner>
+    <div class="container  ">
+        <div class="row mb-2 text-center">
             <div class="col-12 " style="margin-top: 70px;">
-                <img src="../../../assets/Gramadevata banner (1).png" class="img-fluid responsive-image" alt="Temple Image" style="border-radius: 31px; text-align: center;">
+                <img src="../../../assets/gramdevatha-latest.jpg" class="img-fluid responsive-image" alt="Temple Image" style="border-radius: 31px; text-align: center;">
             </div>
         </div>
         
     </div>
+    <h1 style="font-size: 30px; font-weight: bold; text-align: center;" class="mt-2 mb-4">Our Village - Our Temple - Our Deity</h1>
+
+    <!-- <div class="container mt-4">
+        <div class="col-md-12 row">
+            <div class="col-lg-3 col-md-3 col-sm-12 text-center d-none d-sm-block">
+                <img src="../../../assets/gramadevata2.jpg" 
+                     style="border-radius: 31px; width: 100%; height: 300px; object-fit: fill;" 
+                     alt="Temple Image 1">
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 d-none d-sm-none d-md-none d-lg-none d-block">
+                <img src="../../../assets/gramadevata2.jpg" 
+                     style="border-radius: 31px; width: 100%; height: 300px; object-fit: fill;" 
+                     alt="Temple Image 1">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 d-none d-sm-none d-md-none d-lg-none d-block">
+                <img src="../../../assets/Chnagallama Talli.jpg.png" 
+                     style="border-radius: 31px; width: 100%; height: 300px; object-fit: fill;" 
+                     alt="Temple Image 3">
+            </div>
+            
+            
+            
+            
+            <div class="col-lg-6 col-md-6 col-sm-12 text-center position-relative">
+                <video #videoPlayer 
+                       [src]="ads[currentIndex].videoUrl" 
+                       class="w-100" 
+                       style="height: 300px; object-fit: fill;" 
+                       muted 
+                       loop 
+                       (click)="togglePlay(videoPlayer)" 
+                       (ended)="videoPlayer.currentTime = 0; videoPlayer.pause()">
+                </video>
+                
+                <button (click)="togglePlay(videoPlayer)" 
+                        *ngIf="videoPlayer.paused" 
+                        class="btn btn-primary position-absolute top-50 start-50 translate-middle" 
+                        style="font-size: 2rem; border: none; background: none; color: white;">
+                    <i class="fas fa-play"></i> 
+                </button>
+            </div>
+            
+            <div class=" col-md-3 col-sm-12 text-center d-none d-sm-block">
+                <img src="../../../assets/Chnagallama Talli.jpg.png" 
+                     style="border-radius: 31px; width: 100%; height: 300px; object-fit: fill;" 
+                     alt="Temple Image 3">
+            </div>
+        </div>
+    </div> -->
+
     <div class="container mt-4">
         <div class="row">
-            <div class="col-12 col-md-5  order-md-1 text-center">
-                <img src="../../../assets/gramadevata2.jpg" style="border-radius: 31px; text-align: center;" class="gramadevatha-image"   alt="Temple Image">
+            <!-- Left Image (Large Devices) -->
+            <div class="col-lg-3 col-md-3 col-sm-12 text-center d-none d-sm-block ">
+                <img src="../../../assets/gramadevata2.jpg" 
+                     class="responsive-gramadevata_image"
+                     alt="Temple Image 1">
             </div>
-            <div class="col-12 col-md-7 order-md-2">
-                <h1 style="font-size: 30px; font-weight: bold; text-align: justify;" class="mt-2 mb-4">Our Village - Our Temple - Our Deity</h1>
-                <p class="text-left " style="font-size: 18px; text-align: justify">Here’s where heritage meets heart, and roots intertwine with reverence. 
-                    In the hustle and bustle of our modern lives, the echoes of tradition and the whispers of our ancestors often fade away.
-                     But here in Gramadevata, in this sacred space, we invite you on a journey to rediscover the essence of your origins, 
-                     to connect with the spiritual tapestry that weaves through generations. 
-                 </p>
-                
-                <!-- <button (click)="navigateTo('aboutus')" class="p-2 mt-3" style="border:none; background-color:rgb(235, 117, 6); border-radius: 25px; color: white; width:150px;">Read More</button> -->
-                <a class = "text-white" href="../../../assets/GRAMA DEVATA ( EDITED) FINAL.pdf" target="_blank">
-                    <!-- <button class="btn btn-primary px-4 me-md-2 text-white" >Read more</button> -->
-                    <button class="btn btn-primary px-4 me-md-2 text-white" style="background-color: orange; border-color: orange;">Read more</button>
     
-                  </a>
+            <!-- Images Side by Side (Small Devices) -->
+            <div class="col-6 d-block d-sm-none text-center mb-3">
+                <img src="../../../assets/gramadevata2.jpg" 
+                     style="border-radius: 31px; width: 100%; height: 180px; object-fit: fill;" 
+                     alt="Temple Image 1">
+            </div>
+    
+            <div class="col-6 d-block d-sm-none text-center mb-3">
+                <img src="../../../assets/Chnagallama Talli.jpg.png" 
+                     style="border-radius: 31px; width: 100%; height: 180px; object-fit: fill;" 
+                     alt="Temple Image 3">
+            </div>
+    
+            <!-- Middle Video Section -->
+            <div class="col-lg-6 col-md-6 col-sm-12 text-center position-relative">
+                <video #videoPlayer 
+                       [src]="ads[currentIndex].videoUrl" 
+                       class="responsive-video" 
+                        
+                       muted 
+                       loop 
+                       (click)="togglePlay(videoPlayer)" 
+                       (ended)="videoPlayer.currentTime = 0; videoPlayer.pause()">
+                </video>
+    
+                <button (click)="togglePlay(videoPlayer)" 
+                        *ngIf="videoPlayer.paused" 
+                        class="btn btn-primary position-absolute top-50 start-50 translate-middle" 
+                        style="font-size: 2rem; border: none; background: none; color: white;">
+                    <i class="fas fa-play"></i> 
+                </button>
+            </div>
+    
+            <!-- Right Image (Large Devices) -->
+            <div class="col-md-3 col-sm-12 text-center d-none d-sm-block">
+                <img src="../../../assets/Chnagallama Talli.jpg.png" 
+                     class="responsive-gramadevata_image" 
+                     alt="Temple Image 3">
             </div>
         </div>
-        </div>
+    </div>
+    
           <br>
             <!-- connect Your orgini -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Connect Your Origin</h1>
-                            <div class="row text-center">
-                                <div *ngFor="let village of villages; let i = index" class="col-6 col-md-3 mt-3">
-                                    <a  (click)="navigateToVillageDetail(village._id)">
-                                        <img [src]="'../../../assets/village' + (i + 1) + '.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class="img-fluid img-thumbnail mx-2" [alt]="'Village ' + (i + 1) + ' Image'">
-                                    </a>
-                                    <p class="text-center">{{ village.name }}</p>
+            <div class="container">
+                <div class="row">
+
+
+
+                    <div class="col-2 d-none d-md-block ">
+                        <div class="ad-space-container">
+                            <div  >
+
+                                <div class="ad" style="margin-bottom: 150px;" *ngIf="adspace[currentIndex].isVideo">
+                                    <video 
+                                      #adVideo 
+                                      [src]="adspace[currentIndex].videoUrl" 
+                                      autoplay 
+                                      [muted]="isMuted" 
+                                      loop 
+                                      playsinline
+                                      (loadedmetadata)="onVideoLoaded()"
+                                      style=" width: 200px; ">
+                                    </video>
+                                  </div>
+                                  <div style="margin-bottom: 150px;">
+                                    <app-add-space ></app-add-space> 
+
+                                  </div>
+
+                                    <app-add-space1></app-add-space1> 
+
+                              </div>
+                        </div>
+                    </div>
+
+                    
+            
+                    <div class="col-12 col-md-8">
+                        <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Connect Your Origin</h1>
+                        <div class="row text-center">
+                            <div *ngFor="let village of villages; let i = index" class="col-6 col-md-3 mt-3">
+                                <a (click)="navigateToVillageDetail(village._id)">
+                                    <img [src]="'../../../assets/village' + (i + 1) + '.jpg'" 
+                                         style="height: 25vh; width: 30vh; border-radius: 20px;" 
+                                         class="img-fluid img-thumbnail mx-2" 
+                                         [alt]="'Village ' + (i + 1) + ' Image'">
+                                </a>
+                                <p class="text-center">{{ village.name }}</p>
+                            </div>
+                        </div>
+            
+                        <div class="col-12 text-center mt-3">
+                            <p>All villages, towns, and cities in India</p>
+                            <button (click)="openVillageDialog()" 
+                                    class="p-2" 
+                                    style="border-width: 0px; background-color: rgb(241, 124, 15); 
+                                           border-radius: 20px; color: white; margin-right: 10px;">
+                                Connect Your Origin
+                            </button>
+                        </div>
+            
+                        <div class="col-12 mt-3">
+                            <h1 style="font-size: 30px; font-weight: bold;" class="text-center">Temples</h1>
+                            <div class="row">
+                                <div *ngFor="let templeCategory of templeCategories" class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <a (click)="navigateToCategoryDetail(templeCategory)">
+                                            <img [src]="templeCategory.pic ? templeCategory.pic : 'assets/ohm.jpg'"
+                                                 alt="image"
+                                                 class="img-fluid img-thumbnail mx-2"
+                                                 style="height: 25vh; width: 30vh; border-radius:20px;"
+                                                 (error)="handleImageError($event)">
+                                        </a>
+                                        <p class="text-center">{{ templeCategory.name }}</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 text-center mt-3">
-                                <p>All villages, towns, and cities in India</p>
-                                <button (click)="openVillageDialog()" class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;">Connect Your origin</button>
-                                
+                                <button (click)="navigateToTempleFilters()" class="p-2" 
+                                        style="border-width: 0px; background-color: rgb(241, 124, 15); 
+                                               border-radius: 20px; color: white; margin-right: 10px;">
+                                    View more Temples
+                                </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                   
-        <br>
-               <!-- temples -->
-                
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                               <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Temples</h1>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div *ngFor="let templeCategory of templeCategories" class="col-6 col-md-3">
-                                <div class="text-center">
-                                    <a  (click)="navigateToCategoryDetail(templeCategory)">
-                                        <!-- <img [src]="templeCategory.pic ? 'data:image/jpeg;base64,' + templeCategory.pic : 'assets/ohm.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class="img-fluid img-thumbnail mx-2" alt="image"> -->
-                                        <img [src]="templeCategory.pic ? templeCategory.pic : 'assets/ohm.jpg'"
-                                            alt="image"
-                                            class="img-fluid img-thumbnail mx-2"
-                                            style="height: 25vh; width: 30vh; border-radius:20px;"
-                                            (error)="handleImageError($event)">
+            
+                        <div class="col-12 mt-3">
+                            <h1 style="font-size: 30px; font-weight: bold;" class="text-center">Goshalas</h1>
+                            <div class="row text-center">
+                                <div *ngFor="let goshalaCategory of goshalaCategories" class="col-6 col-md-3 mt-3">
+                                    <a (click)="navigateToGoshalaCategoryDetail()">
+                                        <img [src]="goshalaCategory.pic ? goshalaCategory.pic : 'assets/ohm.jpg'"
+                                             alt="image"
+                                             class="img-fluid img-thumbnail mx-2"
+                                             style="height: 25vh; width: 30vh; border-radius:20px;"
+                                             (error)="handleImageError($event)">
                                     </a>
-                                    <p class="text-center">{{ templeCategory.name }}</p>
+                                    <p class="text-center">{{ goshalaCategory.name }}</p>
                                 </div>
                             </div>
+                            <div class="col-12 text-center mt-3">
+                                <button (click)="navigateToGoshalaCategoryDetail()" 
+                                        class="p-2" 
+                                        style="border-width: 0px; background-color: rgb(241, 124, 15); 
+                                               border-radius: 20px; color: white; margin-right: 10px;">
+                                    View more Goshalas
+                                </button>
+                            </div>
+                        </div>
+            
+                        <div class="col-12 mt-3">
+                            <h1 style="font-size: 30px; font-weight: bold;" class="text-center">Events</h1>
+                            <div class="row text-center">
+                                <div *ngFor="let eventcategorydata of eventCategories" class="col-6 col-md-3 mt-3">
+                                    <a (click)="navigateToEventsCategoryDetail()">
+                                        <img [src]="eventcategorydata.pic ? eventcategorydata.pic : 'assets/ohm.jpg'"
+                                             alt="image"
+                                             class="img-fluid img-thumbnail mx-2"
+                                             style="height: 25vh; width: 30vh; border-radius:20px;"
+                                             (error)="handleImageError($event)">
+                                    </a>
+                                    <p class="text-center">{{ eventcategorydata.name }}</p>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center mt-3">
+                                <button (click)="navigateToEventsCategoryDetail()" 
+                                        class="p-2" 
+                                        style="border-width: 0px; background-color: rgb(241, 124, 15); 
+                                               border-radius: 20px; color: white; margin-right: 10px;">
+                                    View More Events
+                                </button>
+                            </div>
                         </div>
                     </div>
-               
-            
-                <div class="col-12 text-center mt-3">
-                  
-                   
-                    <button (click)="navigateToTempleFilters()" class="p-2" style="border-width: 0px; background-color: rgb(241, 124, 15); border-radius: 20px; color: white; margin-right: 10px;">
-                        View more Temples
-                      </button>
-                      
-                      
-            </div>
-               
-                
-                
-<!-- goshalas -->
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1 style="font-size: 30px;font-weight: bold;" class="text-center mt-3">Goshalas</h1>
-        </div>
-    </div>
-    <div class="row text-center">
-        <div *ngFor="let goshalaCategory of goshalaCategories" class="col-6 col-md-3 mt-3">
-            <a (click)="navigateToGoshalaCategoryDetail()">
-                <!-- <img [src]="goshalaCategory.pic ? 'data:image/jpeg;base64,' + goshalaCategory.pic : 'assets/ohm.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class="img-fluid img-thumbnail mx-2" alt="image"> -->
-                <img [src]="goshalaCategory.pic ? goshalaCategory.pic : 'assets/ohm.jpg'"
-                alt="image"
-                class="img-fluid img-thumbnail mx-2"
-                style="height: 25vh; width: 30vh; border-radius:20px;"
-                (error)="handleImageError($event)">
-            </a>
-            <p class="text-center">{{goshalaCategory .name }}</p>
-            
-        </div>
-        <div class="col-12 text-center mt-3">
-            
-            <button (click)="navigateToGoshalaCategoryDetail()" class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;">View more Goshalas</button>
-           
-        </div>
-    </div>
-</div>
-
-              
-        <br>
-                <!-- events -->
 
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h1 style="font-size: 30px;font-weight: bold;" class="text-center mt-3">Events</h1>
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <div *ngFor="let eventcategorydata of eventCategories" class="col-6 col-md-3 mt-3">
-                            <a (click)="navigateToEventsCategoryDetail()">
-                                <!-- <img [src]="eventcategorydata.pic ? 'data:image/jpeg;base64,' + eventcategorydata.pic : 'assets/ohm.jpg'" style="height: 25vh; width: 30vh; border-radius:20px;" class=" img-fluid img-thumbnail mx-2" alt="image"> -->
-                                 <img [src]="eventcategorydata.pic ? eventcategorydata.pic : 'assets/ohm.jpg'"
-                                 alt="image"
-                                 class="img-fluid img-thumbnail mx-2"
-                                 style="height: 25vh; width: 30vh; border-radius:20px;"
-                                 (error)="handleImageError($event)">
-                            </a>
-                            <p class="text-center">{{eventcategorydata .name }}</p>
-                            
-                        </div>
-                        <div class="col-12 text-center mt-3">
-                            <!-- <p>All villages, towns, and cities in India</p> -->
-                            <button (click)="navigateToEventsCategoryDetail()" class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;">View More Events</button>
-                           
+            
+                    <div class="col-2 d-none d-md-block ">
+                        <div class="ad-space-container">
+                            <div  >
+                                <app-add-space></app-add-space> 
+
+                                <div class="ad" *ngIf="2adspace[currentIndex].isVideo">
+                                    <video 
+                                      #adVideo 
+                                      [src]="aadspace[currentIndex].videoUrl" 
+                                      autoplay 
+                                      [muted]="isMuted" 
+                                      loop 
+                                      playsinline
+                                      (loadedmetadata)="onVideoLoaded()"
+                                      style="height: 400px; width: 200px; ">
+                                    </video>
+                                  </div>
+                                  
+                                    <app-add-space1></app-add-space1> 
+
+                              </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
 
 
     
@@ -185,26 +304,6 @@
                     </div>
                 </div>
 
-
-                
-                <!-- <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h1 style="font-size: 30px;font-weight: bold;" class="text-center mt-3">Your Connections</h1>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-12 d-flex justify-content-center align-items-center flex-wrap mt-3">
-                            <img src="../../../assets/village2.jpg" alt="image" class="img-fluid img-thumbnail mx-2" style="height: 25vh; width: 30vh; border-radius:20px;">
-                            <img src="../../../assets/Kamakshi_Ambal_Temple-1024x576.jpeg" alt="image" class="img-fluid img-thumbnail mx-2" style="height: 25vh; width: 30vh; border-radius:20px;">
-                            <img src="../../../assets/brahmotsavam.jpg" alt="image" class="img-fluid img-thumbnail mx-2" style="height: 25vh; width: 30vh; border-radius:20px;">
-                            <img src="../../../assets/g1.jpg" alt="image" class="img-fluid img-thumbnail mx-2" style="height: 25vh; width: 30vh; border-radius:20px;">
-                        </div>
-                        <div class="col-12 text-center mt-3">
-                            <button class="p-2" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; margin-right: 10px;" (click)="navigateTo('connections')">View Your Connections</button>
-                        </div>
-                    </div>
-                </div> -->
                 
                 
 
@@ -251,40 +350,7 @@
     
             </div>
 
-            <!-- <div class="container vh-10 d-flex justify-content-center align-items-center mb-3">
-                <div class="row">
-                    <div class="col text-center">
-                        <img src="../../../assets/HINDU PULSE logo.png" alt="HINDU PULSE logo" style="width: 70px; height: 70px;">
-                        <img src="../../../assets/OM SANATANA  logo.png" alt="OM SANATANA logo" style="width: 70px; height: 70px;">
-                        <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="THE HINDU'S WORLD logo" style="width: 70px; height: 70px;">
-                        <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" style="width: 70px; height: 70px;">
-                    </div>
-                </div>
-            </div>          -->
-
-            <!-- <div class="container vh-10 d-flex justify-content-center align-items-center">
-                <div class="row">
-                    <div class="col text-center">
-                        
-                        <img src="../../../assets/HINDU PULSE logo.png" alt="HINDU PULSE logo" class="d-none d-lg-inline" style="width: 100px; height: 100px;">
-                        <img src="../../../assets/OM SANATANA  logo.png" alt="OM SANATANA logo" class="d-none d-lg-inline" style="width: 100px; height: 100px;">
-                        <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="THE HINDU'S WORLD logo" class="d-none d-lg-inline" style="width: 100px; height: 100px;">
-                        <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" class="d-none d-lg-inline" style="width: 100px; height: 100px;">
-        
-                        
-                        <img src="../../../assets/HINDU PULSE logo.png" alt="HINDU PULSE logo" class="d-none d-md-inline d-lg-none" style="width: 70px; height: 70px;">
-                        <img src="../../../assets/OM SANATANA  logo.png" alt="OM SANATANA logo" class="d-none d-md-inline d-lg-none" style="width: 70px; height: 70px;">
-                        <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="THE HINDU'S WORLD logo" class="d-none d-md-inline d-lg-none" style="width: 70px; height: 70px;">
-                        <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" class="d-none d-md-inline d-lg-none" style="width: 70px; height: 70px;">
-        
-                        
-                        <img src="../../../assets/HINDU PULSE logo.png" alt="HINDU PULSE logo" class="d-inline d-md-none" style="width: 50px; height: 50px;">
-                        <img src="../../../assets/OM SANATANA  logo.png" alt="OM SANATANA logo" class="d-inline d-md-none" style="width: 50px; height: 50px;">
-                        <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="THE HINDU'S WORLD logo" class="d-inline d-md-none" style="width: 50px; height: 50px;">
-                        <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" class="d-inline d-md-none" style="width: 50px; height: 50px;">
-                    </div>
-                </div>
-            </div> -->
+      
 </div>
 
 

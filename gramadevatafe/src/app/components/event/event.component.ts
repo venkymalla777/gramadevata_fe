@@ -14,13 +14,15 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/userservice/user.service';
 import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
+import { AddSpaceComponent } from '../add-space/add-space.component';
+import { AddSpace1Component } from '../add-space1/add-space1.component';
 
 
 
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [CommonModule,TreeViewComponent,NzSelectModule,NzFormModule,ReactiveFormsModule],
+  imports: [CommonModule,TreeViewComponent,NzSelectModule,NzFormModule,ReactiveFormsModule,AddSpaceComponent,AddSpace1Component],
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.css']
 })

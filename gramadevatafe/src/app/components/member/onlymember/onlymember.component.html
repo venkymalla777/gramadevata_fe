@@ -27,19 +27,52 @@
             <div class="row mt-2">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="dob">Date of Birth*</label>
-                        <input type="date" class="form-control" formControlName="dob" placeholder="Enter the date of birth">
-                        <div *ngIf="memberform.get('full_name')?.invalid && (memberform.get('full_name')?.dirty || memberform.get('full_name')?.touched)" class="text-danger">
-                            Date of Birth required
-                          </div>
+                        <label for="gender">Gender*</label>
+                        <select class="form-control" formControlName="gender">
+                            <option value="" disabled selected>Select your gender</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div *ngIf="memberform.get('gender')?.invalid && (memberform.get('gender')?.dirty || memberform.get('gender')?.touched)" class="text-danger">
+                            Gender required
+                        </div>
                     </div>
                 </div>
+                
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="contact_number">Contact Number</label>
+                        <label for="contact_number">Contact Number*</label>
                         <input type="text" class="form-control" formControlName="contact_number" placeholder="Enter the contact number">
                         <div *ngIf="memberform.get('full_name')?.invalid && (memberform.get('full_name')?.dirty || memberform.get('full_name')?.touched)" class="text-danger">
                             Contact Number required
+                          </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="gender"> Visibility*</label>
+                        <select class="form-control" formControlName="account_type">
+                            <option value="" disabled selected></option>
+                            <option value="PRIVATE">PRIVATE</option>
+                            <option value="PUBLIC">PUBLIC</option>
+                            
+                        </select>
+                        <div *ngIf="memberform.get('account_type')?.invalid && (memberform.get('account_type')?.dirty || memberform.get('account_type')?.touched)" class="text-danger">
+                            Gender required
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="contact_number">Email </label>
+                        <input type="text" class="form-control" formControlName="email" placeholder="Enter the email">
+                        <div *ngIf="memberform.get('email')?.invalid && (memberform.get('email')?.dirty || memberform.get('email')?.touched)" class="text-danger">
+                            Email required
                           </div>
                     </div>
                 </div>

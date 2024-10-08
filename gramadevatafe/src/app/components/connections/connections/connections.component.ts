@@ -6,13 +6,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConnectyourtempleComponent } from '../../connectyourtemple/connectyourtemple/connectyourtemple.component';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../services/authenticationservice/authentication.service';
+import { AddSpaceComponent } from '../../add-space/add-space.component';
+import { AddSpace1Component } from '../../add-space1/add-space1.component';
 
 
 
 @Component({
   selector: 'app-connections',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,AddSpaceComponent,AddSpace1Component],
   templateUrl: './connections.component.html',
   styleUrl: './connections.component.css'
 })

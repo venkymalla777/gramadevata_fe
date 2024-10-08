@@ -37,18 +37,18 @@ export class AboutsComponent {
     
     {
       title:'Chairman',
-      name: ' Soundarajan Narendran',
+      name: 'Mr. Soundarajan Narendran',
       image: 'assets/Soundarajan Narendran.jpg',
       bio: 'Soundarajan Narendran is a data scientist with over 25 years of experience in both business and government. From 1998 to 2007, he worked for Apollo Tyres and the TVS Group on product development, business channel development and supply chains. Since 2007, Narendran has worked on policy making, public policy and digital government. He has experience of working with non-governmental organizations, governments and global institutions on big data, social media analytics and sentiment analysis. Educated at IIT Chennai and Anna University, Narendran has an interest in spirituality and narrative development.'
     },
 
     {
-      title:'Founder & CEO',
-      name:'Nalabolu Vishnu Roy',
-      image:'../../../assets/founder.jpg',
-      // bio:'Nalabolu Vishnu Roy is the founder of Gramadevata Foundation, a company dedicated to providing innovative technology solutions. With a passion for driving technological advancements and fostering growth, Vishnu Roy has led the company with a vision to create impactful tech solutions that address real-world challenges. Under his leadership, Sathayush Tech Solutions has achieved significant milestones and continues to be at the forefront of technological innovation.',
-      bio:' Mr. Vishnu, with a Master’s degree from Osmania University (1994), has been driven by a passion for both technology and social service. Beginning as a Software Consultant, Vishnu mentored over 2500+ graduates, guiding them to successful careers. Over the past 20 years, Vishnu’s focus has shifted to working closely with social organizations, NGOs, and the media to bring about positive change. His work has included organizing medical camps, contributing to community-based educational programs, and advocating for cultural preservation. Vishnu remains committed to addressing important social issues while preserving cultural and spiritual heritage through these efforts. Looking to the future, Vishnu aims to expand his initiatives further, striving to create sustainable solutions and foster greater social impact.'
+      title: 'Founder & CEO',
+      name: 'MR. NALABOLU GOVINDA ROY VISHNU SRI',
+      image: '../../../assets/founder.jpg',
+      bio: 'A dedicated social reformer and entrepreneur with over 25 years of experience in rural and urban development. As Chairman and Managing Director of Sathayush Tech Solutions Pvt Ltd and Founder-CEO of the Gramadevata Foundation, he has played a pivotal role in developing web and mobile platforms that unite and empower the global Hindu community. His key activities include organizing medical camps in rural areas, providing financial support for underprivileged students, and promoting religious awareness. Mr. Vishnu Roy holds a Bachelor of Science (BSc) and a Master of Computer Applications (MCA) from Osmania University. His work experience includes mentoring thousands of graduates, working as a software consultant in the USA and Singapore, and collaborating on open-source software and bioinformatics projects. He remains deeply connected with a wide range of professionals, including lawyers, doctors, teachers, and media personnel, leveraging these relationships to further his mission of social upliftment and community development.'
     },
+    
 
     {
       title:'Director',

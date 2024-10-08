@@ -55,6 +55,8 @@ import { ConnectyourtempleComponent } from './components/connectyourtemple/conne
 import { VisionmissionComponent } from './components/vision/mission/visionmission/visionmission.component';
 import { UpdateprofileComponent } from './components/updateprofile/updateprofile.component';
 import { UserService } from './services/userservice/user.service';
+import { AddSpaceComponent } from './components/add-space/add-space.component';
+import { AddSpace1Component } from './components/add-space1/add-space1.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -104,14 +106,15 @@ export const routes: Routes = [
     {path:"chatroom/:id",component:ChatroomComponent},
     {path: 'addpujari',component:PujariComponent},
     {path: 'verify',component:VerifyComponent},
-    {path: 'profile',component:ProfileComponent},
+    {path: 'profile/:id',component:ProfileComponent},
     {path: 'connections',component:ConnectionsComponent},
     {path: 'templechat/:id',component:TemplechatComponent},
     {path: 'addvillage',component:AddvillageComponent},
     {path:'connectyourtemple',component:ConnectyourtempleComponent},
     {path: 'vision/mision',component:VisionmissionComponent},
     {path: 'updateprofile',component:UpdateprofileComponent},
-    
+    {path:'addspace',component:AddSpaceComponent},
+    {path: 'addspce1',component:AddSpace1Component},
 
 
     {

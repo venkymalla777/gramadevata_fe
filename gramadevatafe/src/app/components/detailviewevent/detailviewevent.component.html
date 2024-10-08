@@ -1,54 +1,9 @@
-<!-- 
 
-
-<div class="container mt-5 mb-5">
-    <div class="row" style="margin-top: 100px;">
-        <div  class="col-12 mb-5">
-            <h4 class="mb-5 text-center">Detailed View of {{ eventdata.name }}</h4>
-            <div class="row">
-                <div class="col-md-6 text-center">
-                    <div class="image-container mb-5">
-                        <a>
-                            <img [src]="eventdata.image_location ? 'data:image/jpeg;base64,' + eventdata.image_location : 'assets/ohm.jpg'" 
-                                 alt="image" 
-                                 style="height:400px;width:500px;border-radius: 20px;">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-6 text-left">
-                    <div class="details " style="margin-top: 170px;">
-                        <div class="detail mb-3">
-                            <span class="detail-label"><b>Name:</b></span>   {{ eventdata.name }}
-                        </div>
-                        <div class="detail mb-3">
-                            <span class="detail-label"><b>Address:</b></span>   {{ eventdata.address }}
-                        </div>
-                        <div class="detail">
-                            <span class="detail-label"><b>Map Location:</b></span>
-                            <a (click)="openMap(eventdata.map_location)" href="Temple Map Location">    Temple Map Location</a>
-                        </div>
-                        
-                           
-                    </div>
-                </div>
-
-            </div>
-            <div class="container ">
-                <h4>Comments</h4>
-                <textarea class="large-textarea"></textarea>
-                <div>
-                    <button class="btn my-4 text-primary" style="border-radius: 10px; border: 2px solid #FF6800;"> Add Comment</button>
-                </div>
-            </div>
-           
-        </div>
-    </div>
-</div> -->
 
 
 <div class="container mt-5 mb-5">
     <div class="row" style="margin-top: 100px;">
-        <div *ngFor="let eventdata of eventdata">
+        <div class="col-md-10" *ngFor="let eventdata of eventdata">
             <h4 class="mb-5 text-center">Detailed View of {{ eventdata.name }}</h4>
             <div class="row">
                 <div class="col-md-6 text-center">
@@ -57,7 +12,8 @@
                             <img [src]="eventdata.image_location ? eventdata.image_location : 'assets/ohm.jpg'" 
                                  alt="image" 
                                  class="img-fluid rounded"
-                                 style="height:400px;width:500px;max-width:100%;">
+                                 style="height:400px;width:500px;max-width:100%;"
+                                 (error)="handleImageError($event)">
                         </a>
                     </div>
                 </div>
@@ -88,26 +44,9 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="container col-12">
-                <h4>Comments</h4>
+            
 
-        <div class="row">
-              
-            <div [formGroup]="commentform" class="col-8">
-                <input class="textarea form-control " formControlName="body" placeholder="Share your your Experience">
-            </div>
-                <div class="col-4">
-                    <button (click)="onSubmit()" class="btn  text-primary" style="border-radius: 10px; border: 2px solid #FF6800;">Add Comment</button>
-                </div>
-            </div>
-                <div *ngIf="eventdata">
-                    <ul>
-                      <li *ngFor="let comment of eventdata.comments">
-                        <p>{{ comment.body }}</p>
-                      </li>
-                    </ul>
-                  </div>
-            </div> -->
+        
             <div class=" my-y" [formGroup]="commentform">
                 <div class="card">
                   <div class="card-header">
@@ -145,6 +84,12 @@
                 </div>
               </div>
         </div>
+         <div class="col-md-2 d-none d-md-block">
+                            <div class="ad-space-container " >
+                              <app-add-space class="mb-4"></app-add-space>
+                              <app-add-space1 class="mt-5"></app-add-space1>
+                            </div>
+                          </div>
     </div>
 </div>
 

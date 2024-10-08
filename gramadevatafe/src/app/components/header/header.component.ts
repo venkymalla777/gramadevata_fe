@@ -58,6 +58,7 @@ export class HeaderComponent {
   isSmallScreen = window.innerWidth < 992;
   profile_pic:any;
   username:any;
+  userid: any;
 
 
   constructor(
@@ -83,7 +84,7 @@ export class HeaderComponent {
   profiledata(){
 
     this.profile_pic = localStorage.getItem('profile_pic')
-    this.username = localStorage.getItem('username')
+    this.username = localStorage.getItem('full_name')
   }
 
   checkScreenSize(): void {
@@ -182,21 +183,16 @@ openPdf() {
 }
 
 
-navigateTo(route: string): void {
+navigateTo(): void {
   const ismember = localStorage.getItem('is_member') === 'true'; // Compare as string
 
   if (ismember) {
-    this.router.navigate([route]);
+    this.userid = localStorage.getItem('user')
+    this.router.navigate(['profile',this.userid]);
   } else {
     this.userservice.showMemberModal();
   }
 }
-
-
-
-
-
-
 
 }
 

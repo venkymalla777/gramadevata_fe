@@ -75,7 +75,7 @@ export class AddvillageComponent {
       
       
       desc: [''],
-      status: ['ACTIVE'],
+      status: ['INACTIVE'],
       image_location: ['', Validators.required],
       type:['VILLAGE'],
       
@@ -237,11 +237,13 @@ export class AddvillageComponent {
           // Handle response or redirect to another page
         }, error => {
           console.error('Error adding temple:', error);
+          this.spinner.hide();
           // Handle error
         });
     } else {
       this.templeForm.markAllAsTouched();
       console.log('Form is invalid.');
+      this.spinner.hide();
     }
   }
 

@@ -16,6 +16,8 @@ import { MemberService } from '../../services/memberservice/member.service';
 import { PujariComponent } from '../pujari/pujari.component';
 import { SharedService } from '../../services/sharedservice/shared.service';
 import { Subscription } from 'rxjs';
+import { AddSpaceComponent } from '../add-space/add-space.component';
+import { AddSpace1Component } from '../add-space1/add-space1.component';
 
 
 
@@ -28,7 +30,9 @@ import { Subscription } from 'rxjs';
     CommonModule,
     ReactiveFormsModule,
     NzFormModule,
-    NzModalModule
+    NzModalModule,
+    AddSpaceComponent,
+    AddSpace1Component
   ],
   templateUrl: './getbytemples.component.html',
   styleUrl: './getbytemples.component.css'
@@ -48,6 +52,7 @@ export class GetbytemplesComponent {
   isConnected= false;
   isMemberIn = false
   isPujariIn = false
+  connectedId: any;
 
   constructor(private route:ActivatedRoute,
     private router:Router ,
@@ -201,7 +206,8 @@ if (isPujariIn) {
           );
           if (connection) {
             this.isConnected = true;
-            console.log("User is connected.");
+            console.log("User is connected.",connection._id);
+            this.connectedId = connection._id
           }
         } else {
           console.error("Connections is not defined or is not an array");
@@ -355,6 +361,15 @@ if (isPujariIn) {
         this.ConnectForm.reset()
         this.fecthtempledata()
       })
+  }
+
+  disconnect(){
+    this.memberservice.DisconnectMember(this.connectedId).subscribe(
+      data =>{
+        console.log('deleted succesfully')
+        this.fecthtempledata()
+      }
+    )
   }
 
   navigatetemple(templeId:any):void{

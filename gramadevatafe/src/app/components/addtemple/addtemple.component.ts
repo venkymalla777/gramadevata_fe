@@ -99,7 +99,7 @@ export class AddtempleComponent implements OnInit {
       address: ['', Validators.required],
       
       desc: [''],
-      status: ['ACTIVE'],
+      status: ['INACTIVE'],
       image_location: ['', Validators.required],
       
       category: ['', [Validators.required]],

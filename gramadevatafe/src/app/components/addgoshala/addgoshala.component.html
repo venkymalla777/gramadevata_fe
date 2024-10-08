@@ -57,7 +57,7 @@
                     <div class="col-md-4">
                        <div class="form-group">
                         <label for="registartion numer">Registration Number</label>
-                        <input type="text" class="form-control" id="reg_num" formControlName="reg_num" placeholder="Entert the Registration Number ">
+                        <input type="text" class="form-control" id="reg_num" formControlName="reg_num" placeholder="Enter the Registration Number ">
                         <div *ngIf="goshalaForm.get('reg_num')?.invalid && (goshalaForm.get('reg_num')?.dirty || goshalaForm.get('reg_num')?.touched)" class="text-danger">
                           Registration Number is required
                         </div>
@@ -68,7 +68,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="address">Descreption</label>
+                      <label for="address">Description</label>
                       <textarea class="form-control" id="desc" formControlName="desc" placeholder="Describe about the temple in less than 4500 words" rows="3"></textarea>
                     </div> 
                   </div>
@@ -78,7 +78,7 @@
                     <div class="col-md-12">
                        <div class="form-group">
                         <label for="address">Address *</label>
-                        <input type="text" class="form-control" id="address" formControlName="address" placeholder="Entert the address">
+                        <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter the address">
                         <div *ngIf="goshalaForm.get('address')?.invalid && (goshalaForm.get('address')?.dirty || goshalaForm.get('address')?.touched)" class="text-danger">
                           Address is required
                         </div>

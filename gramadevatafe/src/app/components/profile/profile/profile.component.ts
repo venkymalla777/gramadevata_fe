@@ -13,12 +13,16 @@ import { UpdateprofileComponent } from '../../updateprofile/updateprofile.compon
 import { MatDialog } from '@angular/material/dialog';
 import { SharedService } from '../../../services/sharedservice/shared.service';
 import { Subscription } from 'rxjs';
-
+import { UpdaterootsComponent } from '../../updateroots/updateroots.component';
+import { ActivatedRoute } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule,FormsModule,NzUploadModule],
+  imports: [CommonModule,FormsModule,NzUploadModule,NzIconModule,NzModalModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -44,6 +48,9 @@ export class ProfileComponent {
   familyimages: any;
   goshaladata: any;
   eventdata: any;
+  profile:any;
+  user: any;
+  Isuser: any;
 
 
   constructor(
@@ -53,7 +60,9 @@ export class ProfileComponent {
      private fb:FormBuilder,
      private memberservice:MemberService,
      private dialog:MatDialog,
-     private sharedService:SharedService
+     private sharedService:SharedService,
+     private route:ActivatedRoute,
+     private modal:NzModalService
     ){}
     ngOnInit(): void {
       // Subscribe to triggerFetchVillageData$ observable and call fetchprofiledata when triggered
@@ -63,29 +72,25 @@ export class ProfileComponent {
         })
       );
     
-      // Fetch profile data when the component initializes
+      // this.userid = this.route.snapshot.paramMap.get('id');
+      this.route.paramMap.subscribe(params => {
+        this.userid = params.get('id');
+        if (this.userid) {
+          this.fetchprofiledata();
+        }
+      });
+     
       this.fetchprofiledata();
     
-      // Initialize form group for image uploads with required validation
+      
       this.imagesform = this.fb.group({
-        family_images: [[], Validators.required] // Ensure family_images is initialized as an array with validation
+        family_images: [[], Validators.required] 
       });
     }
     
 
 
-  onViewImage(index: number) {
-    // Logic to view the image
-    console.log('View image at index:', index);
-    // Implement your view logic here
-  }
-  
-  onDeleteImage(index: number) {
-    // Logic to delete the image
-    this.familyimages.splice(index, 1);
-    console.log('Deleted image at index:', index);
-    // Implement any additional deletion logic here
-  }
+    
   
   
 
@@ -93,25 +98,37 @@ export class ProfileComponent {
 
 
   fetchprofiledata(): void {
-    this.userid = localStorage.getItem('user');
+    this.user = localStorage.getItem('user');
     this.UserService.profiledata(this.userid).subscribe(
       data => {
         this.userdata = data;
         this.familyimages = data.family_images
         this.goshaladata = data.goshalas
         this.eventdata = data.events
-        console.log(this.familyimages, "familyimages");
+        this.addedtemples = data.temples
+        // console.log(this.addedtemples, "addedtemples");
+        // console.log(this.goshaladata, "goshaladata");
+        // console.log(this.familyimages, "familyimages1");
         this.villageconnections = [];
           this.templeconnections = [];
-          this.addedtemples = [];
+
+          this.profile = data.profile_pic;
+          console.log(this.profile,"this.profile")
+         
+          localStorage.setItem('profile_pic', this.profile);
           
         this.villageconnections.push(...data.Connections.filter((conn: any) => conn.temple === null));
         this.templeconnections.push(...data.Connections.filter((conn: any) => conn.village === null));
         this.connectedTemplescount = this.templeconnections.length
         this.connectdvillgescount = this.villageconnections.length
+
+        this.Isuser = (this.user === this.userid)
+
+          console.log(this.Isuser,"this.Isuser")
   
         if ((data)) {
           this.useraddedtemples = data;
+          
           
           
   
@@ -126,8 +143,9 @@ export class ProfileComponent {
               this.templeconnections.push(...user.Connections.filter((conn: any) => conn.village === null));
               this.connectedTemplescount = this.templeconnections.length
               this.connectdvillgescount = this.villageconnections.length
-              // this.familyimages =user.family_images
+              // this.familyimages =user.
               
+
 
 
             }
@@ -149,6 +167,12 @@ export class ProfileComponent {
           console.log(this.addedtemples, "addedtemples");
           console.log(this.villageconnections, "villageconnections");
           console.log(this.templeconnections, "templeconnections");
+
+          this.user = localStorage.getItem('user');
+          // if (this.user === this.userid) {
+
+          // }
+          
   
         } else {
           this.useraddedtemples = data;
@@ -180,6 +204,30 @@ export class ProfileComponent {
   handleProfileImageError(event: Event) {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = 'assets/profile1.webp';
+  }
+
+
+  // onViewImage(index: number): void {
+  //   // Logic to view the image
+  //   const imageToView = this.familyimages[index];
+  //   console.log('Viewing image:', imageToView);
+  //   // You can open a modal or navigate to a different page here
+  // }
+
+  onViewImage(index: number): void {
+    const imageUrl = this.familyimages[index] ? this.familyimages[index] : 'assets/ohm.jpg';
+    this.modal.create({
+      nzTitle: 'View Image',
+      nzContent: `<img src="${imageUrl}" class="img-fluid" style="width: 100%;" alt="Image"/>`,
+      nzFooter: null,
+      // nzWidth: '100%'
+    });
+  }
+
+  onDeleteImage(index: number): void {
+    // Logic to delete the image
+    this.familyimages.splice(index, 1);
+    console.log('Deleted image at index:', index);
   }
 
 
@@ -321,6 +369,19 @@ openmemberDialog(): void {
 
   dialogRef.afterClosed().subscribe(() => {
     // Handle after dialog close actions here
+  });
+}
+
+
+updateroots(): void {
+  console.log('sssssssssss');
+  const dialogRef = this.dialog.open(UpdaterootsComponent, {
+    data: { displayName: 'updateprofile' },
+    autoFocus: false,
+    backdropClass: 'dialog-backdrop',
+  });
+
+  dialogRef.afterClosed().subscribe(() => {
   });
 }
 

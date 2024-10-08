@@ -16,8 +16,14 @@ import { AuthenticationService } from '../../services/authenticationservice/auth
 import { UserService } from '../../services/userservice/user.service';
 import { ConnectionsService } from '../../services/connectionservice/connections.service';
 import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AddSpaceComponent } from '../add-space/add-space.component';
+import { AddSpace1Component } from '../add-space1/add-space1.component';
 
-
+interface Ad {
+  videoUrl: SafeResourceUrl;
+  isVideo?: boolean;
+}
 
 @Component({
   selector: 'app-home',
@@ -25,7 +31,7 @@ import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
   imports:[
     CommonModule,
     NzModalModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,AddSpaceComponent,AddSpace1Component
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -45,7 +51,13 @@ export class HomeComponent{
   userdata: any;
   membertype: any;
   connectiondata: any;
+  adspace: Ad[] = [];
+  aadspace: Ad[] = [];
+  adVideo:any;
+  renderer:any;
 
+  ads:Ad[]=[];
+  currentIndex:number=0;
 
   constructor(private router: Router, 
     private homeservice: HomeserviceService,
@@ -54,11 +66,39 @@ export class HomeComponent{
       private spinner: NgxSpinnerService,
       private authenticationService:AuthenticationService,
       private userservice:UserService,
-      private connectionservice:ConnectionsService
-    ) { }
+      private connectionservice:ConnectionsService,
+      private sanitizer: DomSanitizer
+      
 
 
+    ) { 
+      this.ads = [
+        { videoUrl: this.sanitizeUrl('../../../assets/grmadevata_video.mp4'), isVideo: true },
+      ];
+      this.adspace = [
+        { videoUrl: this.sanitizeUrl('../../../assets/temple2.mp4'), isVideo: true },  
+      ];
+      this.aadspace = [
+        { videoUrl: this.sanitizeUrl('../../../assets/temple.mp4'), isVideo: true },  
+      ];
+    }
+    onVideoLoaded(): void {
+      if (this.adVideo) {
+        this.renderer.setProperty(this.adVideo.nativeElement, 'muted', this.isMuted);
+      }
+    }
+    isMuted = true;
 
+    sanitizeUrl(url: string): SafeResourceUrl {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+    togglePlay(video: HTMLVideoElement) {
+      if (video.paused) {
+          video.play();
+      } else {
+          video.pause();
+      }
+  }
 
 
   ngOnInit(): void {

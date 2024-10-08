@@ -6,11 +6,13 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../../services/eventservice/event.service';
+import { AddSpace1Component } from '../add-space1/add-space1.component';
+import { AddSpaceComponent } from '../add-space/add-space.component';
 
 @Component({
   selector: 'app-detailviewevent',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,],
+  imports: [CommonModule,ReactiveFormsModule,AddSpace1Component,AddSpaceComponent],
   templateUrl: './detailviewevent.component.html',
   styleUrl: './detailviewevent.component.css'
 })
@@ -75,7 +77,10 @@ export class DetailvieweventComponent {
   }
   
 
-
+  handleImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/event.png';
+  }
 
   openMap(url: string): void {
     window.open(url, '_blank');

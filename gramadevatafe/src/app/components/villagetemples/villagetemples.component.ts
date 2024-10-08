@@ -48,6 +48,10 @@ export class VillagetemplesComponent {
   
   pujariConnections: any[] = [];
   memberConnections: any[] = [];
+  connectedId: any;
+  connected_as: any;
+  isMemberConnected: any;
+  isPujariConnected : any;
   
 
 
@@ -179,6 +183,16 @@ if (isPujariIn) {
             if (connection) {
               this.isConnected = true;
               console.log("ASDFGBNHJMK");
+              this.connectedId = connection._id
+              this.connected_as = connection.connected_as
+              console.log(this.connected_as,"this.connected_as");
+              this.isPujariConnected = (this.connected_as === 'PUJARI')
+              this.isMemberConnected = (this.connected_as === 'MEMBER')
+              console.log(this.isMemberConnected,"this.isMemberConnected");
+              console.log(this.isPujariConnected,"this.isPujariConnected");
+              
+
+
             }
           } else {
             console.error("Connections is not defined or is not an array");
@@ -254,6 +268,7 @@ isconnect():void{
 
 
   OpenMemberDialog(member: any): void {
+    console.log(member,"member")
 
     const dialogRef = this.dialog.open(GetmemberComponent, {
 
@@ -328,26 +343,14 @@ navigateEventdata(event:string):void{
   this.router.navigate(['detailviewevent',event])
 }
 
-// NavigateToChatRoom():void{
-//   let userId = this.authenticationService.getCurrentUser();
-//     if (userId == undefined || userId == null) {
-//       this.authenticationService.showLoginModal()
-//       return;
-//     }
-
-//     const ismemberin = this.userservice.isMemberIn;
-//     if (ismemberin === false) {
-//       this.openmemberDialog();
-//     } else {
-//       this.village_id = this.route.snapshot.paramMap.get("_id");
-//       console.log(this.village_id,"village id")
-//       this.router.navigate(['chatroom',this.village_id])
-//     }
-    
-//   this.village_id = this.route.snapshot.paramMap.get("_id");
-//   console.log(this.village_id,"village id")
-//   this.router.navigate(['chatroom',this.village_id])
-// }
+disconnect(){
+  this.memberservice.DisconnectMember(this.connectedId).subscribe(
+    data =>{
+      console.log('deleted succesfully')
+      this.fetchvillages()
+    }
+  )
+}
 NavigateToChatRoom(): void {
   const userId = this.authenticationService.getCurrentUser();
 
@@ -387,6 +390,9 @@ NavigateToChatRoom(): void {
   // Navigate to chatroom with village ID
   this.router.navigate(['chatroom', this.village_id]);
 }
+
+
+
 
 
 

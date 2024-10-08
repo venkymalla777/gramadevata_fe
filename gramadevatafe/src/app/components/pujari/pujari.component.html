@@ -1,4 +1,4 @@
-<div class="container p-4" *ngIf="!isMemberIn;" >
+<div class="container p-4" *ngIf="!isMemberIn;" style="max-width: 600px; margin: 0 auto; max-height: 600px" >
     <form [formGroup]="memberform">
         <div >
             <div class="row">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-group">
                         <label for="father_name">Date of birth*</label>
                         <input type="date" class="form-control" formControlName="dob" placeholder="Enter the Date of birth">
@@ -34,7 +34,22 @@
                             Date of Birth required
                           </div>
                     </div>
+                </div> -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="gender">Gender*</label>
+                        <select class="form-control" formControlName="gender">
+                            <option value="" disabled selected>Select your gender</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div *ngIf="memberform.get('gender')?.invalid && (memberform.get('gender')?.dirty || memberform.get('gender')?.touched)" class="text-danger">
+                            Gender required
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="contact_number">Contact Number</label>
@@ -46,7 +61,7 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-group">
                         <label for="you_belongs_to_the_village">pujari certificate</label>
                         <input type="text" class="form-control" formControlName="pujari_certificate" placeholder="Enter the pujari certificate Number">
@@ -54,8 +69,29 @@
                             pujari certificate required
                           </div>
                     </div>
+                </div> -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="certificate_type">Certificate Type</label>
+                    <select class="form-control" formControlName="certificate_type" (change)="onCertificateTypeChange($event)">
+                        <option value="" disabled>Select Certificate Type</option>
+                        <option value="aadhaar">Aadhaar</option>
+                        <option value="pan">PAN</option>
+                        <option value="voter">Voter ID</option>
+                    </select>
                 </div>
-                <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pujari_certificate">Pujari Certificate Number</label>
+                    <input type="text" class="form-control" [placeholder]="certificatePlaceholder" formControlName="pujari_certificate" [pattern]="certificatePattern">
+                    <div *ngIf="memberform.get('pujari_certificate')?.invalid && (memberform.get('pujari_certificate')?.dirty || memberform.get('pujari_certificate')?.touched)" class="text-danger">
+                        Pujari certificate required or invalid format
+                    </div>
+                </div>
+            </div>
+                
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="working_temple">Working Temple</label>
                         
@@ -67,8 +103,34 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="gender"> Visibility*</label>
+                        <select class="form-control" formControlName="account_type">
+                            <option value="" disabled selected></option>
+                            <option value="PRIVATE">PRIVATE</option>
+                            <option value="PUBLIC">PUBLIC</option>
+                            
+                        </select>
+                        <div *ngIf="memberform.get('account_type')?.invalid && (memberform.get('account_type')?.dirty || memberform.get('account_type')?.touched)" class="text-danger">
+                            Gender required
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="contact_number">Email </label>
+                        <input type="text" class="form-control" formControlName="email" placeholder="Enter the email">
+                        <div *ngIf="memberform.get('email')?.invalid && (memberform.get('email')?.dirty || memberform.get('email')?.touched)" class="text-danger">
+                            Email required
+                          </div>
+                    </div>
+                </div>
+            </div>
             <div class="row mt-5">
-                <div class="col-12 text-center" >
+                <div class="col-12 text-center mb-3" >
                     <button (click)="onSubmit()">Submit</button>
                 </div>
             </div>
@@ -88,7 +150,7 @@
 
             
             <div class="row mt-2">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-group">
                         <label for="you_belongs_to_the_village">pujari certificate</label>
                         <input type="text" class="form-control" formControlName="pujari_certificate" placeholder="Enter the pujari certificate Number">
@@ -96,7 +158,25 @@
                             pujari certificate required
                           </div>
                     </div>
+                </div> -->
+                <div class="form-group">
+                    <label for="certificate_type">Certificate Type</label>
+                    <select class="form-control" formControlName="certificate_type" (change)="onCertificateTypeChange($event)">
+                        <option value="" disabled>Select Certificate Type</option>
+                        <option value="aadhaar">Aadhaar</option>
+                        <option value="pan">PAN</option>
+                        <option value="voter">Voter ID</option>
+                    </select>
                 </div>
+                
+                <div class="form-group">
+                    <label for="pujari_certificate">Pujari Certificate Number</label>
+                    <input type="text" class="form-control" [placeholder]="certificatePlaceholder" formControlName="pujari_certificate" [pattern]="certificatePattern">
+                    <div *ngIf="memberform.get('pujari_certificate')?.invalid && (memberform.get('pujari_certificate')?.dirty || memberform.get('pujari_certificate')?.touched)" class="text-danger">
+                        Pujari certificate required or invalid format
+                    </div>
+                </div>
+                
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="working_temple">Working Temple</label>

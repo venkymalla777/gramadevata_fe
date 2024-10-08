@@ -1,28 +1,34 @@
 <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" style="width: 400px;" class="p-4">
   <h4 class="text-center" style="color: orange;">Edit Your Profile</h4>
   <div class="form-group">
-    
     <div class="profile-pic-container" formControlName="profile_pic" (click)="triggerFileInput()">
       
-      <img *ngIf="profileImage; else defaultPic" 
+      <img  
            [src]="'data:image/jpg;base64,' + profileImage" 
            alt="Profile Picture" 
-           class="profile-pic" />
+           class="profile-pic"
+           (error)="onImageError($event)"
+           />
+           <!-- <img  
+            [src]="'data:image/jpg;base64,' + profileImage" 
+            alt="Profile Picture" 
+            class="profile-pic" 
+            (error)="onImageError($event)" 
+          /> -->
+
+
       
-     
       <ng-template #defaultPic>
         <div class="profile-pic-placeholder">
           <span class="plus-icon">+</span>
         </div>
       </ng-template>
       
-      
       <div class="overlay">
         <span class="edit-icon">+</span>
       </div>
     </div>
   
-    
     <input
       id="profile_pic"
       type="file"
@@ -32,11 +38,11 @@
       #fileInput
     />
   
-   
     <div *ngIf="profileForm.controls['profile_pic'].invalid && profileForm.controls['profile_pic'].touched" class="text-danger">
       Profile Picture is required.
     </div>
   </div>
+  
   
   
   
@@ -70,13 +76,13 @@
       </div>
     </div>
   
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="dob">Date of Birth</label>
       <input id="dob" type="date" formControlName="dob" class="form-control" />
       <div *ngIf="profileForm.controls['dob'].invalid && profileForm.controls['dob'].touched" class="text-danger">
         Date of Birth is required.
       </div>
-    </div>
+    </div> -->
   
     <div class="form-group">
       <label for="contact_number">Contact Number*</label>
