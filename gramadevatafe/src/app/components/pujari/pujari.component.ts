@@ -24,6 +24,10 @@ export class PujariComponent {
   villageroleoptions: any;
   villageid: any;
   apicall: any;
+  templeId: any;
+  isMemberIn = false
+  isPujariIn = false
+ 
 
   constructor(
     private memberservice: MemberService,
@@ -36,6 +40,7 @@ export class PujariComponent {
   ) {
     this.villageid = data.villageid; 
     console.log(this.villageid,"ffffsfd")
+    this.templeId = data.templeId
   }
 
 
@@ -44,13 +49,27 @@ export class PujariComponent {
     
     this.initializeForm();
     this.connectionsForm();
+    this.isMemberUser();
   }
 
+
+
+  isMemberUser() {
+    const isMemberIn = localStorage.getItem("is_member") === "true";
+  if (isMemberIn) {
+    this.isMemberIn = true
+  } else {
+    this.isMemberIn = false
+  } 
+}
+
   connectionsForm(): void {
+
     this.ConnectForm = this.fb.group(
       {
       connected_as:"PUJARI",
       village: this.villageid,
+      temple:this.templeId,
       user : localStorage.getItem('user')
       }
     );
@@ -61,17 +80,15 @@ export class PujariComponent {
   initializeForm(): void {
     this.memberform = this.fb.group({
       full_name: ["", Validators.required],
-      // surname: ['', Validators.required],
       father_name: ['', Validators.required],
-      // you_belongs_to_the_village: ['', Validators.required],
-      // your_role_in_our_village: ['', Validators.required],
       type:"PUJARI",
       contact_number: ['',Validators.required],
       dob: ['',Validators.required],
       pujari_certificate: ["", Validators.required],
       working_temple:["", Validators.required],
       connected_as:"PUJARI",
-      village: this.villageid, 
+      village: this.villageid,
+      temple:this.templeId,
       user : localStorage.getItem('user')
       
     });
@@ -79,39 +96,30 @@ export class PujariComponent {
     // this.memberform.controls['your_role_in_our_village'].setValue('Villager');
   }
 
-  // onSubmit(): void {
-  //   const memberData = this.memberform.value;
-  //   this.memberservice.(memberData).subscribe(
-  //     response => {
-  //       console.log('Member added successfully:', response);
-  //       this.memberform.reset();
-  //       this.dialogRef.close();
-        
-  //     },
-  //     error => {
-  //       console.error('Error adding member:', error);
-  //       // Handle error here
-  //     }
-  //   );
-  // }
+
   onSubmit(): void {
     const userId = localStorage.getItem('user');
     const {connected_as, village, user, ...memberData} = this.memberform.value;
     console.log(memberData,"memberData")
     const { full_name, father_name, contact_number, dob, type, ...connectdata } = this.memberform.value;
     console.log(connectdata,"connectdata")
-    if (this.userservice.isMemberIn === false){
+   if (localStorage.getItem('is_member') === 'false') {
     if (userId && memberData) {
       this.memberservice.AddMember(memberData, userId).subscribe(
         response => {
           if (this.apicall === "Connection Temples") {
             this.sharedservice.fetchTempleData();
+            this.sharedservice.fetchVillagedata()
           } else {
             this.sharedservice.fetchByTempleData();
+            this.sharedservice.fetchVillagedata()
           }
+          
+          localStorage.setItem('type', 'PUJARI');
           console.log('Member added successfully:', response);
           this.memberform.reset();
           this.dialogRef.close();
+       
           this.memberservice.connect(connectdata).subscribe(
             response => {
               console.log(response);
@@ -122,6 +130,7 @@ export class PujariComponent {
               // Handle connection error here
             }
           );
+        
         },
         error => {
           console.error('Error adding member:', error);
@@ -139,10 +148,13 @@ export class PujariComponent {
     console.log(connectdata,"connectdata")
     this.memberservice.connect(connectdata).subscribe(
       response => {
+        localStorage.setItem('type', 'PUJARI');
         if (this.apicall === "Connection Temples") {
           this.sharedservice.fetchTempleData();
+          this.sharedservice.fetchVillagedata()
         } else {
           this.sharedservice.fetchByTempleData();
+          this.sharedservice.fetchVillagedata()
         }
         console.log(response);
         this.ConnectForm.reset();

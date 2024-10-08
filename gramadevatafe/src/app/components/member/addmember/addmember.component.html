@@ -124,7 +124,7 @@
 
 
 
- <div class="container p-4" *ngIf="!userservice.isMemberIn;" style="max-width: 600px; margin: 0 auto; max-height: 800px">
+ <div class="container p-4" *ngIf="!isMemberIn;" style="max-width: 600px; margin: 0 auto; max-height: 800px">
     <form [formGroup]="memberform">
         <div>
             <div class="row">
@@ -196,7 +196,7 @@
     </form>
 </div>
 
-<div class="container p-4" *ngIf="userservice.isMemberIn;" style="max-width: 600px; margin: 0 auto; max-height: 800px">
+<div class="container p-4" *ngIf="isMemberIn;" style="max-width: 600px; margin: 0 auto; max-height: 800px">
     <form [formGroup]="ConnectForm">
         <div>
             <div class="row">

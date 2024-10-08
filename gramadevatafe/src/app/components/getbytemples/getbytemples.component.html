@@ -56,22 +56,22 @@
                                 
                                 <div class="col-sm-12 col-md-4 col-lg-4 d-flex justify-content-end align-items-center">
 
-                                    <div class="text-center mb-3" *ngIf="!userservice.isMemberIn">
+                                    <div class="text-center mb-3" *ngIf="!isMemberIn">
                                         <button type="button" (click)="OpenAddmemberDilog(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem; margin-right: 10px;">
                                             Connect as Member
                                         </button>
                                     </div>
-                                    <div class="text-center mb-3 " *ngIf="userservice.isMemberIn">
+                                    <div class="text-center mb-3 " *ngIf="isMemberIn">
                                         <button type="button" (click)="isMemberconnect(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem; margin-right: 10px;">
                                             Connected as Member
                                         </button>
                                     </div>
-                                    <div class="text-center mb-3" *ngIf="!userservice.isPujariIn">
+                                    <div class="text-center mb-3" *ngIf="!isPujariIn">
                                         <button type="button" (click)="OpenPujariDilog(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem;">
                                             Connect as Pujari
                                         </button>
                                     </div>
-                                    <div class="text-center mb-3" *ngIf="userservice.isPujariIn">
+                                    <div class="text-center mb-3" *ngIf="isPujariIn">
                                         <button type="button" (click)="isPujariconnect(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem;">
                                             Connected as Pujari
                                         </button>

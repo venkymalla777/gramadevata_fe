@@ -82,7 +82,7 @@ export class TempleserviceService {
   }
 
   addTemple(templeData: any): Observable<any> {
-    return this.httpclient.post("http://127.0.0.1:8000/hindu/temple", templeData);
+    return this.httpclient.post(URL+"temple", templeData);
   }
 
   getTempleCategorybyId(_id:string):Observable<any>{

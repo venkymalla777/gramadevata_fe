@@ -55,7 +55,7 @@ export class LoggedinguardGuard implements CanActivate {
     const user = localStorage.getItem('user');
     console.log('decfvgbn');
     if (user) {
-      this.ismember =this.userservice.isMemberIn
+      // this.ismember =this.userservice.isMemberIn
       
       
 

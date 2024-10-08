@@ -43,6 +43,8 @@ export class VillagetemplesComponent {
   currentUser: any;
   userdata:any;
   membertype:any;
+  isMemberIn = false
+  isPujariIn = false
   
   pujariConnections: any[] = [];
   memberConnections: any[] = [];
@@ -86,6 +88,8 @@ export class VillagetemplesComponent {
       }
     });
     this.connectionsForm();
+    this.isMemberUser();
+    this.isPujariUser();
     
   }
   
@@ -103,6 +107,26 @@ export class VillagetemplesComponent {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = 'assets/ohm.jpg';
   }
+
+  isMemberUser() {
+    const isMemberIn = localStorage.getItem("is_member") === "true";
+  if (isMemberIn) {
+    this.isMemberIn = true
+  } else {
+    this.isMemberIn = false
+  } 
+}
+
+
+isPujariUser() {
+  const isPujariIn = localStorage.getItem("type") === "PUJARI";
+  console.log(isPujariIn,"isPujariIn")
+if (isPujariIn) {
+  this.isPujariIn = true
+} else {
+  this.isPujariIn = false
+} 
+}
 
 
   fetchvillages(): void {
@@ -128,24 +152,24 @@ export class VillagetemplesComponent {
         console.log('Member Connections:', this.memberConnections);
         this.spinner.hide()
   
-        this.userservice.profiledata(this.currentUser).subscribe(
-          (profileData) => {
-            this.userdata = profileData.some((item: any) => item.is_member === 'true');
-            this.membertype = profileData.some((item: any) => item.type === 'PUJARI');
-            console.log(this.userdata, "7777777777tt");
-            if (this.userdata) {
-              console.log("kjhgfd");
-              this.userservice.isMemberIn = true;
-            }
-            if (this.membertype) {
-              console.log("Ispujari");
-              this.userservice.isPujariIn = true;
-            }
-          },
-          (error) => {
-            console.error("Error fetching profile data", error);
-          }
-        );
+        // this.userservice.profiledata(this.currentUser).subscribe(
+        //   (profileData) => {
+        //     this.userdata = profileData.some((item: any) => item.is_member === 'true');
+        //     this.membertype = profileData.some((item: any) => item.type === 'PUJARI');
+        //     console.log(this.userdata, "7777777777tt");
+        //     if (this.userdata) {
+        //       console.log("kjhgfd");
+        //       this.userservice.isMemberIn = true;
+        //     }
+        //     if (this.membertype) {
+        //       console.log("Ispujari");
+        //       this.userservice.isPujariIn = true;
+        //     }
+        //   },
+        //   (error) => {
+        //     console.error("Error fetching profile data", error);
+        //   }
+        // );
   
         if (this.villagedata) {
           if (Array.isArray(this.villagedata.Connections)) {
@@ -171,17 +195,33 @@ export class VillagetemplesComponent {
   }
   
 
-  isconnect(): void {
-    const connectdata = this.ConnectForm.value;
-    this.memberservice.connect(connectdata).subscribe(
-      response => {
-        console.log(response);
-        this.fetchvillages(); // Call fetchvillages() after a successful response
-      },
-      error => {
-        console.error('Error:', error); // Handle any errors if necessary
-      }
-    );
+//   isconnect(): void {
+//     const connectdata = this.ConnectForm.value;
+//     this.memberservice.connect(connectdata).subscribe(
+//       response => {
+//         console.log(response);
+//         this.fetchvillages(); // Call fetchvillages() after a successful response
+//         this.ConnectForm.reset()
+//       },
+//       error => {
+//         console.error('Error:', error); // Handle any errors if necessary
+//       }
+//     );
+// }
+isconnect():void{
+  const connectdata = this.ConnectForm.value;
+  const contactedPujari = {
+    village: this.route.snapshot.paramMap.get("_id"),
+    user : localStorage.getItem('user'),
+    connected_as:'PUJARI'
+
+  }
+  this.memberservice.connect(contactedPujari).subscribe(
+    response => {
+      console.log(response);
+      this.ConnectForm.reset()
+      this.fetchvillages()
+    })
 }
 
 
@@ -190,7 +230,7 @@ export class VillagetemplesComponent {
 
 
   navigateTo(route: string): void {
-    const ismemberin = this.userservice.isMemberIn;
+    const ismemberin = localStorage.getItem('is_member') === 'true';
     if (ismemberin === false) {
       this.openmemberDialog();
     } else {
@@ -317,7 +357,7 @@ NavigateToChatRoom(): void {
     return;
   }
 
-  const isMemberIn = this.userservice.isMemberIn;
+  const isMemberIn = localStorage.getItem('is_member') === 'true';;
 
   // Check if user is a member
   if (!isMemberIn) {

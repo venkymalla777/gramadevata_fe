@@ -19,10 +19,12 @@ export class UserService {
   
 
   constructor(private httpclient:HttpClient,private dialog:MatDialog,) { 
-    const storedIsMemberIn = localStorage.getItem('isMemberIn');
-    this.isMemberIn = storedIsMemberIn !== null && storedIsMemberIn === 'true';
+    // const storedIsMemberIn = localStorage.getItem('is_member');
+    // this.isMemberIn = storedIsMemberIn !== null && storedIsMemberIn === 'true';
+    let user = localStorage.getItem('is_member');
+    this.isMemberIn = user != 'false';
 
-    const storedIsPujariIn = localStorage.getItem('isPujariIn');
+    const storedIsPujariIn = localStorage.getItem('is_PujariIn');
     this.isPujariIn = storedIsPujariIn !== null && storedIsPujariIn === 'true';
   }
 
@@ -31,8 +33,15 @@ export class UserService {
   
 
   isMemberUser() {
-    return this.isMemberIn;
-  }
+    const isMemberIn = localStorage.getItem("is_member") === "true";
+  if (isMemberIn) {
+    this.isMemberIn = true
+  } else {
+    this.isMemberIn = false
+  } 
+}
+   
+  
 
   isPujariUser() {
     return this.isPujariIn;

@@ -115,46 +115,46 @@ FetchHomeData(): void {
 
       this.spinner.hide();
 
-      if (this.authenticationService.isLoggedIn) {
-        this.userId = localStorage.getItem("user");
+      // if (this.authenticationService.isLoggedIn) {
+      //   this.userId = localStorage.getItem("user");
 
-        if (this.userId) {
-          this.connectionservice.GetConnnections(this.userId).subscribe({
-            next: (data) => {
-              this.connectiondata = data.temple.slice(0, 4);
-              console.log(this.connectiondata, "Connection Data");
-            },
-            error: (error) => {
-              console.error("Error fetching connection data", error);
-            }
-          });
+      //   if (this.userId) {
+      //     this.connectionservice.GetConnnections(this.userId).subscribe({
+      //       next: (data) => {
+      //         this.connectiondata = data.temple.slice(0, 4);
+      //         console.log(this.connectiondata, "Connection Data");
+      //       },
+      //       error: (error) => {
+      //         console.error("Error fetching connection data", error);
+      //       }
+      //     });
 
-          this.userservice.profiledata(this.userId).subscribe({
-            next: (profileData) => {
-              this.userdata = profileData.is_member;
-              this.membertype = profileData.type;
+      //     this.userservice.profiledata(this.userId).subscribe({
+      //       next: (profileData) => {
+      //         this.userdata = profileData.is_member;
+      //         this.membertype = profileData.type;
 
-              console.log(this.userdata, "Is Member");
-              console.log(this.membertype, "Member Type");
+      //         console.log(this.userdata, "Is Member");
+      //         console.log(this.membertype, "Member Type");
 
-              if (this.userdata) {
-                console.log("User is a member");
-                this.userservice.isMemberIn = true;
-                localStorage.setItem('isMemberIn', 'true');
-              }
+      //         if (this.userdata) {
+      //           console.log("User is a member");
+      //           this.userservice.isMemberIn = true;
+      //           localStorage.setItem('isMemberIn', 'true');
+      //         }
 
-              if (this.membertype) {
-                console.log("User is a Pujari");
-                this.userservice.isPujariIn = true;
-                localStorage.setItem('isPujariIn', 'true');
-              }
-            },
-            error: (error) => {
-              console.error("Error fetching profile data", error);
-            }
-          });
-        }
-      }
+      //         if (this.membertype) {
+      //           console.log("User is a Pujari");
+      //           this.userservice.isPujariIn = true;
+      //           localStorage.setItem('isPujariIn', 'true');
+      //         }
+      //       },
+      //       error: (error) => {
+      //         console.error("Error fetching profile data", error);
+      //       }
+      //     });
+      //   }
+      // }
     },
     error: (error) => {
       console.error("Error fetching home data", error);
@@ -201,8 +201,6 @@ navigateTo(route: string): void {
     this.userservice.showMemberModal();
   }
 }
-
-
 
 
 
@@ -289,6 +287,23 @@ navigateTempleDetail(_id:string):void{
 //     }
 //   )
 // }
+
+
+
+shareNews() {
+  const shareUrl = "http://gramadevata.com/home";
+  console.log('Share URL:', shareUrl);
+  if (navigator.share) {
+    navigator.share({
+      url: shareUrl
+    }).catch((error) => console.log('Error sharing:', error));
+  } else {
+    console.log('Share API not supported');
+  }
+}
+
+
+
 
 }
 

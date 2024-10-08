@@ -55,20 +55,23 @@ export class ProfileComponent {
      private dialog:MatDialog,
      private sharedService:SharedService
     ){}
-  ngOnInit():void{
-    this.subscription.add(
-      this.sharedService.triggerFetchVillageData$.subscribe(() => {
-        this.fetchprofiledata();
-      })
-    );
-    this.fetchprofiledata();
-    // this.connectiondata();
-
-    this.imagesform = this.fb.group({
-      family_images : [[], Validators.required]
-    })
-
-  }
+    ngOnInit(): void {
+      // Subscribe to triggerFetchVillageData$ observable and call fetchprofiledata when triggered
+      this.subscription.add(
+        this.sharedService.triggerFetchprofileData$.subscribe(() => {
+          this.fetchprofiledata();
+        })
+      );
+    
+      // Fetch profile data when the component initializes
+      this.fetchprofiledata();
+    
+      // Initialize form group for image uploads with required validation
+      this.imagesform = this.fb.group({
+        family_images: [[], Validators.required] // Ensure family_images is initialized as an array with validation
+      });
+    }
+    
 
 
   onViewImage(index: number) {

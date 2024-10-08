@@ -1,4 +1,4 @@
-<div class="container p-4" *ngIf="!userservice.isMemberIn;" >
+<div class="container p-4" *ngIf="!isMemberIn;" >
     <form [formGroup]="memberform">
         <div >
             <div class="row">
@@ -79,7 +79,7 @@
 
 
 
-<div class="container p-4" *ngIf="userservice.isMemberIn;" >
+<div class="container p-4" *ngIf="isMemberIn;" >
     <form [formGroup]="memberform">
         <div >
             <div class="row">

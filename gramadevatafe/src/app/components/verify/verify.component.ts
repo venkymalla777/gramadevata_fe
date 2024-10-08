@@ -6,6 +6,8 @@ import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationHelper } from '../commons/notification';
 import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
 import { otpValidator } from '../otpverify';
+import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
+// import { HeaderComponent } from '../header/header.component';
 
 
 
@@ -14,7 +16,7 @@ import { otpValidator } from '../otpverify';
 @Component({
   selector: 'app-verify',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,NgxSpinnerModule],
   templateUrl: './verify.component.html',
   styleUrl: './verify.component.css'
 })
@@ -32,6 +34,8 @@ export class VerifyComponent {
      private notificationHelper: NotificationHelper,
      private authenticationService: AuthenticationService,
      private userservice:UserService,
+     private spinner: NgxSpinnerService,
+    //  private headercomponent:HeaderComponent
      
     ){
       this.username = data.username;
@@ -86,6 +90,7 @@ export class VerifyComponent {
 
   onSubmit(): void {
     if (this.verifyForm.valid) {
+      this.spinner.show();
       const verificationData = {
         username: this.username,
         verification_otp: this.verifyForm.value.verification_otp
@@ -111,23 +116,32 @@ export class VerifyComponent {
           loginRresponsees?.is_member
           ? localStorage.setItem('is_member', loginRresponsees.is_member)
           : null;
+          loginRresponsees?.type
+          ? localStorage.setItem('type', loginRresponsees.type)
+          : null;
+          loginRresponsees?.profile_pic
+          ? localStorage.setItem('profile_pic', loginRresponsees.profile_pic)
+          : null;
+          // this.headercomponent.profiledata()
 
-          this.memberstatus= response.is_member
-          this.userService.isMemberIn = this.memberstatus === true;
+          // this.memberstatus= response.is_member
+          // this.userService.isMemberIn = this.memberstatus === true;
 
-          console.log("swdefg",this.memberstatus)
-          if (this.userService.isMemberIn) {
-            console.log("123456")
-            this.userService.isMemberIn = true;
-          }
-          else{
-            this.userService.isMemberIn = false;
-          }
+          // console.log("swdefg",this.memberstatus)
+          // if (this.userService.isMemberIn) {
+          //   console.log("123456")
+          //   this.userService.isMemberIn = true;
+          // }
+          // else{
+          //   this.userService.isMemberIn = false;
+          // }
           
           
         
  
         this.authenticationService.isLoggedIn = true;
+        this.dialogRef.close()
+        this.spinner.hide()
         
         // this.router.navigate(['/home']);
         },
@@ -135,11 +149,13 @@ export class VerifyComponent {
           console.error('Error verifying OTP', error);
           this.notificationHelper.showErrorNotification('Invalid Otp');
           this.verifyForm.markAllAsTouched();
+          this.spinner.hide()
          
         }
       );
     } else {
       this.markAllAsTouched();
+      this.spinner.hide()
     }
   }
 
