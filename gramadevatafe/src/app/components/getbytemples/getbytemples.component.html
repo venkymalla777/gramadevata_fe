@@ -29,13 +29,20 @@
                                     <div class="detail mb-3">
                                         <span class="detail-label"><b>Address:</b></span> {{ temple?.address }}
                                     </div>
-                                    <div class="detail">
+                                    <div class="detail" *ngIf="temple?.temple_map_location">
                                         <span class="detail-label"><b>Map Location:</b></span>
                                         <a (click)="openMap(temple?.temple_map_location)" href="Temple Map Location" target="_blank">Temple Map Location</a>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
+                       
+                        <div class="detail mb-3" *ngIf="temple?.desc">
+                            <span class="detail-label"><b>Description:</b></span> 
+                            <span>{{ temple?.desc }}</span>
+                          </div>
+                          
                         <hr>
                   
                         <div class="container" >
