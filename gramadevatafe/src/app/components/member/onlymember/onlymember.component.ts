@@ -23,6 +23,7 @@ export class OnlymemberComponent {
   apicall: any;
   isMemberIn = false
   isPujariIn = false
+  full_name: any;
 
 
 
@@ -66,10 +67,15 @@ export class OnlymemberComponent {
       father_name: ['', Validators.required],
      
       contact_number: ['',Validators.required],
-      dob: ['',Validators.required],
-      
+      // dob: ['',Validators.required],
+      gender: ['',Validators.required],
+      type:'MEMBER',
+      is_member:"true",
+      // family_images:[],
       temple: this.templeId,
-      user : localStorage.getItem('user')
+      user : localStorage.getItem('user'),
+      account_type:['PRIVATE',Validators.required],
+      email:['']
       
     });
    
@@ -136,6 +142,8 @@ export class OnlymemberComponent {
       response => {
         console.log('Member added successfully:', response);
         localStorage.setItem('is_member', 'true');
+        this.full_name = this.memberform.get('full_name')?.value || ''; 
+        localStorage.setItem('full_name', this.full_name);
         // this.userservice.isMemberIn = true;
         this.memberform.reset();
         this.dialogRef.close();

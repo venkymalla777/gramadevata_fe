@@ -233,7 +233,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SharedService } from '../../services/sharedservice/shared.service';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-updateprofile',
@@ -247,6 +247,7 @@ export class UpdateprofileComponent {
   userId: any;
   profileImage: string | ArrayBuffer | null = null;
   profile_pic: any;
+  full_name: any;
 
   constructor(
     private fb: FormBuilder,
@@ -268,7 +269,7 @@ export class UpdateprofileComponent {
       full_name: ['', Validators.required],
       father_name: [''],
       gender: [''],
-      dob: [''],
+      // dob: [''],
       contact_number: ['', Validators.required],
       profile_pic: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -282,7 +283,7 @@ export class UpdateprofileComponent {
         full_name: response.full_name,
         father_name: response.father_name,
         gender: response.gender,
-        dob: response.dob,
+        // dob: response.dob,
         contact_number: response.contact_number,
         email: response.email,
       });
@@ -327,16 +328,26 @@ export class UpdateprofileComponent {
     if (this.profileForm.valid) {
       this.userservice.updateprofile(this.profileForm.value, this.userId).subscribe(
         (response: any) => {
-          this.sharedservice.fetchByProfiledata();
-          this.router.navigate(['/profile', this.userId]);
-          this.dialogRef.close();
+          // Handle successful update
+          this.sharedservice.fetchByProfiledata(); // Update the profile data
+          this.router.navigate(['/profile', this.userId]); // Navigate to the updated profile
+          this.full_name = this.profileForm.get('full_name')?.value || ''; 
+          localStorage.setItem('full_name', this.full_name);
+          if (this.dialogRef) {
+            this.dialogRef.close(); // Close the dialog if open
+
+          }
         },
-        error => {
-          console.log('Failed to update profile!');
+        (error: any) => {
+          console.error('Failed to update profile!', error); // Log the actual error
+          this.profileForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
         }
       );
+    } else {
+      this.profileForm.markAllAsTouched(); // If form is invalid, mark all fields as touched
     }
   }
+  
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -355,9 +366,14 @@ export class UpdateprofileComponent {
     }
   }
 
+
   triggerFileInput() {
     const fileInput = document.getElementById('profile_pic') as HTMLElement;
     fileInput.click();
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/profile1.webp'; // Set path to your default image
   }
 }
 

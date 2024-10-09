@@ -15,7 +15,7 @@
         <div class="row mt-5">
             <h1 class="text-justify"><span style="font-size: 22px;">Village : </span>{{villagedata.name}}</h1>
             <!-- <p class="text-justify"><span>Village/Area :</span>{{villagedata.name}}</p> -->
-            <p class="text-justify "><span>Blocke/Mandal : </span>{{villagedata.block.name}}</p>
+            <p class="text-justify "><span>Block/Mandal : </span>{{villagedata.block.name}}</p>
             <p class="text-justify"><span>District : </span>{{villagedata.block.district.name}}</p>
             <p class="text-justify"><span>State : </span>{{villagedata.block.district.state.name}}</p>
             <p class="text-justify"><span>Country : </span>{{villagedata.block.district.state.country.name}}</p>
@@ -239,7 +239,7 @@
                     <ng-container *ngIf="memberConnections && memberConnections.length > 0; else NOMembers">
                     <div *ngFor="let member of memberConnections" class="d-flex flex-column align-items-center">
                         <button style="border-radius: 50%; border: none; height: 35px; width: 35px; padding: 0;"
-                                (click)="OpenMemberDialog(member)">
+                                (click)="OpenMemberDialog(member.user._id)">
                             <i class="fas fa-user" style="font-size: 15px;"></i>
                         </button>
                         <div class="mx-3">
@@ -266,7 +266,7 @@
                     <div *ngFor="let member of pujariConnections" class="d-flex flex-column align-items-center">
 
                         <button style="border-radius: 50%; border: none; height: 35px; width: 35px; padding: 0;"
-                                (click)="OpenMemberDialog(member)">
+                                (click)="OpenMemberDialog(member.user._id)">
                             <i class="fas fa-user" style="font-size: 15px;"></i>
                         </button>
                         <div class="mx-3">
@@ -307,35 +307,52 @@
                     <ng-container *ngIf="memberConnections && memberConnections.length > 0; else NOMembers">
                     <div *ngFor="let member of memberConnections" class="d-flex flex-column align-items-center">
                         <button style="border-radius: 50%; border: none; height: 35px; width: 35px; padding: 0;"
-                                (click)="OpenMemberDialog(member)">
+                                (click)="OpenMemberDialog(member.user._id)">
                             <i class="fas fa-user" style="font-size: 15px;"></i>
                         </button>
                         <div class="mx-3">
                             <p class="text-center">{{member.user.name}}</p>
                         </div>
+                        
                     </div>
+                    
+                    
                 </ng-container>
                 <ng-template #NOMembers>
                     <div class = "row"> 
                         <p>No Members Found</p>
                     </div>
                 </ng-template>
+                
                 </div>
-        
+                <div class="text-center mb-3" *ngIf="isMemberConnected">
+                    <button type="button" (click)="disconnect()" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800;">Disconnect as Members</button>
+                </div>
+                
                 
             </div>
         
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="d-flex flex-row justify-content-center align-items-center mb-3" style="margin-top: 18px;">
+                    <ng-container *ngIf="pujariConnections && pujariConnections.length > 0; else NOPujaris">
                     <div *ngFor="let member of pujariConnections" class="d-flex flex-column align-items-center">
                         <button style="border-radius: 50%; border: none; height: 35px; width: 35px; padding: 0;"
-                                (click)="OpenMemberDialog(member)">
+                                (click)="OpenMemberDialog(member.user_.id)">
                             <i class="fas fa-user" style="font-size: 15px;"></i>
                         </button>
                         <div class="mx-3">
                             <p class="text-center">{{member.user.name}}</p>
                         </div>
+                        <div class="text-center mb-3" *ngIf="isPujariConnected">
+                            <button type="button" (click)="disconnect()" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800;">Disconnect as Pujari</button>
+                        </div>
                     </div>
+                </ng-container>
+                <ng-template #NOPujaris>
+                    <div class = "row"> 
+                        <p>No Pujaris Found</p>
+                    </div>
+                </ng-template>
                 </div>
         
                 
@@ -347,13 +364,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
   
 
     <ng-template #noMembers>

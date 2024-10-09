@@ -13,6 +13,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { UserService } from '../../services/userservice/user.service';
 import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
+import { AddSpaceComponent } from '../add-space/add-space.component';
 
 
 @Component({
@@ -24,7 +25,8 @@ import { AuthenticationService } from '../../services/authenticationservice/auth
     ReactiveFormsModule,
     NzSelectModule,
     NzTreeModule,
-    NzFormModule
+    NzFormModule,
+    AddSpaceComponent,
   ],
   templateUrl: './goshala.component.html',
   styleUrl: './goshala.component.css'

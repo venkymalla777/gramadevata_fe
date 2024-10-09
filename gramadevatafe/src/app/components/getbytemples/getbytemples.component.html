@@ -2,7 +2,7 @@
             <div class="container mt-5 mb-5">
                 
                 <div class="row" style="margin-top: 100px;">
-                    <div *ngFor="let temple of templedata" class="col-lg-8 mb-5">
+                    <div *ngFor="let temple of templedata" class="col-lg-7 mb-5">
                         <h4 class="mb-5 text-center">Detailed View of {{ temple?.name }}</h4>
                         <div class="row">
                             <div class="col-md-6 text-center">
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="detail">
                                         <span class="detail-label"><b>Map Location:</b></span>
-                                        <a (click)="openMap(temple?.temple_map_location)" href="Temple Map Location">Temple Map Location</a>
+                                        <a (click)="openMap(temple?.temple_map_location)" href="Temple Map Location" target="_blank">Temple Map Location</a>
                                     </div>
                                 </div>
                             </div>
@@ -122,8 +122,8 @@
                                 <!-- This div should be a sibling of the previous div to form the second column -->
                                 <div class="col-4 d-flex align-items-center">
                                     <div class="text-center mb-3">
-                                        <button (click)="NavigateToChatRoom(temple._id)" type="button" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem;">
-                                            Chat With Members
+                                        <button (click)="disconnect()" type="button" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem;">
+                                            Disconnect as Members
                                         </button>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@
                         </div>
                         <hr>
                         <div class="col-sm-12 d-lg-none">
-                            <h6 ><i class="fas fa-gopuram faicon mt-1 "></i> Nearby Temples</h6>
+                            <h6 ><i class="fas fa-gopuram faicon mt-1 "></i> Near By Temples</h6>
                         <div class=" hide-scrollbar" style="overflow-x: auto; white-space: nowrap;">
                             
                             <div class="d-inline-flex" style="height: 100px;">
@@ -237,7 +237,7 @@
                               </div>
                         </div>
                     </div>
-                    <div class="col-4 hide-scrollbar d-none d-md-block" style="overflow-y: scroll; height: 100vh;">
+                    <div class="col-12 col-md-4 col-lg-3 hide-scrollbar d-none d-lg-block " style="overflow-y: scroll; height: 100vh;">
                         <h5 class=""><i class="fas fa-gopuram faicon mt-2"></i> Near By Temples</h5>
                         <div class="container " >
                             <div class="  text-center" style="height: 250px; width: 250px;" *ngFor="let temple of nearbytemples">
@@ -261,7 +261,16 @@
                                 </div>
                             </div>
                         </div>
+
+
+                       
                     </div>
+                    <div class="col-md-2 d-none d-lg-block">
+                        <div class="ad-space-container " >
+                          <app-add-space class="mb-4"></app-add-space>
+                          <app-add-space1 class="mt-5"></app-add-space1>
+                        </div>
+                      </div>
                     
                     
             </div>

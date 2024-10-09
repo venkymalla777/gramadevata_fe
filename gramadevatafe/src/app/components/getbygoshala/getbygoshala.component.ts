@@ -9,12 +9,14 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule,NgxSpinnerService } from 'ngx-spinner';
+import { AddSpaceComponent } from '../add-space/add-space.component';
+import { AddSpace1Component } from '../add-space1/add-space1.component';
 
 
 @Component({
   selector: 'app-getbygoshala',
   standalone: true,
-  imports: [CommonModule,NzModalModule,NzFormModule,ReactiveFormsModule,NgxSpinnerModule],
+  imports: [CommonModule,NzModalModule,NzFormModule,ReactiveFormsModule,NgxSpinnerModule,AddSpaceComponent,AddSpace1Component],
   templateUrl: './getbygoshala.component.html',
   styleUrl: './getbygoshala.component.css'
 })

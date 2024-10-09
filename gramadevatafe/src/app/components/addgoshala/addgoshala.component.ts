@@ -62,7 +62,7 @@ export class AddgoshalaComponent {
     this.fetchallaCategories();
     this.goshalaForm=this.fb.group({
       name:['',Validators.required],
-      reg_num:['',Validators.required],
+      reg_num:[''],
       category: ['', [Validators.required]],
       contact_name:['', [Validators.required]],
       contact_phone:['', [Validators.required]],
@@ -72,11 +72,11 @@ export class AddgoshalaComponent {
       district: [{ value: '', disabled: true }, [Validators.required]],
       mandal: [{ value: '', disabled: true }, [Validators.required]],
       object_id: [{ value: '', disabled: true }, [Validators.required]],
-
       temple: null,
       image_location:[' '],
       address:['',Validators.required],
-      user:localStorage.getItem('user')
+      user:localStorage.getItem('user'),
+      status: ['INACTIVE'],
     
     })
    
@@ -275,6 +275,7 @@ export class AddgoshalaComponent {
       },
       (err)=> {
         console.log(err)
+        this.spinner.hide();
       }
      
     )
@@ -282,6 +283,7 @@ export class AddgoshalaComponent {
   else{
     console.log("form is not valid")
     this.goshalaForm.markAllAsTouched();
+    this.spinner.hide();
   }
   
  }

@@ -25,8 +25,11 @@ export class PujariComponent {
   villageid: any;
   apicall: any;
   templeId: any;
+  certificatePlaceholder: string = 'Enter the certificate number';
+  certificatePattern: string = '';
   isMemberIn = false
   isPujariIn = false
+
  
 
   constructor(
@@ -75,6 +78,28 @@ export class PujariComponent {
     );
   }
 
+  onCertificateTypeChange(event: Event) {
+    const selectedType = (event.target as HTMLSelectElement).value;
+
+    switch (selectedType) {
+      case 'aadhaar':
+        this.certificatePlaceholder = 'Enter Aadhaar Number (xxxx-xxxx-xxxx)';
+        this.certificatePattern = '\\d{4}-\\d{4}-\\d{4}'; // Format for Aadhaar
+        break;
+      case 'pan':
+        this.certificatePlaceholder = 'Enter PAN Number (AAAAA9999A)';
+        this.certificatePattern = '[A-Z]{5}[0-9]{4}[A-Z]{1}'; // Format for PAN
+        break;
+      case 'voter':
+        this.certificatePlaceholder = 'Enter Voter ID Number (ABC1234567)';
+        this.certificatePattern = '[A-Z]{3}[0-9]{7}'; // Format for Voter ID
+        break;
+      default:
+        this.certificatePlaceholder = 'Enter the certificate number';
+        this.certificatePattern = '';
+    }
+  }
+
   
 
   initializeForm(): void {
@@ -82,14 +107,19 @@ export class PujariComponent {
       full_name: ["", Validators.required],
       father_name: ['', Validators.required],
       type:"PUJARI",
+      is_member:"true",
       contact_number: ['',Validators.required],
-      dob: ['',Validators.required],
+      // dob: ['',Validators.required],
+      gender: ['',Validators.required],
       pujari_certificate: ["", Validators.required],
       working_temple:["", Validators.required],
       connected_as:"PUJARI",
       village: this.villageid,
       temple:this.templeId,
-      user : localStorage.getItem('user')
+      user : localStorage.getItem('user'),
+      family_images:[],
+      account_type:['PRIVATE',Validators.required],
+      email:['']
       
     });
     // this.villageroleoptions = enumToMap(your_role_in_our_village);
@@ -116,6 +146,7 @@ export class PujariComponent {
           }
           
           localStorage.setItem('type', 'PUJARI');
+          localStorage.setItem('is_member', 'true');
           console.log('Member added successfully:', response);
           this.memberform.reset();
           this.dialogRef.close();
@@ -124,6 +155,7 @@ export class PujariComponent {
             response => {
               console.log(response);
               console.log("connected succesfully1")
+              
             },
             error => {
               console.error('Error connecting:', error);

@@ -34,7 +34,7 @@
 /* For large devices (992px and up) */
 @media (min-width: 992px) {
   .responsive-btn {
-    width: 230px;
+    width: 200px;
   }
 }
 

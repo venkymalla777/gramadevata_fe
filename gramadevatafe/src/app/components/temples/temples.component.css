@@ -72,3 +72,7 @@ nz-tree {
   margin-top: 20px;
 }
 
+*::-webkit-scrollbar {
+  width: 0px !important;
+  background-color: white !important;
+}

@@ -17,13 +17,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { VillageService } from '../../services/villageservice/village.service';
 import { SharedService } from '../../services/sharedservice/shared.service';
 import { Subscription } from 'rxjs';
+import { AddSpaceComponent } from '../add-space/add-space.component';
+import { AddSpace1Component } from '../add-space1/add-space1.component';
 
 
 
 @Component({
   selector: 'app-temples',
   standalone: true,
-  imports: [CommonModule,NzSelectModule,NzFormModule,ReactiveFormsModule],
+  imports: [CommonModule,NzSelectModule,NzFormModule,ReactiveFormsModule,AddSpaceComponent,AddSpace1Component],
   templateUrl: './temples.component.html',
   styleUrls: ['./temples.component.css']
 })
@@ -43,8 +45,9 @@ export class TemplesComponent {
   validatorForm!:FormGroup;
   selectedLocationId: any;
   villagedata: any;
-  isMemberIn = false
-  isPujariIn = false
+  isMemberIn = false;
+  isPujariIn = false;
+  connectedId:any;
 
 
 
@@ -157,6 +160,7 @@ if (isPujariIn) {
                 (conn: any) => conn.user && conn.user._id === userId
               );
   
+              this.connectedId = isUserConnected
               
               record.isConnected = isUserConnected;
             } else {
@@ -184,6 +188,17 @@ if (isPujariIn) {
         console.error("Error fetching temple data", error);
       }
     );
+  }
+
+
+
+  disconnect(){
+    this.memberservice.DisconnectMember(this.connectedId).subscribe(
+      data =>{
+        console.log('deleted succesfully')
+        this.fecthtempledata()
+      }
+    )
   }
   
   
@@ -214,20 +229,6 @@ if (isPujariIn) {
   }
 
 
-  // OpenPujariDilog(): void {
-  //   let userId = this.authenticationService.getCurrentUser();
-  //     if (userId == undefined || userId == null) {
-  //       this.authenticationService.showLoginModal()
-  //       return;
-  //     }
-  //   this.templeId = this.route.snapshot.paramMap.get("_id")
-  //   console.log(this.templeId,"55454")
-  //   const dialogRef = this.dialog.open(PujariComponent, {
-  //     data: { displayName: 'addpujari', templeId: this.templeId },
-  //     autoFocus: false,
-  //     backdropClass: 'dialog-backdrop'
-  //   });
-  // }
 
   OpenPujariDilog(templeid:any): void {
     let userId = this.authenticationService.getCurrentUser();

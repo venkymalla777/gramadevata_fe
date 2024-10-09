@@ -57,8 +57,8 @@ export class AddeventComponent {
       name: ['', Validators.required],
       start_date: ['', Validators.required],
       end_date:['', Validators.required],
-      start_time: ['', Validators.required],
-      end_time:['', Validators.required],
+      start_time: [''],
+      end_time:[''],
       // tag: [''],
       // tag_id: [null],
       // tag_type_id: [null],
@@ -78,7 +78,8 @@ export class AddeventComponent {
       district: [{ value: '', disabled: true }, [Validators.required]],
       mandal: [{ value: '', disabled: true }, [Validators.required]],
       object_id: [{ value: '', disabled: true }, [Validators.required]],
-      user:localStorage.getItem('user')
+      user:localStorage.getItem('user'),
+      status: ['INACTIVE'],
 
     });
 
@@ -264,6 +265,7 @@ export class AddeventComponent {
   onSubmit() {
     this.spinner.show();
     if(this.eventform.valid){
+      
     
       const { country, state, district, mandal, ...EventData } = this.eventform.value;
       this.eventService.addevent(EventData)
@@ -276,13 +278,17 @@ export class AddeventComponent {
         },
         (err)=> {
           console.log(err)
+          this.spinner.hide();
         }
        
       )
     }
     else{
       console.log("form is not valid")
+      
       this.eventform.markAllAsTouched();
+      this.spinner.hide();
+      
     }
     
    }

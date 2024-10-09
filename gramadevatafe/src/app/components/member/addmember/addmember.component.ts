@@ -30,6 +30,7 @@ export class AddmemberComponent implements OnInit {
   connectdata:any;
   isMember=false;
   isMemberIn=false
+  full_name: any;
 
   
 
@@ -141,11 +142,17 @@ export class AddmemberComponent implements OnInit {
       // you_belongs_to_the_village: ['', Validators.required],
       // your_role_in_our_village: ['', Validators.required],
       contact_number: ['',Validators.required],
-      dob: ['',Validators.required],
+      // dob: ['',Validators.required],
+      gender: ['',Validators.required],
       belongs_as: this.fb.array([]),
       description: [''],
-      village: this.villageid, 
-      user : localStorage.getItem('user')
+      type:'MEMBER',
+      is_member:"true",
+      family_images:[],
+      village: this.villageid,
+      user : localStorage.getItem('user'),
+      account_type:['PRIVATE',Validators.required],
+      email:['']
       
     });
     // this.villageroleoptions = enumToMap(your_role_in_our_village);
@@ -191,9 +198,14 @@ export class AddmemberComponent implements OnInit {
         response => {
           console.log('Member added successfully:', response);
           localStorage.setItem('is_member', 'true');
+          this.full_name = this.memberform.get('full_name')?.value || ''; 
+          localStorage.setItem('full_name', this.full_name);
+
+
           // this.userservice.isMemberIn = true
           this.memberform.reset();
           this.dialogRef.close();
+
           // this.memberservice.refreshvillagedata();
           
           this.memberservice.connect(connectdata).subscribe(

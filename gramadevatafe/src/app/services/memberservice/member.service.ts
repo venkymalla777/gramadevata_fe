@@ -43,6 +43,11 @@ export class MemberService {
   }
 
 
+  DisconnectMember(id:string): Observable<any> {
+    return this.httpclient.delete(URL+"connect/"+id)
+  }
+
+
 
   
 }

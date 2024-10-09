@@ -3,7 +3,7 @@
 			type="ball-spin-clockwise">
 		</ngx-spinner>
     <div class="row" style="margin-top: 100px;">
-        <div *ngFor="let temple of goshaladata" class="col-12 mb-5">
+        <div *ngFor="let temple of goshaladata" class="col-md-10 col-12 mb-5">
             <h4 class="mb-5 text-center">Detailed View of {{ temple.name }}</h4>
             <div class="row">
                 <div class="col-md-6 text-center">
@@ -96,6 +96,12 @@
                   </div>
                 </div>
               </div>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+          <div class="ad-space-container " >
+            <app-add-space class="mb-4"></app-add-space>
+            <app-add-space1 class="mt-5"></app-add-space1>
+          </div>
         </div>
     </div>
 </div>

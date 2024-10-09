@@ -116,24 +116,26 @@
                     <div *ngIf="authenticationService.isLoggedIn;" class="nav-item-container d-flex">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" id="navbarDropdown" role="button" style="margin-top: -5px;" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link" href="#" id="navbarDropdown" role="button" style="margin-top: -20px;" data-bs-toggle="dropdown" aria-expanded="false">
                                     
                                     <img [src]="profile_pic || '../../../../assets/profile1.webp'"
                                     class="rounded-circle"
-                                    [ngStyle]="{ 'height': '35px', 'width': '35px', 'border-radius': '20px' }"
+                                    [ngStyle]="{ 'height': '35px', 'width': '35px', 'border-radius': '50%', 'margin-left': '25px' }"
                                     alt="profile image"
                                     (error)="handleProfileImageError($event)">
+                               
+                                    <p>{{username}}</p>
                                 </a>
                                 
                                 <ul class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
-                                        <a data-bs-dismiss="offcanvas" class="nav-link" (click)="navigateTo('profile')" routerLinkActive="active">View Profile</a>
+                                        <a data-bs-dismiss="offcanvas" class="nav-link" (click)="navigateTo()" routerLinkActive="active">View Profile</a>
                                     </li>
                                     <li class="nav-item">
                                         <a data-bs-dismiss="offcanvas" class="nav-link" (click)="doLogout()" routerLinkActive="active">Logout</a>
                                     </li>
                                 </ul>
-                                <div class="d-lg-none d-flex align-items-center justify-content-between logo-row">
+                                <!-- <div class="d-lg-none d-flex align-items-center justify-content-between logo-row">
                                     <img src="../../../assets/Screenshot 2024-08-07 105609.png" alt="Logo" routerLink="/home" style="width: 20px; height: 20px; margin-right: 10px;">
                                     <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="HINDU PULSE logo" style="width: 20px; height: 20px; margin-right: 10px;">
                                     <a href="http://hindupulse.com/home" target="_blank">
@@ -141,7 +143,7 @@
                                     </a>
                                     <img src="../../../assets/OM SANATANA logo.png" alt="OM SANATANA logo" style="width: 20px; height: 20px; margin-right: 10px;">
                                     <img src="../../../assets/GRAMAUTPAD logo.png" alt="GRAMAUTPAD logo" style="width: 20px; height: 20px;">
-                                </div>
+                                </div> -->
                                 
                                 
                                 

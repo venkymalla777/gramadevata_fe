@@ -15,6 +15,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 import { UserService } from '../../services/userservice/user.service';
 import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
+import { AddSpaceComponent } from '../add-space/add-space.component';
+import { AddSpace1Component } from '../add-space1/add-space1.component';
 
 
 
@@ -22,7 +24,7 @@ import { AuthenticationService } from '../../services/authenticationservice/auth
 @Component({
   selector: 'app-globaltemple',
   standalone: true,
-  imports: [CommonModule,TreeViewComponent,NzTreeModule,ReactiveFormsModule,NzSelectModule,NzFormModule,NgxSpinnerModule],
+  imports: [CommonModule,TreeViewComponent,NzTreeModule,ReactiveFormsModule,NzSelectModule,NzFormModule,NgxSpinnerModule,AddSpace1Component,AddSpaceComponent],
   templateUrl: './globaltemple.component.html',
   styleUrl: './globaltemple.component.css'
 })
