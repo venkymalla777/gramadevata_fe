@@ -295,45 +295,35 @@
             </div>
           </div>
         </div>
-        <!-- <div class="row">
+       
+
+
+        <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <label for="desc">temple map location</label>
-              <input class="form-control" id="desc" formControlName="temple_map_location" placeholder="give temple map location" >
-              <div *ngIf="templeForm.get('temple_map_location')?.invalid && (templeForm.get('temple_map_location')?.dirty || templeForm.get('temple_map_location')?.touched)" class="text-danger">
-                
-                <div *ngIf="templeForm.get('temple_map_location')?.errors?.['maxlength']">Description cannot be more than 4500 words</div>
+              <label for="temple_map_location">Temple Map Location (URL) *</label>
+              <input
+                type="url"
+                class="form-control"
+                id="temple_map_location"
+                formControlName="temple_map_location"
+                placeholder="https://example.com/map"
+              />
+              <small class="form-text text-muted">
+                Please provide a valid URL for the temple's map location.
+              </small>
+              <div
+                *ngIf="templeForm.get('temple_map_location')?.invalid && (templeForm.get('temple_map_location')?.dirty || templeForm.get('temple_map_location')?.touched)"
+                class="text-danger"
+              >
+                Please enter a valid URL for the Temple Map Location.
               </div>
             </div>
           </div>
-        </div> -->
-        <!-- HTML Template -->
-<!-- <div class="row">
-  <div class="col-md-12">
-    <div class="form-group">
-      <label for="desc">Temple Map Location</label>
-      <input
-        class="form-control"
-        id="desc"
-        formControlName="temple_map_location"
-        placeholder="Give temple map location"
-      />
-      <div
-        *ngIf="
-          templeForm.get('temple_map_location')?.invalid &&
-          (templeForm.get('temple_map_location')?.dirty ||
-            templeForm.get('temple_map_location')?.touched)
-        "
-        class="text-danger"
-      >
-        <div *ngIf="templeForm.get('temple_map_location')?.errors?.['maxlength']">
-          Description cannot be more than 4500 words
         </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
+        
+        
+        
 
 
 
@@ -346,7 +336,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="address">Total Address *</label>
-              <textarea class="form-control" id="address" formControlName="address" placeholder="Total Address" rows="5"></textarea>
+              <textarea class="form-control" id="address" formControlName="address" placeholder="Total Address" rows="2"></textarea>
               <div *ngIf="templeForm.get('address')?.invalid && (templeForm.get('address')?.dirty || templeForm.get('address')?.touched)" class="text-danger">
                 Address is required
               </div>

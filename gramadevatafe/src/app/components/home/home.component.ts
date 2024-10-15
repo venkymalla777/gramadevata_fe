@@ -73,10 +73,10 @@ export class HomeComponent{
 
     ) { 
       this.ads = [
-        { videoUrl: this.sanitizeUrl('../../../assets/gramadevata latest1.mp4'), isVideo: true },
+        { videoUrl: this.sanitizeUrl('../../../assets/gramadevata_final_video.mp4'), isVideo: true },
       ];
       this.adspace = [
-        { videoUrl: this.sanitizeUrl('../../../assets/temple2.mp4'), isVideo: true },  
+        { videoUrl: this.sanitizeUrl('../../../assets/temple.mp4'), isVideo: true },  
       ];
       this.aadspace = [
         { videoUrl: this.sanitizeUrl('../../../assets/save plastic video.mp4'), isVideo: true },  

@@ -95,7 +95,7 @@ export class AddtempleComponent implements OnInit {
       diety: ['', [Validators.required]],
       style: [""],
       
-      temple_map_location: [''],
+      temple_map_location: ['', Validators.required],
       address: ['', Validators.required],
       
       desc: [''],

@@ -124,7 +124,7 @@ export class VerifyComponent {
           : null;
 
           loginRresponsees?.full_name
-          ? localStorage.setItem('full_name', loginRresponsees.profile_pic)
+          ? localStorage.setItem('full_name', loginRresponsees.full_name)
           : null;
           // this.headercomponent.profiledata()
 
@@ -144,6 +144,7 @@ export class VerifyComponent {
         
  
         this.authenticationService.isLoggedIn = true;
+        window.location.reload();
         this.dialogRef.close()
         this.spinner.hide()
         

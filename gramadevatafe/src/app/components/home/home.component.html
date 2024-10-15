@@ -124,10 +124,7 @@
                         <div class="ad-space-container">
                             <div  >
 
-                                <div style="margin-bottom: 150px;">
-                                    <app-add-space ></app-add-space> 
-
-                                  </div>
+                                
 
                                 <div class="ad" style="margin-bottom: 150px;" *ngIf="adspace[currentIndex].isVideo">
                                     <video 
@@ -141,9 +138,9 @@
                                       style=" width: 200px; ">
                                     </video>
                                   </div>
-                                  <!-- <div style="margin-bottom: 150px;">
+                                  <div style="margin-bottom: 150px;">
                                     <app-add-space ></app-add-space> 
-                                  </div> -->
+                                  </div>
 
                                     <app-add-space1></app-add-space1> 
 
@@ -256,19 +253,25 @@
                     <div class="col-2 d-none d-md-block ">
                         <div class="ad-space-container">
                             <div  >
-                                <app-add-space></app-add-space> 
+                                
 
-                                <div class="ad" *ngIf="2adspace[currentIndex].isVideo">
+                               
+                                  <div class="ad" style="margin-bottom: 150px;" *ngIf="2adspace[currentIndex].isVideo">
                                     <video 
                                       #adVideo 
-                                      [src]="aadspace[currentIndex].videoUrl" 
+                                      [src]="aadspace[currentIndex].videoUrl"  
                                       autoplay 
                                       [muted]="isMuted" 
                                       loop 
                                       playsinline
                                       (loadedmetadata)="onVideoLoaded()"
-                                      style="height: 400px; width: 200px; ">
+                                      style=" width: 200px; ">
                                     </video>
+                                  </div>
+
+                                  <!-- <app-add-space></app-add-space>  -->
+                                  <div style="margin-bottom: 150px;">
+                                    <app-add-space ></app-add-space> 
                                   </div>
                                   
                                     <app-add-space1></app-add-space1> 

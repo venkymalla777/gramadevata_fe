@@ -57,6 +57,7 @@ import { UpdateprofileComponent } from './components/updateprofile/updateprofile
 import { UserService } from './services/userservice/user.service';
 import { AddSpaceComponent } from './components/add-space/add-space.component';
 import { AddSpace1Component } from './components/add-space1/add-space1.component';
+import { HeaderComponent } from './components/header/header.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -115,6 +116,7 @@ export const routes: Routes = [
     {path: 'updateprofile',component:UpdateprofileComponent},
     {path:'addspace',component:AddSpaceComponent},
     {path: 'addspce1',component:AddSpace1Component},
+    {path: 'header', component:HeaderComponent},
 
 
     {
