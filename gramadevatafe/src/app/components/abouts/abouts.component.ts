@@ -42,12 +42,19 @@ export class AboutsComponent {
       bio: 'Soundarajan Narendran is a data scientist with over 25 years of experience in both business and government. From 1998 to 2007, he worked for Apollo Tyres and the TVS Group on product development, business channel development and supply chains. Since 2007, Narendran has worked on policy making, public policy and digital government. He has experience of working with non-governmental organizations, governments and global institutions on big data, social media analytics and sentiment analysis. Educated at IIT Chennai and Anna University, Narendran has an interest in spirituality and narrative development.'
     },
 
+    // {
+    //   title: 'Founder & CEO',
+    //   name: 'MR. NALABOLU GOVINDA ROY VISHNU SRI',
+    //   image: '../../../assets/founder.jpg',
+    //   bio: 'A dedicated social reformer and entrepreneur with over 25 years of experience in rural and urban development. As Chairman and Managing Director of Sathayush Tech Solutions Pvt Ltd and Founder-CEO of the Gramadevata Foundation, he has played a pivotal role in developing web and mobile platforms that unite and empower the global Hindu community. His key activities include organizing medical camps in rural areas, providing financial support for underprivileged students, and promoting religious awareness. Mr. Vishnu Roy holds a Bachelor of Science (BSc) and a Master of Computer Applications (MCA) from Osmania University. His work experience includes mentoring thousands of graduates, working as a software consultant in the USA and Singapore, and collaborating on open-source software and bioinformatics projects. He remains deeply connected with a wide range of professionals, including lawyers, doctors, teachers, and media personnel, leveraging these relationships to further his mission of social upliftment and community development.'
+    // },
+
     {
       title: 'Founder & CEO',
       name: 'MR. NALABOLU GOVINDA ROY VISHNU SRI',
       image: '../../../assets/founder.jpg',
-      bio: 'A dedicated social reformer and entrepreneur with over 25 years of experience in rural and urban development. As Chairman and Managing Director of Sathayush Tech Solutions Pvt Ltd and Founder-CEO of the Gramadevata Foundation, he has played a pivotal role in developing web and mobile platforms that unite and empower the global Hindu community. His key activities include organizing medical camps in rural areas, providing financial support for underprivileged students, and promoting religious awareness. Mr. Vishnu Roy holds a Bachelor of Science (BSc) and a Master of Computer Applications (MCA) from Osmania University. His work experience includes mentoring thousands of graduates, working as a software consultant in the USA and Singapore, and collaborating on open-source software and bioinformatics projects. He remains deeply connected with a wide range of professionals, including lawyers, doctors, teachers, and media personnel, leveraging these relationships to further his mission of social upliftment and community development.'
-    },
+      bio: 'MR. NALABOLU GOVINDA ROY VISHNU SRI is a dedicated social reformer and entrepreneur with over 25 years of experience in rural and urban development. As Chairman and Managing Director of Sathayush Tech Solutions Pvt Ltd and Founder-CEO of the Gramadevata Foundation, he has played a pivotal role in developing web and mobile platforms that unite and empower the global Hindu community. His key initiatives include organizing medical camps in rural areas, providing financial support to underprivileged students, and promoting religious awareness. Mr. Vishnu Sri holds a Bachelor of Science (BSc) and a Master of Computer Applications (MCA) from Osmania University. He has mentored thousands of graduates, worked as a software consultant in the USA and Singapore, and collaborated on open-source software and bioinformatics projects. He maintains strong connections with professionals across various fields, including law, medicine, education, and media, using these relationships to further his mission of social upliftment and community development.'
+    },    
     
 
     {
