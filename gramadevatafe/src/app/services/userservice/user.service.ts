@@ -106,6 +106,10 @@ export class UserService {
     return this.httpclient.put(url, data);
   }
 
+  DeleeFamilyImage(imagedata:any,userId: any):Observable<any> {
+    return this.httpclient.post(URL+'deleteimage/'+userId, imagedata)
+  }
+
 
 
 

@@ -1,8 +1,25 @@
 <section class="header-m" style="margin-top: 120px; ">
     <div class="container col-xxl-8 px-3 py-2">
-      <div class="row justify-content-center align-items-center g-5 py-2">
+      <!-- <div class="row justify-content-center align-items-center g-5 py-2">
         <div class="col-10 col-sm-8 col-lg-6">
-          <img src="../../../assets/durga.jpg" class="d-block mx-lg-auto img-fluid" style="border-radius: 50px;"
+         
+            <video #videoPlayer 
+                   [src]="ads[currentIndex].videoUrl" 
+                   class="responsive-video" 
+                    
+                   muted 
+                   loop 
+                   (click)="togglePlay(videoPlayer)" 
+                   (ended)="videoPlayer.currentTime = 0; videoPlayer.pause()">
+            </video>
+
+            <button (click)="togglePlay(videoPlayer)" 
+                    *ngIf="videoPlayer.paused" 
+                    class="btn btn-primary position-absolute top-50 start-50 translate-middle" 
+                    style="font-size: 2rem; border: none; background: none; color: white;">
+                <i class="fas fa-play"></i> 
+            </button>
+  
             alt="Bootstrap Themes" width="500" height="300" loading="lazy">
         </div>
   
@@ -20,6 +37,45 @@
           </div>
           </div>
       </div>
+   -->
+
+   <div class="row justify-content-center align-items-center g-5 py-4">
+    <div class="col-10 col-sm-8 col-lg-6 position-relative">
+      <video #videoPlayer 
+             [src]="ads[currentIndex].videoUrl" 
+             class="responsive-video w-100 rounded shadow" 
+             muted 
+             loop 
+             (click)="togglePlay(videoPlayer)" 
+             (ended)="videoPlayer.currentTime = 0; videoPlayer.pause()">
+      </video>
+      
+      <button (click)="togglePlay(videoPlayer)" 
+              *ngIf="videoPlayer.paused" 
+              class="btn btn-primary position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center" 
+              style="font-size: 2rem; border: none; background: rgba(0, 0, 0, 0.5); color: white; width: 3rem; height: 3rem; border-radius: 50%;">
+        <i class="fas fa-play"></i>
+      </button>
+    </div>
+  
+    <div class="col-lg-6">
+      <h4 class="fw-bold lh-1 mb-3 text-orange">Our Village - Our Temple - Our Deity</h4>
+      <p class="lead">Gramadevata Foundation is a pioneering organization dedicated to the revival, preservation, and promotion of Sanatana Dharma and Hindu cultural heritage. Rooted in the ancient Indian principle of "Vasudhaiva Kutumbakam" (The World is One Family), the foundation's core philosophy revolves around creating a unified global Hindu community that is deeply connected to its spiritual roots. The foundation’s efforts span across multiple domains, including temple preservation, community engagement, cultural education, and rural upliftment, all designed to foster a strong, vibrant, interconnected, and empowered Hindu society.</p>
+      
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="text-white" href="../../../../../assets/Gramadevatha Foundation1.pdf" target="_blank">
+          <button class="btn btn-primary px-4 text-white" style="background-color: orange; border-color: orange;">
+            Read more
+          </button>
+        </a>
+        <a class="text-white" href="../../../../../assets/gramadevata_sitemap.pdf" target="_blank">
+          <button class="btn btn-primary px-4 text-white" style="background-color: orange; border-color: orange;">
+            Site Map
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
   
       <div class="row justify-content-center align-items-center mt-2">
         <h4 class="fw-bold lh-1 " style="color: orange;">Vision</h4>

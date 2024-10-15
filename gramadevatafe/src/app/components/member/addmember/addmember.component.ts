@@ -148,7 +148,7 @@ export class AddmemberComponent implements OnInit {
       description: [''],
       type:'MEMBER',
       is_member:"true",
-      family_images:[],
+      
       village: this.villageid,
       user : localStorage.getItem('user'),
       account_type:['PRIVATE',Validators.required],

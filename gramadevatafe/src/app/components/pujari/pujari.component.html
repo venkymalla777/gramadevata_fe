@@ -131,7 +131,8 @@
             </div>
             <div class="row mt-5">
                 <div class="col-12 text-center mb-3" >
-                    <button (click)="onSubmit()">Submit</button>
+                    <!-- <button (click)="onSubmit()">Submit</button> -->
+                    <button type="button" (click)="onSubmit()" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; padding: 10px;"> Submit </button>
                 </div>
             </div>
             
@@ -159,6 +160,7 @@
                           </div>
                     </div>
                 </div> -->
+                <div class="col-md-6">
                 <div class="form-group">
                     <label for="certificate_type">Certificate Type</label>
                     <select class="form-control" formControlName="certificate_type" (change)="onCertificateTypeChange($event)">
@@ -168,7 +170,8 @@
                         <option value="voter">Voter ID</option>
                     </select>
                 </div>
-                
+                </div>
+                <div class="col-md-6">
                 <div class="form-group">
                     <label for="pujari_certificate">Pujari Certificate Number</label>
                     <input type="text" class="form-control" [placeholder]="certificatePlaceholder" formControlName="pujari_certificate" [pattern]="certificatePattern">
@@ -176,8 +179,9 @@
                         Pujari certificate required or invalid format
                     </div>
                 </div>
+                </div>
                 
-                <div class="col-md-6">
+                <div >
                     <div class="form-group">
                         <label for="working_temple">Working Temple</label>
                         
@@ -191,7 +195,8 @@
             </div>
             <div class="row mt-5">
                 <div class="col-12 text-center" >
-                    <button (click)="onSubmit()">Submit</button>
+                    <!-- <button (click)="onSubmit()">Submit</button> -->
+                    <button type="button" (click)="onSubmit()" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; padding: 10px;"> Submit </button>
                 </div>
             </div>
             

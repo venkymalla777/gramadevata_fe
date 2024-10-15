@@ -333,6 +333,7 @@ export class UpdateprofileComponent {
           this.router.navigate(['/profile', this.userId]); // Navigate to the updated profile
           this.full_name = this.profileForm.get('full_name')?.value || ''; 
           localStorage.setItem('full_name', this.full_name);
+         
           if (this.dialogRef) {
             this.dialogRef.close(); // Close the dialog if open
 
@@ -346,6 +347,10 @@ export class UpdateprofileComponent {
     } else {
       this.profileForm.markAllAsTouched(); // If form is invalid, mark all fields as touched
     }
+  }
+  
+  refreshPage() {
+    window.location.reload();
   }
   
 

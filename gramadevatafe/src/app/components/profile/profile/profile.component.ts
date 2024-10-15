@@ -90,14 +90,7 @@ export class ProfileComponent {
     
 
 
-    
-  
-  
-
-
-
-
-  fetchprofiledata(): void {
+fetchprofiledata(): void {
     this.user = localStorage.getItem('user');
     this.UserService.profiledata(this.userid).subscribe(
       data => {
@@ -114,8 +107,10 @@ export class ProfileComponent {
 
           this.profile = data.profile_pic;
           console.log(this.profile,"this.profile")
-         
+          
+
           localStorage.setItem('profile_pic', this.profile);
+
           
         this.villageconnections.push(...data.Connections.filter((conn: any) => conn.temple === null));
         this.templeconnections.push(...data.Connections.filter((conn: any) => conn.village === null));
@@ -125,17 +120,12 @@ export class ProfileComponent {
         this.Isuser = (this.user === this.userid)
 
           console.log(this.Isuser,"this.Isuser")
+          // window.location.reload();
   
         if ((data)) {
-          this.useraddedtemples = data;
-          
-          
-          
-  
+          this.useraddedtemples = data;  
           // Assuming `Connections` should be fetched from each user in the array
-          
           // this.familyimages =[];
-  
           this.useraddedtemples.forEach((user: any) => {
             console.log("swdefrgth")
             if (user.Connections && Array.isArray(user.Connections)) {
@@ -145,8 +135,6 @@ export class ProfileComponent {
               this.connectdvillgescount = this.villageconnections.length
               // this.familyimages =user.
               
-
-
 
             }
           });
@@ -207,12 +195,7 @@ export class ProfileComponent {
   }
 
 
-  // onViewImage(index: number): void {
-  //   // Logic to view the image
-  //   const imageToView = this.familyimages[index];
-  //   console.log('Viewing image:', imageToView);
-  //   // You can open a modal or navigate to a different page here
-  // }
+
 
   onViewImage(index: number): void {
     const imageUrl = this.familyimages[index] ? this.familyimages[index] : 'assets/ohm.jpg';
@@ -224,11 +207,41 @@ export class ProfileComponent {
     });
   }
 
-  onDeleteImage(index: number): void {
-    // Logic to delete the image
-    this.familyimages.splice(index, 1);
-    console.log('Deleted image at index:', index);
-  }
+  // onDeleteImage(index: number): void {
+  //   // Logic to delete the image
+  //   this.familyimages.splice(index, 1);
+  //   console.log('Deleted image at index:', index);
+  //   imagedata = {
+  //     action : "delete_family_image",
+  //     index: index
+
+  //   }
+  //   this.UserService.DeleeFamilyImage(imagedata,this.userid)
+  // }
+
+
+onDeleteImage(index: number): void {
+  // Remove the image from the array
+  this.familyimages.splice(index, 1);
+  console.log('Deleted image at index:', index);
+
+  const imagedata = {
+    action: "delete_family_image",
+    index: index
+  };
+
+  this.UserService.DeleeFamilyImage(imagedata, this.userid).subscribe(
+    (response: any) => {
+      console.log('Image deletion successful:', response);
+    },
+    (error: any) => {
+      console.error('Error deleting image:', error);
+    }
+  );
+}
+
+  
+  
 
 
   onFileSelected(event: any) {

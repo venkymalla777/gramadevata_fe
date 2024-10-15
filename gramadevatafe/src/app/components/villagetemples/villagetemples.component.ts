@@ -391,10 +391,4 @@ NavigateToChatRoom(): void {
   this.router.navigate(['chatroom', this.village_id]);
 }
 
-
-
-
-
-
-
 }
