@@ -112,7 +112,7 @@ muteVideo(video: HTMLVideoElement): void {
     togglePlay(video: HTMLVideoElement) {
       if (video.paused) {
           // video.play();
-          window.open("https://youtu.be/A7_JQnc55EQ", "_blank");
+          window.open("https://www.youtube.com/watch?v=d6xvszRQcTA", "_blank");
       } else {
           video.pause();
           // window.open("https://www.youtube.com", "_blank");
@@ -148,46 +148,7 @@ FetchHomeData(): void {
 
       this.spinner.hide();
 
-      // if (this.authenticationService.isLoggedIn) {
-      //   this.userId = localStorage.getItem("user");
-
-      //   if (this.userId) {
-      //     this.connectionservice.GetConnnections(this.userId).subscribe({
-      //       next: (data) => {
-      //         this.connectiondata = data.temple.slice(0, 4);
-      //         console.log(this.connectiondata, "Connection Data");
-      //       },
-      //       error: (error) => {
-      //         console.error("Error fetching connection data", error);
-      //       }
-      //     });
-
-      //     this.userservice.profiledata(this.userId).subscribe({
-      //       next: (profileData) => {
-      //         this.userdata = profileData.is_member;
-      //         this.membertype = profileData.type;
-
-      //         console.log(this.userdata, "Is Member");
-      //         console.log(this.membertype, "Member Type");
-
-      //         if (this.userdata) {
-      //           console.log("User is a member");
-      //           this.userservice.isMemberIn = true;
-      //           localStorage.setItem('isMemberIn', 'true');
-      //         }
-
-      //         if (this.membertype) {
-      //           console.log("User is a Pujari");
-      //           this.userservice.isPujariIn = true;
-      //           localStorage.setItem('isPujariIn', 'true');
-      //         }
-      //       },
-      //       error: (error) => {
-      //         console.error("Error fetching profile data", error);
-      //       }
-      //     });
-      //   }
-      // }
+  
     },
     error: (error) => {
       console.error("Error fetching home data", error);
@@ -313,13 +274,7 @@ navigateTempleDetail(_id:string):void{
 }
 
 
-// fetchorh():void{
-//   this.homeservice.getorg().subscribe(
-//     data => {
-//       this.orgdata = data.results
-//     }
-//   )
-// }
+
 
 
 
