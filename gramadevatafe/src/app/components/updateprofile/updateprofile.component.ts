@@ -273,6 +273,12 @@ export class UpdateprofileComponent {
       contact_number: ['', Validators.required],
       profile_pic: [''],
       email: ['', [Validators.required, Validators.email]],
+      marital_status:[''],
+      gotram: [''],
+      siblings: [''],
+      husband: [''],
+      wife: [''],
+      children: [''],
     });
   }
 
@@ -286,6 +292,14 @@ export class UpdateprofileComponent {
         // dob: response.dob,
         contact_number: response.contact_number,
         email: response.email,
+        marital_status:response.marital_status,
+        gotram:response.gotram,
+        siblings:response.siblings,
+        children:response.children,
+        wife:response.wife,
+        husband:response.husband
+
+
       });
 
       this.profile_pic = response.profile_pic;

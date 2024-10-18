@@ -58,6 +58,7 @@ export class HomeComponent{
 
   ads:Ad[]=[];
   currentIndex:number=0;
+  isPlaying = false;
 
   constructor(private router: Router, 
     private homeservice: HomeserviceService,
@@ -89,15 +90,39 @@ export class HomeComponent{
     }
     isMuted = true;
 
+    // isMuted = true;
+
+unmuteVideo(video: HTMLVideoElement): void {
+  video.muted = false;
+}
+
+muteVideo(video: HTMLVideoElement): void {
+  video.muted = true;
+}
+
     sanitizeUrl(url: string): SafeResourceUrl {
       return this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
+
+    getTrustedUrl(videoUrl: string): SafeResourceUrl {
+      const videoId = this.extractVideoId(videoUrl);
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`https://youtu.be/A7_JQnc55EQ${videoId}`);
+    }
+
     togglePlay(video: HTMLVideoElement) {
       if (video.paused) {
-          video.play();
+          // video.play();
+          window.open("https://youtu.be/A7_JQnc55EQ", "_blank");
       } else {
           video.pause();
+          // window.open("https://www.youtube.com", "_blank");
       }
+  }
+  
+
+  private extractVideoId(videoUrl: string): string {
+    const url = new URL(videoUrl);
+    return url.searchParams.get('v') || '';
   }
 
 
@@ -107,39 +132,7 @@ export class HomeComponent{
     this.FetchHomeData();
   }
 
-//   FetchHomeData(): void {
-//     this.spinner.show();
-//     this.homeservice.getHomeData()
-//     .subscribe(data => {
-//       this.villages = data.villages;
-//       console.log(this.villages,"1111111111111111")
-//       this.templeCategories = data.templeCategories;
-//       console.log(this.templeCategories,"templeCategories")
-//       this.goshalaCategories = data.goshalaCategories;
-//       this.eventCategories = data.eventCategories;
-//       this.spinner.hide();
-//       if(this.authenticationService.isLoggedIn===true){
-//         this.userId = localStorage.getItem("user")
-//         this.userservice.profiledata(this.userId).subscribe(
-//           (profileData) => {
-//             this.userdata = profileData.some((item: any) => item.is_member === 'true');
-//             this.membertype = profileData.some((item: any) => item.type === 'PUJARI');
-//             console.log(this.userdata, "7777777777tt");
-//             if (this.userdata ===true) {
-//               console.log("kjhgfd");
-//               this.userservice.isMemberIn = true;
-//             }
-//             if (this.membertype==='PUJARI') {
-//               console.log("Ispujari");
-//               this.userservice.isPujariIn = true;
-//             }
-//           },
-//         )
 
-//       }
-      
-//     });
-// }
 
 FetchHomeData(): void {
   this.spinner.show();

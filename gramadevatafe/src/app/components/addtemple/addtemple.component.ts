@@ -81,39 +81,29 @@ export class AddtempleComponent implements OnInit {
   ngOnInit() {
     this.fetchallCategorys();
     this.fetchAllPriority();
-    
-    
-
+  
     this.templeForm = this.fb.group({
-      
       name: ['', Validators.required],
       is_navagraha_established: [false],
       construction_year: [],
-     
       is_destroyed: [false],
       animal_sacrifice_status: [false],
       diety: ['', [Validators.required]],
-      style: [""],
-      
+      style: [''],
       temple_map_location: ['', Validators.required],
       address: ['', Validators.required],
-      
       desc: [''],
       status: ['INACTIVE'],
       image_location: ['', Validators.required],
-      
       category: ['', [Validators.required]],
-      priority: ['',[Validators.required]],
+      priority: ['', [Validators.required]],
       country: ['', [Validators.required]],
       state: [{ value: '', disabled: true }, [Validators.required]],
       district: [{ value: '', disabled: true }, [Validators.required]],
       mandal: [{ value: '', disabled: true }, [Validators.required]],
       object_id: [{ value: '', disabled: true }, [Validators.required]],
-      // deityList: this.fb.array([])
-      user:localStorage.getItem('user')
+      user: localStorage.getItem('user'),
     });
-  
-    // this.spinner.show();
   
     // Fetch all countries and populate dropdown
     this.templeservice.GetAllCountries().subscribe(
@@ -123,64 +113,43 @@ export class AddtempleComponent implements OnInit {
           value: country._id,
         }));
         this.templeCountryOptions.sort((a, b) => a.label.localeCompare(b.label));
-        this.spinner.hide();
+
+        const defaultCountry = this.templeCountryOptions.find(option => option.label === 'India');
+        if (defaultCountry) {
+          this.templeForm.controls['country'].setValue(defaultCountry.value);
+        }
       },
       (err) => {
         console.log(err);
-        this.spinner.hide();
       }
     );
   
     // Listen for changes in the country dropdown and update states accordingly
     this.templeForm.get('country')?.valueChanges.subscribe(countryId => {
+      this.resetFormFields(['state', 'district', 'mandal', 'object_id']);
       if (countryId) {
-        // this.spinner.show();
         this.templeservice.getbyStates(countryId).subscribe(
           (res) => {
-            if (Array.isArray(res)) { // Check if res is an array
+            if (Array.isArray(res)) {
               this.templeStateOptions = res.map((state: any) => ({
                 label: state.name,
                 value: state._id,
               }));
               this.templeStateOptions.sort((a, b) => a.label.localeCompare(b.label));
             } else {
-              // Handle the case where res is not an array (e.g., error handling)
-              console.error("Response is not an array:", res);
+              console.error('Response is not an array:', res);
             }
-            this.spinner.hide();
           },
-          (err) => {
-            console.log(err);
-            this.spinner.hide();
-          }
+          (err) => console.log(err)
         );
-        // Enable state select and reset districts, mandals, and villages
-        this.templeForm.get('state')?.reset();
         this.templeForm.get('state')?.enable();
-        this.templeForm.get('district')?.reset();
-        this.templeForm.get('mandal')?.reset();
-        this.templeForm.get('village')?.reset();
-        this.templeForm.get('district')?.disable();
-        this.templeForm.get('mandal')?.disable();
-        this.templeForm.get('village')?.disable();
-      } else {
-        // If no country selected, disable and clear state, district, mandal, and village select
-        this.templeForm.get('state')?.reset();
-        this.templeForm.get('state')?.disable();
-        this.templeForm.get('district')?.reset();
-        this.templeForm.get('district')?.disable();
-        this.templeForm.get('mandal')?.reset();
-        this.templeForm.get('mandal')?.disable();
-        this.templeForm.get('village')?.reset();
-        this.templeForm.get('village')?.disable();
       }
     });
-    
   
     // Listen for changes in the state dropdown and update districts accordingly
     this.templeForm.get('state')?.valueChanges.subscribe(stateId => {
+      this.resetFormFields(['district', 'mandal', 'object_id']);
       if (stateId) {
-        // this.spinner.show();
         this.templeservice.getdistricts(stateId).subscribe(
           (res) => {
             this.templeDistrictOptions = res.map((district: any) => ({
@@ -188,34 +157,17 @@ export class AddtempleComponent implements OnInit {
               value: district._id,
             }));
             this.templeDistrictOptions.sort((a, b) => a.label.localeCompare(b.label));
-            this.spinner.hide();
-            // Enable district select and reset mandals and villages
-            this.templeForm.get('district')?.enable();
-            this.templeForm.get('mandal')?.reset();
-            this.templeForm.get('village')?.reset();
-            this.templeForm.get('mandal')?.disable();
-            this.templeForm.get('village')?.disable();
           },
-          (err) => {
-            console.log(err);
-            this.spinner.hide();
-          }
+          (err) => console.log(err)
         );
-      } else {
-        // If no state selected, disable and clear district, mandal, and village select
-        this.templeForm.get('district')?.reset();
-        this.templeForm.get('district')?.disable();
-        this.templeForm.get('mandal')?.reset();
-        this.templeForm.get('mandal')?.disable();
-        this.templeForm.get('village')?.reset();
-        this.templeForm.get('village')?.disable();
+        this.templeForm.get('district')?.enable();
       }
     });
   
     // Listen for changes in the district dropdown and update mandals accordingly
     this.templeForm.get('district')?.valueChanges.subscribe(districtId => {
+      this.resetFormFields(['mandal', 'object_id']);
       if (districtId) {
-        // this.spinner.show();
         this.templeservice.getblocks(districtId).subscribe(
           (res) => {
             this.templeMandalOptions = res.map((mandal: any) => ({
@@ -223,65 +175,48 @@ export class AddtempleComponent implements OnInit {
               value: mandal._id,
             }));
             this.templeMandalOptions.sort((a, b) => a.label.localeCompare(b.label));
-            this.spinner.hide();
-            // Enable mandal select and reset villages
-            this.templeForm.get('mandal')?.enable();
-            this.templeForm.get('village')?.reset();
-            this.templeForm.get('village')?.disable();
           },
-          (err) => {
-            console.log(err);
-            this.spinner.hide();
-          }
+          (err) => console.log(err)
         );
-      } else {
-        // If no district selected, disable and clear mandal and village select
-        this.templeForm.get('mandal')?.reset();
-        this.templeForm.get('mandal')?.disable();
-        this.templeForm.get('village')?.reset();
-        this.templeForm.get('village')?.disable();
+        this.templeForm.get('mandal')?.enable();
       }
     });
   
     // Listen for changes in the mandal dropdown and update villages accordingly
     this.templeForm.get('mandal')?.valueChanges.subscribe(mandalId => {
+      this.templeForm.get('object_id')?.reset();
+      this.templeForm.get('object_id')?.disable();
       if (mandalId) {
-        // this.spinner.show();
         this.templeservice.getvillages(mandalId).subscribe(
           (res) => {
-            this.templeVillageOptions = res.map((object_id: any) => ({
-              label: object_id.name,
-              value: object_id._id,
+            this.templeVillageOptions = res.map((village: any) => ({
+              label: village.name,
+              value: village._id,
             }));
             this.templeVillageOptions.sort((a, b) => a.label.localeCompare(b.label));
-            this.spinner.hide();
-            // Enable village select
             this.templeForm.get('object_id')?.enable();
           },
-          (err) => {
-            console.log(err);
-            this.spinner.hide();
-          }
+          (err) => console.log(err)
         );
-      } else {
-        // If no mandal selected, disable and clear village select
-        this.templeForm.get('object_id')?.reset();
-        this.templeForm.get('object_id')?.disable();
       }
     });
-
+  
     this.templeStyleOptions = enumToMap(TempleStyle);
     this.templeForm.controls['style'].setValue('O');
-
-
-
-
+  
     this.formGroup = this.formBuilder.group({
       templeIsNavagraha: ['']
     });
-    
-    
   }
+  
+  // Utility function to reset and disable form fields
+  private resetFormFields(fields: string[]) {
+    fields.forEach(field => {
+      this.templeForm.get(field)?.reset();
+      this.templeForm.get(field)?.disable();
+    });
+  }
+  
 
   // getCurrentLocation() {
   //   if (navigator.geolocation) {

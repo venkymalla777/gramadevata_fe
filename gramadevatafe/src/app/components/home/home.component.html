@@ -125,7 +125,7 @@
                             <div  >
 
                                 
-
+<!-- 
                                 <div class="ad" style="margin-bottom: 150px;" *ngIf="adspace[currentIndex].isVideo">
                                     <video 
                                       #adVideo 
@@ -136,6 +136,22 @@
                                       playsinline
                                       (loadedmetadata)="onVideoLoaded()"
                                       style=" width: 200px; ">
+                                    </video>
+                                  </div> -->
+
+
+                                  <div class="ad" style="margin-bottom: 150px;" *ngIf="aadspace[currentIndex].isVideo">
+                                    <video 
+                                      #adVideo 
+                                      [src]="adspace[currentIndex].videoUrl"  
+                                      autoplay 
+                                      [muted]="isMuted" 
+                                      loop 
+                                      playsinline
+                                      (loadedmetadata)="onVideoLoaded()"
+                                      (mouseenter)="unmuteVideo(adVideo)"
+                                      (mouseleave)="muteVideo(adVideo)"
+                                      style="width: 200px;">
                                     </video>
                                   </div>
                                   <div style="margin-bottom: 150px;">
@@ -160,7 +176,9 @@
                                          class="img-fluid img-thumbnail mx-2" 
                                          [alt]="'Village ' + (i + 1) + ' Image'">
                                 </a>
-                                <p class="text-center">{{ village.name }}</p>
+                                <p class="text-center"><strong>{{ village.name }}</strong></p>
+                                <p class="text-center">{{ village.block.district.state.name }}</p>
+
                             </div>
                         </div>
             
@@ -186,7 +204,7 @@
                                                  style="height: 25vh; width: 30vh; border-radius:20px;"
                                                  (error)="handleImageError($event)">
                                         </a>
-                                        <p class="text-center">{{ templeCategory.name }}</p>
+                                        <p class="text-center"><strong>{{ templeCategory.name }}</strong></p>
                                     </div>
                                 </div>
                             </div>
@@ -210,7 +228,7 @@
                                              style="height: 25vh; width: 30vh; border-radius:20px;"
                                              (error)="handleImageError($event)">
                                     </a>
-                                    <p class="text-center">{{ goshalaCategory.name }}</p>
+                                    <p class="text-center"><strong>{{ goshalaCategory.name }}</strong></p>
                                 </div>
                             </div>
                             <div class="col-12 text-center mt-3">
@@ -234,7 +252,7 @@
                                              style="height: 25vh; width: 30vh; border-radius:20px;"
                                              (error)="handleImageError($event)">
                                     </a>
-                                    <p class="text-center">{{ eventcategorydata.name }}</p>
+                                    <p class="text-center"><strong>{{ eventcategorydata.name }}</strong></p>
                                 </div>
                             </div>
                             <div class="col-12 text-center mt-3">
@@ -256,7 +274,7 @@
                                 
 
                                
-                                  <div class="ad" style="margin-bottom: 150px;" *ngIf="2adspace[currentIndex].isVideo">
+                                  <!-- <div class="ad" style="margin-bottom: 150px;" *ngIf="2adspace[currentIndex].isVideo">
                                     <video 
                                       #adVideo 
                                       [src]="aadspace[currentIndex].videoUrl"  
@@ -267,7 +285,23 @@
                                       (loadedmetadata)="onVideoLoaded()"
                                       style=" width: 200px; ">
                                     </video>
+                                  </div> -->
+
+                                  <div class="ad" style="margin-bottom: 150px;" *ngIf="aadspace[currentIndex].isVideo">
+                                    <video 
+                                      #adVideo 
+                                      [src]="aadspace[currentIndex].videoUrl"  
+                                      autoplay 
+                                      [muted]="isMuted" 
+                                      loop 
+                                      playsinline
+                                      (loadedmetadata)="onVideoLoaded()"
+                                      (mouseenter)="unmuteVideo(adVideo)"
+                                      (mouseleave)="muteVideo(adVideo)"
+                                      style="width: 200px;">
+                                    </video>
                                   </div>
+                                  
 
                                   <!-- <app-add-space></app-add-space>  -->
                                   <div style="margin-bottom: 150px;">

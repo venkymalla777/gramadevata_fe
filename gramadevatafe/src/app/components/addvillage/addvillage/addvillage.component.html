@@ -61,49 +61,45 @@
           </div>
           <div class="row">
             <div class="col-md-4">
-              <div class="form-group">
-                <label for="country">Country *</label>
-                <select class="form-control" id="country" formControlName="country">
-                  <option *ngFor="let option of templeCountryOptions" [value]="option.value">{{ option.label }}</option>
-                </select>
-                <div *ngIf="templeForm.get('country')?.invalid && (templeForm.get('country')?.dirty || templeForm.get('country')?.touched)" class="text-danger">
-                  Country is required
-                </div>
-              </div>
+              <nz-form-item>
+                <nz-form-control nzErrorTip="Please select a country">
+                  <label for="country">Country</label>
+                  <nz-select formControlName="country" nzPlaceHolder="Select country" [nzShowSearch]="true">
+                    <nz-option *ngFor="let option of templeCountryOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
             </div>
             <div class="col-md-4">
-              <div class="form-group">
-                <label for="state">State *</label>
-                <select class="form-control" id="state" formControlName="state">
-                  <option *ngFor="let option of templeStateOptions" [value]="option.value">{{ option.label }}</option>
-                </select>
-                <div *ngIf="templeForm.get('state')?.invalid && (templeForm.get('state')?.dirty || templeForm.get('state')?.touched)" class="text-danger">
-                  State is required
-                </div>
-              </div>
+              <nz-form-item>
+                <nz-form-control nzErrorTip="State is required">
+                  <label for="state">State</label>
+                  <nz-select formControlName="state" nzPlaceHolder="Select state" [nzShowSearch]="true">
+                    <nz-option *ngFor="let option of templeStateOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
             </div>
             <div class="col-md-4">
-              <div class="form-group">
-                <label for="district">District *</label>
-                <select class="form-control" id="district" formControlName="district">
-                  <option *ngFor="let option of templeDistrictOptions" [value]="option.value">{{ option.label }}</option>
-                </select>
-                <div *ngIf="templeForm.get('district')?.invalid && (templeForm.get('district')?.dirty || templeForm.get('district')?.touched)" class="text-danger">
-                  District is required
-                </div>
-              </div>
+              <nz-form-item>
+                <nz-form-control nzErrorTip="District is required">
+                  <label for="district">District</label>
+                  <nz-select formControlName="district" nzPlaceHolder="Select district" [nzShowSearch]="true">
+                    <nz-option *ngFor="let option of templeDistrictOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
             </div>
             
             <div class="col-md-4">
-              <div class="form-group">
-                <label for="village">Mandal *</label>
-                <select class="form-control" id="village" formControlName="block">
-                  <option *ngFor="let option of templeMandalOptions" [value]="option.value">{{ option.label }}</option>
-                </select>
-                <div *ngIf="templeForm.get('block')?.invalid && (templeForm.get('block')?.dirty || templeForm.get('block')?.touched)" class="text-danger">
-                  Mandal is required
-                </div>
-              </div>
+              <nz-form-item>
+                <nz-form-control nzErrorTip="Mandal is required">
+                  <label for="mandal">Mandal</label>
+                  <nz-select formControlName="block" nzPlaceHolder="Select mandal" [nzShowSearch]="true">
+                    <nz-option *ngFor="let option of templeMandalOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
             </div>
           </div>
           <!-- <div class="row">

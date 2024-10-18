@@ -9,6 +9,9 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerService,NgxSpinnerModule } from 'ngx-spinner';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 
@@ -18,7 +21,10 @@ import { NgxSpinnerService,NgxSpinnerModule } from 'ngx-spinner';
   imports: [CommonModule,
     NzUploadModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NzFormModule,
+    NzInputModule,
+    NzSelectModule
   ],
   templateUrl: './addevent.component.html',
   styleUrl: './addevent.component.css'
@@ -92,6 +98,10 @@ export class AddeventComponent {
           value:country._id
         }));
         this.CountryOptions.sort((a, b) => a.label.localeCompare(b.label));
+        const defaultCountry = this.CountryOptions.find(option => option.label === 'India');
+        if (defaultCountry) {
+          this.eventform.controls['country'].setValue(defaultCountry.value);
+        }
         
       },
       (err) => {
@@ -114,6 +124,7 @@ export class AddeventComponent {
                 value:state._id
               }));
               this.StateOptions.sort((a, b) => a.label.localeCompare(b.label));
+              
             }
             else {
               console.error("response is not an array type",res)
@@ -235,6 +246,7 @@ export class AddeventComponent {
         );
         // this.goshalaForm.get('object_id')?.disable();
         this.eventform.get('object_id')?.enable();
+        this.eventform.get('object_id')?.reset(); 
       }
       else {
         this.eventform.get('object_id')?.disable();

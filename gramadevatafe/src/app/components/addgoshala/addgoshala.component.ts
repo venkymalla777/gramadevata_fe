@@ -88,7 +88,10 @@ export class AddgoshalaComponent {
           value:country._id
         }));
         this.CountryOptions.sort((a, b) => a.label.localeCompare(b.label));
-        
+        const defaultCountry = this.CountryOptions.find(option => option.label === 'India');
+        if (defaultCountry) {
+          this.goshalaForm.controls['country'].setValue(defaultCountry.value);
+        }
       },
       (err) => {
         console.log(err);
@@ -231,6 +234,7 @@ export class AddgoshalaComponent {
         );
         // this.goshalaForm.get('object_id')?.disable();
         this.goshalaForm.get('object_id')?.enable();
+        this.goshalaForm.get('object_id')?.reset(); 
       }
       else {
         this.goshalaForm.get('object_id')?.disable();

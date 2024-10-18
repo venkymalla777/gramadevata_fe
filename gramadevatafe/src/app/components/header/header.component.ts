@@ -194,6 +194,12 @@ navigateTo(): void {
   }
 }
 
+
+
+openSitemap() {
+  window.open('../../../assets/gramadevata_sitemap.pdf', '_blank');
+}
+
 }
 
 

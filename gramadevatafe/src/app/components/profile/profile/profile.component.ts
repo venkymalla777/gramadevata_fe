@@ -88,6 +88,7 @@ export class ProfileComponent {
       });
     }
     
+    
 
 
 fetchprofiledata(): void {
@@ -99,9 +100,7 @@ fetchprofiledata(): void {
         this.goshaladata = data.goshalas
         this.eventdata = data.events
         this.addedtemples = data.temples
-        // console.log(this.addedtemples, "addedtemples");
-        // console.log(this.goshaladata, "goshaladata");
-        // console.log(this.familyimages, "familyimages1");
+       
         this.villageconnections = [];
           this.templeconnections = [];
 
@@ -110,6 +109,7 @@ fetchprofiledata(): void {
           
 
           localStorage.setItem('profile_pic', this.profile);
+          
 
           
         this.villageconnections.push(...data.Connections.filter((conn: any) => conn.temple === null));
@@ -124,8 +124,7 @@ fetchprofiledata(): void {
   
         if ((data)) {
           this.useraddedtemples = data;  
-          // Assuming `Connections` should be fetched from each user in the array
-          // this.familyimages =[];
+          
           this.useraddedtemples.forEach((user: any) => {
             console.log("swdefrgth")
             if (user.Connections && Array.isArray(user.Connections)) {

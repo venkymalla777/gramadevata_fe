@@ -1,7 +1,7 @@
-<form [formGroup]="profileForm" (ngSubmit)="updateProfile()" style="width: 400px;" class="p-4">
+<form [formGroup]="profileForm" (ngSubmit)="updateProfile()" style="width: 600px;" class="p-4">
   <h4 class="text-center" style="color: orange;">Edit Your Profile</h4>
   <div class="form-group">
-    <div class="profile-pic-container" formControlName="profile_pic" (click)="triggerFileInput()">
+    <div class="profile-pic-container " formControlName="profile_pic" (click)="triggerFileInput()">
       
       <img  
            [src]="'data:image/jpg;base64,' + profileImage" 
@@ -9,12 +9,7 @@
            class="profile-pic"
            (error)="onImageError($event)"
            />
-           <!-- <img  
-            [src]="'data:image/jpg;base64,' + profileImage" 
-            alt="Profile Picture" 
-            class="profile-pic" 
-            (error)="onImageError($event)" 
-          /> -->
+  
 
 
       
@@ -47,7 +42,7 @@
   
   
 
-    <div class="form-group ">
+    <!-- <div class="form-group ">
       <label for="full_name">Full Name*</label>
       <input id="full_name" formControlName="full_name" class="form-control" placeholder="Enter your full name" />
       <div *ngIf="profileForm.controls['full_name'].invalid && profileForm.controls['full_name'].touched" class="text-danger">
@@ -63,9 +58,12 @@
       </div>
     </div>
   
+
+    
+
     <div class="form-group">
       <label for="gender">Gender</label>
-      <select id="gender" formControlName="gender" class="form-control"  >
+      <select id="gender" formControlName="gender" class="form-control">
         <option value="">Select Gender</option>
         <option value="MALE">Male</option>
         <option value="FEMALE">Female</option>
@@ -75,7 +73,80 @@
         Gender is required.
       </div>
     </div>
-  
+    
+    <div class="form-group">
+      <label for="marital_status">Marital Status</label>
+      <select id="marital_status" formControlName="marital_status" class="form-control">
+        <option value="">Select Status</option>
+        <option value="UNMARRIED">UNMARRIED</option>
+        <option value="MARRIED">MARRIED</option>
+        <option value="OTHER">OTHER</option>
+      </select>
+    </div> -->
+    
+    <!-- <div *ngIf="profileForm.get('marital_status')?.value === 'MARRIED'" class="form-group">
+      <label>Do you have children?</label>
+      <div>
+        <input type="radio" formControlName="hasChildren" [value]="true" /> Yes
+        <input type="radio" formControlName="hasChildren" [value]="false" /> No
+      </div>
+    </div>
+    
+    <div *ngIf="profileForm.get('hasChildren')?.value === true" class="form-group">
+      <label for="children">Child's Name</label>
+      <input type="text" id="children" formControlName="children" class="form-control" placeholder="Enter child's name" />
+      <div *ngIf="profileForm.get('children')?.invalid && profileForm.get('children')?.touched" class="text-danger">
+        Child's name is required.
+      </div>
+    </div> -->
+    <!-- <div
+  *ngIf="profileForm.get('marital_status')?.value === 'MARRIED'"
+  class="form-group"
+>
+  <label for="children">Child's Name</label>
+  <input type="text" id="children" formControlName="children" class="form-control" placeholder="Enter child's name"/>
+  <div
+    *ngIf="profileForm.get('children')?.invalid &&profileForm.get('children')?.touched "class="text-danger"> Child's name is required.
+  </div>
+    </div>
+    
+    <div *ngIf="profileForm.get('marital_status')?.value === 'MARRIED' && profileForm.get('gender')?.value === 'MALE'" class="form-group">
+      <label for="husband">Wife's Name</label>
+      <input type="text" id="husband" formControlName="wife" class="form-control" placeholder="Enter wife's name" />
+      <div *ngIf="profileForm.get('husband')?.invalid && profileForm.get('husband')?.touched" class="text-danger">
+        Wife's name is required.
+      </div>
+    </div>
+    
+    <div *ngIf="profileForm.get('marital_status')?.value === 'MARRIED' && profileForm.get('gender')?.value === 'FEMALE'" class="form-group">
+      <label for="husband">Husband's Name</label>
+      <input type="text" id="husband" formControlName="husband" class="form-control" placeholder="Enter husband's name" />
+      <div *ngIf="profileForm.get('husband')?.invalid && profileForm.get('husband')?.touched" class="text-danger">
+        Husband's name is required.
+      </div>
+    </div>
+    
+    <div *ngIf="profileForm.controls['marital_status'].invalid && profileForm.controls['marital_status'].touched" class="text-danger">
+      Marital status is required.
+    </div>
+    
+
+
+    <div class="form-group">
+      <label for="siblings">Siblings</label>
+      <input id="siblings" formControlName="siblings" class="form-control" placeholder="Enter your siblings's name" />
+      <div *ngIf="profileForm.controls['siblings'].invalid && profileForm.controls['siblings'].touched" class="text-danger">
+        siblings's Name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="gotram">Gotram</label>
+      <input id="gotram" formControlName="gotram" class="form-control" placeholder="Enter your gotram's name" />
+      <div *ngIf="profileForm.controls['gotram'].invalid && profileForm.controls['gotram'].touched" class="text-danger">
+        gotram's Name is required.
+      </div>
+    </div> -->
     <!-- <div class="form-group">
       <label for="dob">Date of Birth</label>
       <input id="dob" type="date" formControlName="dob" class="form-control" />
@@ -84,7 +155,7 @@
       </div>
     </div> -->
   
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="contact_number">Contact Number*</label>
       <input id="contact_number" formControlName="contact_number" class="form-control" placeholder="Enter your contact number" />
       <div *ngIf="profileForm.controls['contact_number'].invalid && profileForm.controls['contact_number'].touched" class="text-danger">
@@ -101,7 +172,130 @@
       <div *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched" class="text-danger">
         A valid Email is required.
       </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="full_name">Full Name*</label>
+          <input id="full_name" formControlName="full_name" class="form-control" placeholder="Enter your full name" />
+          <div *ngIf="profileForm.controls['full_name'].invalid && profileForm.controls['full_name'].touched" class="text-danger">
+            Full Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="father_name">Father's Name</label>
+          <input id="father_name" formControlName="father_name" class="form-control" placeholder="Enter your father's name" />
+          <div *ngIf="profileForm.controls['father_name'].invalid && profileForm.controls['father_name'].touched" class="text-danger">
+            Father's Name is required.
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" formControlName="gender" class="form-control">
+            <option value="">Select Gender</option>
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+            <option value="OTHER">Other</option>
+          </select>
+          <div *ngIf="profileForm.controls['gender'].invalid && profileForm.controls['gender'].touched" class="text-danger">
+            Gender is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="marital_status">Marital Status</label>
+          <select id="marital_status" formControlName="marital_status" class="form-control">
+            <option value="">Select Status</option>
+            <option value="UNMARRIED">UNMARRIED</option>
+            <option value="MARRIED">MARRIED</option>
+            <option value="OTHER">OTHER</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row" *ngIf="profileForm.get('marital_status')?.value === 'MARRIED'">
+
+      <div class="col-md-6" *ngIf="profileForm.get('gender')?.value === 'MALE'">
+        <div class="form-group">
+          <label for="wife">Wife's Name</label>
+          <input type="text" id="wife" formControlName="wife" class="form-control" placeholder="Enter wife's name" />
+          <div *ngIf="profileForm.get('wife')?.invalid && profileForm.get('wife')?.touched" class="text-danger">
+            Wife's name is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" *ngIf="profileForm.get('gender')?.value === 'FEMALE'">
+        <div class="form-group">
+          <label for="husband">Husband's Name</label>
+          <input type="text" id="husband" formControlName="husband" class="form-control" placeholder="Enter husband's name" />
+          <div *ngIf="profileForm.get('husband')?.invalid && profileForm.get('husband')?.touched" class="text-danger">
+            Husband's name is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="children">Child's Name</label>
+          <input type="text" id="children" formControlName="children" class="form-control" placeholder="Enter child's name"/>
+          <div *ngIf="profileForm.get('children')?.invalid && profileForm.get('children')?.touched" class="text-danger">
+            Child's name is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="siblings">Siblings</label>
+          <input id="siblings" formControlName="siblings" class="form-control" placeholder="Enter your siblings' name" />
+          <div *ngIf="profileForm.controls['siblings'].invalid && profileForm.controls['siblings'].touched" class="text-danger">
+            Siblings' Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="gotram">Gotram</label>
+          <input id="gotram" formControlName="gotram" class="form-control" placeholder="Enter your gotram's name" />
+          <div *ngIf="profileForm.controls['gotram'].invalid && profileForm.controls['gotram'].touched" class="text-danger">
+            Gotram's Name is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="contact_number">Contact Number*</label>
+          <input id="contact_number" formControlName="contact_number" class="form-control" placeholder="Enter your contact number" />
+          <div *ngIf="profileForm.controls['contact_number'].invalid && profileForm.controls['contact_number'].touched" class="text-danger">
+            Contact Number is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="email">Email*</label>
+          <input id="email" type="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+          <div *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched" class="text-danger">
+            A valid Email is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    
   <div class="text-center mt-4">
     <button type="submit" class="btn btn-primary" style="background-color: orange; border-color: orange;" >Update Profile</button>
   </div>

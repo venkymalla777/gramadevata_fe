@@ -40,7 +40,7 @@
    -->
 
    <div class="row justify-content-center align-items-center g-5 py-4">
-    <div class="col-10 col-sm-8 col-lg-6 position-relative">
+    <!-- <div class="col-10 col-sm-8 col-lg-6 position-relative">
       <video #videoPlayer 
              [src]="ads[currentIndex].videoUrl" 
              class="responsive-video w-100 rounded shadow" 
@@ -56,7 +56,41 @@
               style="font-size: 2rem; border: none; background: rgba(0, 0, 0, 0.5); color: white; width: 3rem; height: 3rem; border-radius: 50%;">
         <i class="fas fa-play"></i>
       </button>
+    </div> -->
+
+
+  <div class="col-10 col-sm-8 col-lg-6 position-relative">
+    <video #videoPlayer
+           [src]="ads[currentIndex].videoUrl"
+           class="responsive-video w-100 rounded shadow"
+           muted
+           loop
+           (click)="togglePlay(videoPlayer)"
+           (ended)="videoPlayer.currentTime = 0; videoPlayer.pause()"
+           (timeupdate)="updateProgress(videoPlayer)">
+    </video>
+  
+    <button (click)="togglePlay(videoPlayer)"
+            *ngIf="videoPlayer.paused"
+            class="btn btn-primary position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center"
+            style="font-size: 2rem; border: none; background: rgba(0, 0, 0, 0.5); color: white; width: 3rem; height: 3rem; border-radius: 50%;">
+        <i class="fas fa-play"></i>
+    </button>
+  
+    <input type="range"
+           min="0"
+           max="100"
+           value="0"
+           class="progress-bar w-100"
+           (input)="seekVideo(videoPlayer, $event)"
+           #progressBar>
+  
+    <div class="d-flex justify-content-between">
+        <span>{{ formatTime(videoPlayer.currentTime) }}</span>
+        <span>{{ formatTime(videoPlayer.duration) }}</span>
     </div>
+  </div>
+  
   
     <div class="col-lg-6">
       <h4 class="fw-bold lh-1 mb-3 text-orange">Our Village - Our Temple - Our Deity</h4>
@@ -68,11 +102,11 @@
             Read more
           </button>
         </a>
-        <a class="text-white" href="../../../../../assets/gramadevata_sitemap.pdf" target="_blank">
+        <!-- <a class="text-white" href="../../../../../assets/gramadevata_sitemap.pdf" target="_blank">
           <button class="btn btn-primary px-4 text-white" style="background-color: orange; border-color: orange;">
             Site Map
           </button>
-        </a>
+        </a> -->
       </div>
     </div>
   </div>
