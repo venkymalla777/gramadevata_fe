@@ -3,7 +3,21 @@
                 
                 <div class="row" style="margin-top: 100px;">
                     <div *ngFor="let temple of templedata" class="col-lg-7 mb-5">
-                        <h4 class="mb-5 text-center">Detailed View of {{ temple?.name }}</h4>
+                        <!-- <h4 class="mb-5 text-center">Detailed View of {{ temple?.name }}</h4>
+                        <button class="btn btn-light" (click)="sharegetbytemple(temple)" style="font-size: 20px;">
+                            <i class="fas fa-share-alt"></i> 
+                          </button> -->
+                          <div class="row align-items-center mb-5">
+                            <div class="col text-center">
+                                <h4>Detailed View of {{ temple?.name }}</h4>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-light" (click)="sharegetbytemple(temple)" style="font-size: 20px;">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-md-6 text-center">
                                 <div class="image-container mb-5">

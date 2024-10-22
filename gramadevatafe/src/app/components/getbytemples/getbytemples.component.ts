@@ -387,4 +387,37 @@ if (isPujariIn) {
     this.router.navigate(['templechat',templeId])
   }
 
+
+
+
+
+  sharegetbytemple(temple: any) {
+    const shareUrl = temple && temple._id 
+      ? `${window.location.origin}/getbytemples/${temple._id}`
+      : `${window.location.origin}/getbytemples/`; 
+  
+    console.log('Share URL:', shareUrl);
+  
+    if (navigator.share) {
+      navigator.share({
+        title: temple ? temple.name : 'Temple',
+        text: temple && temple.desc ? temple.desc : 'Check out this temple!',
+        url: shareUrl
+      }).then(() => {
+        console.log('Sharing successful');
+      }).catch((error) => {
+        console.error('Error sharing:', error);
+      });
+    } else {
+      alert(`Share URL: ${shareUrl}`);
+    }
+  }
+  
+
+
+
+
+
+
+
 }

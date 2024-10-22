@@ -238,6 +238,52 @@ export class AddtempleComponent implements OnInit {
   // }
 
 
+  // getCurrentLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const lat = position.coords.latitude;
+  //         const lng = position.coords.longitude;
+  //         this.templeForm.patchValue({
+  //           temple_map_location: `https://www.google.com/maps?q=${lat},${lng}`,
+  //         });
+  //       },
+  //       (error) => {
+  //         console.error('Error getting location', error);
+  //         alert('Unable to retrieve your location. Please try again.');
+  //       }
+  //     );
+  //   } else {
+  //     alert('Geolocation is not supported by this browser.');
+  //   }
+  // }
+  
+
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          this.templeForm.patchValue({
+            temple_map_location: `https://www.google.com/maps?q=${lat},${lng}`,
+          });
+        },
+        (error) => {
+          console.error('Error getting location', error);
+          alert('Unable to retrieve your location. Please try again.');
+        },
+        {
+          enableHighAccuracy: true, 
+          timeout: 10000, 
+          maximumAge: 0,  
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  }
+  
 
   
 

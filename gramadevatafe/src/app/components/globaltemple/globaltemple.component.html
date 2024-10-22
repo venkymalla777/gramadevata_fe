@@ -186,9 +186,7 @@
               <div class="card mt-3">
                 <div class="row no-gutters">
                   <div class="col-md-4 text-center">
-                    <img [src]="(templeCategorydata && templeCategorydata[0] && templeCategorydata[0].pic) ?
-                              templeCategorydata[0].pic :
-                              'assets/ohm.jpg'"
+                    <img [src]="(templeCategorydata && templeCategorydata[0] && templeCategorydata[0].pic) ? templeCategorydata[0].pic : 'assets/ohm.jpg'"
                          alt="img"
                          class="card-img responsive-img">
                   </div>
@@ -200,13 +198,18 @@
                   </div>
                 </div>
               </div>
+              
               <div class="container text-end mt-3">
+                <button class="btn btn-light" (click)="shareNews(templeCategorydata[0])" style="font-size: 20px;">
+                  <i class="fas fa-share-alt"></i> 
+                </button>
+      
                 <button (click)="navigateTo('addtemple')" nz-button class="login-form-button login-form-margin"
-                   style="background-color: orange; border-color: orange;">
-                   <i class="fas fa-gopuram faicon"></i>
-                   Add Temple
+                        style="background-color: orange; border-color: orange;">
+                  <i class="fas fa-gopuram faicon"></i> Add Temple
                 </button>
               </div>
+      
               <div class="container card mt-3">
                 <div class="slider-div">
                   <ng-container *ngIf="globaltemples && globaltemples.length > 0; else noData">
@@ -227,6 +230,7 @@
                   </ng-container>
                 </div>
               </div>
+              
               <ng-template #noData>
                 <div class="row text-center">
                   <div class="col">
@@ -243,13 +247,14 @@
           </section>
         </div>
       </div>
-              <div class="col-md-2 d-none d-md-block">
-                <div class="ad-space-container " >
-                  <app-add-space class="mb-4"></app-add-space>
-                  <app-add-space1 class="mt-5"></app-add-space1>
-                </div>
-              </div>
-
+      
+      <div class="col-md-2 d-none d-md-block">
+        <div class="ad-space-container ">
+          <app-add-space class="mb-4"></app-add-space>
+          <app-add-space1 class="mt-5"></app-add-space1>
+        </div>
+      </div>
+      
 
 
 

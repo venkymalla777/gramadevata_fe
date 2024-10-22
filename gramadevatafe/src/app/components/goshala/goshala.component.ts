@@ -464,6 +464,36 @@ export class GoshalaComponent {
     }
   }
 
+  shareGoshala(goshala: any): void {
+    console.log('Attempting to share:', goshala); 
+  
+    if (!goshala || !goshala._id) {
+      console.error('Invalid goshala data provided:', goshala); 
+      return;
+    }
+  
+    const shareUrl = `${window.location.origin}/goshala/${goshala._id}`;
+    console.log('Share URL:', shareUrl);
+  
+    if (navigator.share) {
+      navigator.share({
+        title: goshala.name || 'Goshala',
+        text: goshala.desc || 'Check out this goshala!',
+        url: shareUrl
+      })
+      .then(() => {
+        console.log('Sharing successful');
+      })
+      .catch((error) => {
+        console.error('Error sharing:', error);
+      });
+    } else {
+      alert(`Copy and share this URL: ${shareUrl}`);
+    }
+  }
+  
+  
+  
 
 
 

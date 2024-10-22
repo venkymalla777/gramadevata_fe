@@ -19,6 +19,7 @@ import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AddSpaceComponent } from '../add-space/add-space.component';
 import { AddSpace1Component } from '../add-space1/add-space1.component';
+import { AddspacerightComponent } from '../addspaceright/addspaceright.component';
 
 interface Ad {
   videoUrl: SafeResourceUrl;
@@ -31,7 +32,7 @@ interface Ad {
   imports:[
     CommonModule,
     NzModalModule,
-    NgxSpinnerModule,AddSpaceComponent,AddSpace1Component
+    NgxSpinnerModule,AddSpaceComponent,AddSpace1Component,AddspacerightComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

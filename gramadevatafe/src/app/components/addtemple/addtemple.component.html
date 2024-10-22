@@ -135,13 +135,25 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="temple_map_location">Temple Map Location (URL) *</label>
-              <input
-                type="url"
-                class="form-control"
-                id="temple_map_location"
-                formControlName="temple_map_location"
-                placeholder="https://example.com/map"
-              />
+              <div class="input-group">
+                <input
+                  type="url"
+                  class="form-control"
+                  id="temple_map_location"
+                  formControlName="temple_map_location"
+                  placeholder="https://example.com/map"
+                />
+                <div class="input-group-append">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="getCurrentLocation()"
+                    title="Fetch Current Location"
+                  >
+                    📍 Get Location
+                  </button>
+                </div>
+              </div>
               <small class="form-text text-muted">
                 Please provide a valid URL for the temple's map location.
               </small>
@@ -154,6 +166,7 @@
             </div>
           </div>
         </div>
+        
         
         
         

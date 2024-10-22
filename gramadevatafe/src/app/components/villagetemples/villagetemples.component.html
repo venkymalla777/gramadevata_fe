@@ -10,10 +10,22 @@
         <div class="row align-items-center">
             <h1 class="text-center text-primary">Connect your Origin</h1>
         </div>
+
     </div>
     <div class="container  mt-3" *ngIf="this.villagedata!=null">
         <div class="row mt-5">
-            <h1 class="text-justify"><span style="font-size: 22px;">Village : </span>{{villagedata.name}}</h1>
+            <!-- <h1 class="text-justify"><span style="font-size: 22px;">Village : </span>{{villagedata.name}}</h1> -->
+            <div class="row align-items-center mb-3">
+                <div class="col text-justify">
+                    <h1><span style="font-size: 22px;">Village: </span>{{ villagedata.name }}</h1>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-light" (click)="sharegetbytemple(villagedata)" style="font-size: 20px;">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
             <!-- <p class="text-justify"><span>Village/Area :</span>{{villagedata.name}}</p> -->
             <p class="text-justify "><span>Block/Mandal : </span>{{villagedata.block.name}}</p>
             <p class="text-justify"><span>District : </span>{{villagedata.block.district.name}}</p>

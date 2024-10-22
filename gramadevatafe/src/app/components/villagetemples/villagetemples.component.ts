@@ -391,4 +391,33 @@ NavigateToChatRoom(): void {
   this.router.navigate(['chatroom', this.village_id]);
 }
 
+
+sharegetbytemple(temple: any) {
+  if (!temple || !temple._id) {
+    console.error('Invalid temple data provided.');
+    return;
+  }
+
+  const shareUrl = `${window.location.origin}/detailviewevent/${temple._id}`; 
+  console.log('Share URL:', shareUrl);
+
+  if (navigator.share) {
+    navigator.share({
+      title: temple.name,
+      text: temple.desc || 'Check out this temple!',
+      url: shareUrl
+    }).then(() => {
+      console.log('Sharing successful');
+    }).catch((error) => {
+      console.error('Error sharing:', error);
+    });
+  } else {
+    alert(`Share URL: ${shareUrl}`);
+  }
+}
+
+
+
+
+
 }

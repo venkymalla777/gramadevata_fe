@@ -104,4 +104,28 @@ export class ConnectionsComponent {
     this .router.navigate(['villages',_id])
   }
 
+
+  sharegetbytemple() {
+    const shareUrl = `${window.location.origin}/connections`;
+  
+    console.log('Share URL:', shareUrl);
+  
+    if (navigator.share) {
+      navigator.share({
+        title: 'Check out this temple!',
+        text: 'Discover more about this amazing temple!',
+        url: shareUrl
+      }).then(() => {
+        console.log('Sharing successful');
+      }).catch((error) => {
+        console.error('Error sharing:', error);
+      });
+    } else {
+      alert(`Share URL: ${shareUrl}`);
+    }
+  }
+  
+
+
+
 }

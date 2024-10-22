@@ -136,6 +136,11 @@
                       
                       
                       <div class="container text-end">
+                        <button class="btn btn-light" (click)="shareGoshala(goshalaCategorydata)" style="font-size: 20px;">
+                          <i class="fas fa-share-alt"></i> 
+                        </button>
+                        
+
                         <button (click)="navigateTo('addgoshala')" nz-button class="login-form-button login-form-margin" 
                            style="background-color: orange; border-color: orange;">
                            <i class="fa-solid fa-cow"></i>
@@ -192,6 +197,11 @@
               </section>
 
           </div>
+
+
+
+
+          
           <div class="col-md-2 d-none d-md-block">
                 <div class="ad-space-container " >
                   <app-add-space class="mb-4"></app-add-space>
