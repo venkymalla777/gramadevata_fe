@@ -100,12 +100,13 @@ fetchprofiledata(): void {
         this.goshaladata = data.goshalas
         this.eventdata = data.events
         this.addedtemples = data.temples
+        // console.log(this.addedtemples.image_location[0],"this.addedtemples")
        
         this.villageconnections = [];
           this.templeconnections = [];
 
           this.profile = data.profile_pic;
-          console.log(this.profile,"this.profile")
+          console.log(this.addedtemples,"this.profile")
           
 
           localStorage.setItem('profile_pic', this.profile);

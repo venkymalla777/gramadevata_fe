@@ -217,7 +217,7 @@
                       <div *ngFor="let temple of globaltemples" class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-4">
                         <div class="image-container text-center">
                           <a (click)="navigateTempleDetail(temple._id)">
-                            <img [src]="temple.image_location ? temple.image_location : 'assets/ohm.jpg'"
+                            <img [src]="temple.image_location[0] ? temple.image_location[0] : 'assets/ohm.jpg'"
                                  alt="image"
                                  class="img-fluid img-thumbnail"
                                  style="height: 10vw; width: 35vw; min-width: 70px; min-height: 100px; object-fit: cover;"

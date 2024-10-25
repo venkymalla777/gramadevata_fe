@@ -3,10 +3,7 @@
                 
                 <div class="row" style="margin-top: 100px;">
                     <div *ngFor="let temple of templedata" class="col-lg-7 mb-5">
-                        <!-- <h4 class="mb-5 text-center">Detailed View of {{ temple?.name }}</h4>
-                        <button class="btn btn-light" (click)="sharegetbytemple(temple)" style="font-size: 20px;">
-                            <i class="fas fa-share-alt"></i> 
-                          </button> -->
+                        
                           <div class="row align-items-center mb-5">
                             <div class="col text-center">
                                 <h4>Detailed View of {{ temple?.name }}</h4>
@@ -22,19 +19,26 @@
                             <div class="col-md-6 text-center">
                                 <div class="image-container mb-5">
                                     <a>
-                                        <!-- <img [src]="temple?.image_location ? 'data:image/jpeg;base64,' + temple?.image_location : 'assets/ohm.jpg'" 
+                                        <img [src]="selectedImage ? selectedImage : 'assets/ohm.jpg'"
                                              alt="image"
                                              class="img-fluid rounded"
-                                             style="height:300px;width:350px;max-width:100%;"> -->
-                                             <img [src]="temple.image_location ? temple.image_location : 'assets/ohm.jpg'"
-                                                alt="image"
-                                                class="img-fluid rounded"
-                                                style="height:300px;width:350px;max-width:100%;"
-                                                (error)="handleImageError($event)">
-
+                                             style="height:300px;width:350px;max-width:100%;"
+                                             (error)="handleImageError($event)">
                                     </a>
                                 </div>
+                                <!-- <div class="row">
+                                    <div class="col-md-2" *ngFor="let image of temple.image_location">
+                                        <img [src]="image ? image : 'assets/ohm.jpg'"
+                                             alt="image"
+                                             class="img-fluid rounded"
+                                             style="height:80px; max-width:100%; cursor: pointer;"
+                                             (click)="onImageClick(image)"
+                                             (error)="handleImageError($event)">
+                                    </div>
+                                </div> -->
                             </div>
+                            
+                            
                             <div class="col-md-6">
                                 <div class="details" style="margin-top: 50px;">
                                     <div class="detail mb-3">
@@ -50,6 +54,22 @@
                                     
                                 </div>
                             </div>
+
+                            <div class="image-container" style="overflow-x: auto; white-space: nowrap;">
+                                <div class="d-inline-block" *ngFor="let image of temple.image_location" style="margin-right: 10px;">
+                                    <img [src]="image ? image : 'assets/ohm.jpg'"
+                                         alt="image"
+                                         class="img-fluid rounded"
+                                         [ngClass]="{'highlighted': image === selectedImage}"
+                                         style="height: 80px; width: auto; cursor: pointer; display: inline-block;"
+                                         (click)="onImageClick(image)"
+                                         (error)="handleImageError($event)">
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
                         </div>
                        
                         <div class="detail mb-3" *ngIf="temple?.desc">
@@ -84,7 +104,7 @@
                                     </div>
                                     <div class="text-center mb-3 " *ngIf="isMemberIn">
                                         <button type="button" (click)="isMemberconnect(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem; margin-right: 10px;">
-                                            Connected as Member
+                                            Connect as Member
                                         </button>
                                     </div>
                                     <div class="text-center mb-3" *ngIf="!isPujariIn">
@@ -94,38 +114,14 @@
                                     </div>
                                     <div class="text-center mb-3" *ngIf="isPujariIn">
                                         <button type="button" (click)="isPujariconnect(temple._id)" class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem;">
-                                            Connected as Pujari
+                                            Connect as Pujari
                                         </button>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <!-- <div class="row " *ngIf="isConnected">
-                                <div class="col-8">
-                                    <h6>Members/Pujaries</h6>
-                                    <div style="display: flex; align-items: center;">
-                                        <div *ngFor="let member of temple.Connections" style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
-                                            <button style="border-radius: 50%; border: none; height: 35px; width: 35px; padding: 0;">
-                                                <i class="fas fa-user" style="font-size: 15px;"></i>
-                                            </button>
-                                            <div class="mt-2">
-                                                <p class="text-center" style="margin: 0;">{{member.user.name}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4  d-flex  align-items-center"> 
-                                        <div class="text-center mb-3" >
-                                            <button type="button"  class="btn text-primary" style="border-radius: 10px; border: 2px solid #FF6800; padding: 5px 10px; font-size: 0.7rem;">
-                                                Chat With Members
-                                            </button>
-                                        </div>
-    
-                                    </div>
-                                </div>
-                                
-                                
-                            </div> -->
+                        
                             <div class="row" *ngIf="isConnected">
                                 <div class="col-8">
                                     <h6>Members/Pujaries</h6>

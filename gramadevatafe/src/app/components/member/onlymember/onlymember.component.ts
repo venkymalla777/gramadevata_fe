@@ -147,7 +147,8 @@ export class OnlymemberComponent {
         // this.userservice.isMemberIn = true;
         this.memberform.reset();
         this.dialogRef.close();
-  
+        window.location.reload();
+ 
         // Make the connection call after successfully adding the member
         if (this.templeId){
         this.memberservice.connect(connectdata).subscribe(

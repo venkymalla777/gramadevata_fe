@@ -17,7 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { NzUploadModule,NzUploadFile,NzUploadChangeParam } from 'ng-zorro-antd/upload';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -62,6 +63,9 @@ export class AddtempleComponent implements OnInit {
   villagedata: any;
   villageid:any;
   templeMapLocation: string = '';
+  village_id: any;
+  InVillage = false;
+  village: any;
   
   
 
@@ -76,34 +80,78 @@ export class AddtempleComponent implements OnInit {
     private locationservice: LocationService,
     private formBuilder: FormBuilder,
     private router:Router,
+    private route:ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.fetchallCategorys();
     this.fetchAllPriority();
-  
+    this.InVillageId();
+
+
+
+
+    this.village_id = history.state.village_id || null;
+    console.log(this.village_id, "this.village_id");
+
     this.templeForm = this.fb.group({
       name: ['', Validators.required],
       is_navagraha_established: [false],
       construction_year: [],
       is_destroyed: [false],
       animal_sacrifice_status: [false],
-      diety: ['', [Validators.required]],
+      diety: ['', Validators.required],
       style: [''],
       temple_map_location: ['', Validators.required],
       address: ['', Validators.required],
       desc: [''],
       status: ['INACTIVE'],
       image_location: ['', Validators.required],
-      category: ['', [Validators.required]],
-      priority: ['', [Validators.required]],
-      country: ['', [Validators.required]],
-      state: [{ value: '', disabled: true }, [Validators.required]],
-      district: [{ value: '', disabled: true }, [Validators.required]],
-      mandal: [{ value: '', disabled: true }, [Validators.required]],
-      object_id: [{ value: '', disabled: true }, [Validators.required]],
+      category: ['', Validators.required],
+      priority: ['', Validators.required],
+      country: ['', Validators.required],
+      state: [{ value: '', disabled: true }, Validators.required],
+      district: [{ value: '', disabled: true }, Validators.required],
+      mandal: [{ value: '', disabled: true }, Validators.required],
+      object_id: [{ value: this.village_id, disabled: true }, Validators.required],
       user: localStorage.getItem('user'),
     });
+
+    // Conditionally update the form controls based on village_id
+    if (this.village_id != null) {
+      // Enable object_id before setting its value
+      this.templeForm.get('object_id')?.enable();
+
+      // Strictly set the value using setValue
+      try {
+        this.templeForm.get('object_id')?.setValue(this.village_id);
+        console.log(this.templeForm.get('object_id')?.value, "Updated object_id value");
+      } catch (error) {
+        console.error("Error setting object_id:", error);
+      }
+
+      // Clear validators for location fields
+      this.templeForm.get('country')?.clearValidators();
+      this.templeForm.get('state')?.clearValidators();
+      this.templeForm.get('district')?.clearValidators();
+      this.templeForm.get('mandal')?.clearValidators();
+    } else {
+      // When village_id is null, disable object_id and require location fields
+      this.templeForm.get('object_id')?.disable();
+      this.templeForm.get('country')?.setValidators(Validators.required);
+      this.templeForm.get('state')?.setValidators(Validators.required);
+      this.templeForm.get('district')?.setValidators(Validators.required);
+      this.templeForm.get('mandal')?.setValidators(Validators.required);
+    }
+
+    // Update validation status after changing validators
+    this.templeForm.get('country')?.updateValueAndValidity();
+    this.templeForm.get('state')?.updateValueAndValidity();
+    this.templeForm.get('district')?.updateValueAndValidity();
+    this.templeForm.get('mandal')?.updateValueAndValidity();
+    this.templeForm.get('object_id')?.updateValueAndValidity();
+
+    
   
     // Fetch all countries and populate dropdown
     this.templeservice.GetAllCountries().subscribe(
@@ -257,6 +305,19 @@ export class AddtempleComponent implements OnInit {
   //     alert('Geolocation is not supported by this browser.');
   //   }
   // }
+ InVillageId(): void{
+
+  this.village_id = history.state.village_id || null;
+
+  if (this.village_id !== null) {
+    this.InVillage = true;
+    
+  }else {
+    this.InVillage = false
+    console.log("fales")
+  }
+ }
+
   
 
   getCurrentLocation() {
@@ -293,28 +354,53 @@ export class AddtempleComponent implements OnInit {
 
   onSubmit() {
     this.spinner.show();
+    console.log(this.templeForm, "Form Data at Submission");
+
     if (this.templeForm.valid) {
-      const { country, state, district, mandal, ...templeData } = this.templeForm.value;
-      console.log(this.templeForm, "999999999999999999")
-      this.templeservice.addTemple(templeData)
-        .subscribe(response => {
-          console.log('Temple added successfully:', response);
-          this.villageid = this.templeForm.value.object_id
-          console.log(this.villageid)
-          this.router.navigate(["villages",templeData.object_id])
-          this.spinner.hide()
-          // this.router.navigate(['home']);
-          // Handle response or redirect to another page
-        }, error => {
-          console.error('Error adding temple:', error);
-          // Handle error
-        });
+        const { country, state, district, mandal, ...templeData } = this.templeForm.value;
+        
+        console.log(templeData, "Valid Form Data");
+        
+        // Get the village object_id
+        this.village = this.templeForm.get('object_id')?.value;
+        console.log(this.village, "Selected Village");
+
+        // If village is not selected, set it to the village_id
+        if (this.village === null) {
+            this.templeForm.get('object_id')?.setValue(this.village_id);
+            console.log(this.village_id, "Set object_id to village_id");
+        }
+
+        // Update the templeData object with the correct object_id
+        templeData.object_id = this.templeForm.get('object_id')?.value;
+
+        // Add the temple using the service
+        this.templeservice.addTemple(templeData).subscribe(
+            response => {
+                console.log('Temple added successfully:', response);
+                
+                // Update villageid and navigate to the village page
+                this.villageid = templeData.object_id;
+                console.log(this.villageid, "Updated villageid");
+                this.router.navigate(["villages", this.villageid]);
+
+                this.spinner.hide();
+            },
+            error => {
+                console.error('Error adding temple:', error);
+                // Hide spinner on error
+                this.spinner.hide();
+            }
+        );
     } else {
-      this.templeForm.markAllAsTouched();
-      console.log('Form is invalid.');
-      this.spinner.hide();
+        // Mark all fields as touched to trigger validation messages
+        this.templeForm.markAllAsTouched();
+        console.log('Form is invalid.');
+        this.spinner.hide();
     }
-  }
+}
+
+
 
   fetchallCategorys(): void {
     this.templecategoryservice.GetallCategories().subscribe(
@@ -362,59 +448,99 @@ export class AddtempleComponent implements OnInit {
   }
 
 
-  handleBannerFileRemove(): void {
-    // Handle file remove event if needed
-    if (this.bannerFileList.length === 0) {
-      // No files remaining, trigger validation message
-      this.bannerFileList = [];
-    }
-  }
+//   handleBannerFileRemove(): void {
+//     // Handle file remove event if needed
+//     if (this.bannerFileList.length === 0) {
+//       // No files remaining, trigger validation message
+//       this.bannerFileList = [];
+//     }
+//   }
 
-  handleBannerFileChange(info: NzUploadChangeParam): void {
-    this.handleUpload(info, 'bannerImage');
-  }
+//   handleBannerFileChange(info: NzUploadChangeParam): void {
+//     this.handleUpload(info, 'bannerImage');
+//   }
 
-  handleUpload(info: NzUploadChangeParam, formControlName: string): void {
-    const fileList = [...info.fileList];
+//   handleUpload(info: NzUploadChangeParam, formControlName: string): void {
+//     const fileList = [...info.fileList];
 
-    fileList.forEach((file: NzUploadFile) => {
-      this.getBase64(file.originFileObj!, (base64String: string) => {
-        file['base64'] = base64String;
-        this.templeForm.patchValue({ image_location: base64String });
+//     fileList.forEach((file: NzUploadFile) => {
+//       this.getBase64(file.originFileObj!, (base64String: string) => {
+//         file['base64'] = base64String;
+//         this.templeForm.patchValue({ image_location: base64String });
         
-      });
+//       });
+//     });
+
+//     this.templeForm.get(formControlName)?.setValue(fileList);
+
+//     if (formControlName === 'images') {
+//       this.fileList = fileList;
+//     } else if (formControlName === 'bannerImage') {
+//       this.bannerFileList = fileList;
+//     }
+//    console.log('image submit', this.templeForm.value);
+//   }
+
+
+//   getBase64(file: File, callback: (base64String: string) => void): void {
+//     const reader = new FileReader();
+//     reader.onload = () => {
+//         let base64String = reader.result as string;
+//         // Extract base64 string without the data URI scheme
+//         base64String = base64String.split(',')[1];
+//         console.log('Base64 string:', base64String); // Print base64 string
+//         callback(base64String);
+//     };
+//     reader.readAsDataURL(file);
+// }
+
+handleBannerFileRemove(file: any): boolean {
+  // Remove the file from the list
+  this.bannerFileList = this.bannerFileList.filter(f => f.uid !== file.uid);
+  return true;
+}
+
+handleBannerFileChange(info:NzUploadChangeParam):void {
+  this.handleUpload(info, 'bannerImage');
+ }
+
+ handleUpload(info: NzUploadChangeParam, formControlName: string): void {
+  const fileList = [...info.fileList];
+
+  // Initialize an empty array to store base64 strings
+  const base64Images: string[] = [];
+
+  fileList.forEach((file: NzUploadFile) => {
+    this.getBase64(file.originFileObj!, (base64String: string) => {
+      file['base64'] = base64String;
+      base64Images.push(base64String);
+
+      // Update the form control once all images are processed
+      if (base64Images.length === fileList.length) {
+        this.templeForm.patchValue({ image_location: base64Images });
+        console.log('Updated images form:', this.templeForm.value);
+      }
     });
+  });
 
-    this.templeForm.get(formControlName)?.setValue(fileList);
-
-    if (formControlName === 'images') {
-      this.fileList = fileList;
-    } else if (formControlName === 'bannerImage') {
-      this.bannerFileList = fileList;
-    }
-   console.log('image submit', this.templeForm.value);
+  if (formControlName === 'bannerImage') {
+    this.bannerFileList = fileList;
   }
 
-  
-  // getBase64(file: File, callback: (base64String: string) => void): void {
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     const base64String = reader.result as string;
-  //     console.log('Base64 string:', base64String); // Print base64 string
-  //     callback(base64String);
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
-  getBase64(file: File, callback: (base64String: string) => void): void {
-    const reader = new FileReader();
-    reader.onload = () => {
-        let base64String = reader.result as string;
-        // Extract base64 string without the data URI scheme
-        base64String = base64String.split(',')[1];
-        console.log('Base64 string:', base64String); // Print base64 string
-        callback(base64String);
-    };
-    reader.readAsDataURL(file);
+  console.log('File upload:', info.fileList);
+}
+
+
+getBase64(file: File, callback: (base64String: string) => void): void {
+  const reader = new FileReader();
+  reader.onload = () => {
+      let base64String = reader.result as string;
+      // Extract base64 string without the data URI scheme
+      base64String = base64String.split(',')[1];
+      console.log('Base64 string:', base64String); // Print base64 string
+      callback(base64String);
+  };
+  reader.readAsDataURL(file);
 }
 
 }

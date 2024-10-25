@@ -53,6 +53,8 @@ export class GetbytemplesComponent {
   isMemberIn = false
   isPujariIn = false
   connectedId: any;
+  selectedImage: any;
+  temple: any;
 
   constructor(private route:ActivatedRoute,
     private router:Router ,
@@ -97,7 +99,9 @@ export class GetbytemplesComponent {
       // temple:null,
       user:localStorage.getItem('user')
 
-    }) 
+    })
+    
+   
   }
 
 
@@ -144,6 +148,9 @@ if (isPujariIn) {
   }
 
 
+  onImageClick(image: string): void {
+    this.selectedImage = image; // Update the main image
+  }
 
  
 
@@ -184,6 +191,14 @@ if (isPujariIn) {
         if (!this.blockId) {
           console.error("Block ID is not defined.");
           return;
+        }
+
+        console.log(this.templedata[0].image_location[0],'this.templedata.image_location')
+
+        if (this.templedata[0].image_location[0] && this.templedata[0].image_location[0].length > 0) {
+          this.selectedImage = this.templedata[0].image_location[0]; // Default to the first image
+        } else {
+          this.selectedImage = 'assets/ohm.jpg'; // Fallback image if no images exist
         }
   
         this.templeservice.filtertemples('', this.blockId).subscribe(

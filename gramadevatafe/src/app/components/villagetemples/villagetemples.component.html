@@ -51,8 +51,8 @@
                             <div *ngFor="let gramadevatatemple of gramadevatatemples" class="col-md-6 col-lg-3 col-sm-6">
                               <div>
                                 <div class="text-center">
-                                  <a (click)="navigateTotempleDetail(gramadevatatemple._id)">
-                                    <img [src]="gramadevatatemple.image_location ? gramadevatatemple.image_location : 'assets/ohm.jpg'" alt="image" style="height:20vh; width: 30vh; border-radius:20px;" class="img-fluid rounded" alt="image" (error)="handleImageError($event)">
+                                  <a (click)="navigateTotempleDetail(gramadevatatemple)">
+                                    <img [src]="gramadevatatemple.image_location[0] ? gramadevatatemple.image_location[0] : 'assets/ohm.jpg'" alt="image" style="height:20vh; width: 30vh; border-radius:20px;" class="img-fluid rounded" alt="image" (error)="handleImageError($event)">
                                   </a>
                                   <p class="text-center">{{gramadevatatemple.name}}</p>
                                 </div>
@@ -96,16 +96,13 @@
                               <div *ngFor="let temple of othertemples" class="col-md-6 col-lg-3 col-sm-6">
                                 <div>
                                   <div class="text-center">
-                                    <a (click)="navigateTotempleDetail(temple._id)">
-                                        <img [src]="temple.image_location ? temple.image_location : 'assets/ohm.jpg'" style="height: 20vh; width: 30vh; border-radius:20px;" class="img-fluid rounded" alt="image" (error)="handleImageError($event)">
+                                    <a (click)="navigateTotempleDetail(temple)">
+                                        <img [src]="temple.image_location[0] ? temple.image_location[0] : 'assets/ohm.jpg'" style="height: 20vh; width: 30vh; border-radius:20px;" class="img-fluid rounded" alt="image" (error)="handleImageError($event)">
                                     </a>
                                     <p class="text-center">{{temple .name }}</p>
                                   </div>
                                 </div>
                               </div>
-                              
-                              
-                              
                             </div>
                           </div>
 

@@ -52,6 +52,8 @@ export class VillagetemplesComponent {
   connected_as: any;
   isMemberConnected: any;
   isPujariConnected : any;
+  templeId: any;
+  templeStatus: any;
   
 
 
@@ -248,7 +250,9 @@ isconnect():void{
     if (ismemberin === false) {
       this.openmemberDialog();
     } else {
-      this.router.navigate([route]);
+
+      // this.router.navigate([route, this.village_id]);
+      this.router.navigate([route], { state: { village_id: this.village_id } });
     }
 
   }
@@ -315,14 +319,43 @@ OpenPujariDilog(): void {
   });
 }
 
-navigateTotempleDetail(_id:string): void{
+// navigateTotempleDetail(data:any): void{
+//   this.templeId = data._id
+//   this.templeStatus = data.status
+//   if (this.templeStatus === 'INACTIVE')
+//   console.log(this.templeId,"qwer")
+//   let userId = this.authenticationService.getCurrentUser();
+//     if (userId == undefined || userId == null) {
+//       this.authenticationService.showLoginModal()
+//       return;
+//     }
+//   this.router.navigate(['getbytemples',this.templeId])
+// }
+
+navigateTotempleDetail(data: any): void {
+  this.templeId = data._id;
+  this.templeStatus = data.status;
+
+  
+  if (this.templeStatus === 'INACTIVE') {
+    this.notificationHelper.showSuccessNotification('This temple is under review', '');
+    return;
+  }
+
+  
   let userId = this.authenticationService.getCurrentUser();
-    if (userId == undefined || userId == null) {
-      this.authenticationService.showLoginModal()
-      return;
-    }
-  this.router.navigate(['getbytemples',_id])
+
+  
+  if (!userId) {
+    this.authenticationService.showLoginModal();
+    return;
+  }
+
+  
+  this.router.navigate(['getbytemples', this.templeId]);
 }
+
+
 
 navigategoshaladata(goshala:string):void{
   let userId = this.authenticationService.getCurrentUser();
