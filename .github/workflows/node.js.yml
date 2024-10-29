@@ -1,0 +1,39 @@
+
+name: Deploy Angular to Azure VM
+
+on:
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+        
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 4.240.116.69 >> ~/.ssh/known_hosts
+
+      - name: Run npm build on Azure VM
+        env:
+          AZURE_VM_PASSWORD: ${{ secrets.AZURE_VM_PASSWORD }}
+        run: |
+          sshpass -p "$AZURE_VM_PASSWORD" ssh -o StrictHostKeyChecking=no root1@4.240.116.69 << 'EOF'
+            # Navigate to project directory and build
+            sudo su
+            cd /home/root1/gramadevata_fe
+            git add .
+            git commit -m "old code"
+            git pull origin main
+            cd /home/root1/gramadevata_fe/gramadevatafe
+            npm run build
+            sudo systemctl restart nginx
+            sudo systemctl status nginx
+          EOF
