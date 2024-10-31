@@ -112,14 +112,15 @@ export class PujariComponent {
       // dob: ['',Validators.required],
       gender: ['',Validators.required],
       pujari_certificate: ["", Validators.required],
-      working_temple:["", Validators.required],
+      working_temple:[""],
       connected_as:"PUJARI",
       village: this.villageid,
       temple:this.templeId,
       user : localStorage.getItem('user'),
-      family_images:[],
+      family_images:[''],
       account_type:['PRIVATE',Validators.required],
-      email:['']
+      email:[''],
+      pujari_designation:['']
       
     });
     // this.villageroleoptions = enumToMap(your_role_in_our_village);
@@ -154,7 +155,16 @@ export class PujariComponent {
           this.memberservice.connect(connectdata).subscribe(
             response => {
               console.log(response);
+              localStorage.setItem('type', 'PUJARI');
+              localStorage.setItem('is_member', 'true');
               console.log("connected succesfully1")
+              if (this.apicall === "Connection Temples") {
+                this.sharedservice.fetchTempleData();
+                this.sharedservice.fetchVillagedata()
+              } else {
+                this.sharedservice.fetchByTempleData();
+                this.sharedservice.fetchVillagedata()
+              }
               
             },
             error => {

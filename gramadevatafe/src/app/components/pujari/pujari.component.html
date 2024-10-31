@@ -52,7 +52,7 @@
                 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="contact_number">Contact Number</label>
+                        <label for="contact_number">Contact Number*</label>
                         <input type="text" class="form-control" formControlName="contact_number" placeholder="Enter the contact number">
                         <div *ngIf="memberform.get('full_name')?.invalid && (memberform.get('full_name')?.dirty || memberform.get('full_name')?.touched)" class="text-danger">
                             Contact Number required
@@ -72,9 +72,9 @@
                 </div> -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="certificate_type">Certificate Type</label>
+                    <label for="certificate_type">ID Proof Type*</label>
                     <select class="form-control" formControlName="certificate_type" (change)="onCertificateTypeChange($event)">
-                        <option value="" disabled>Select Certificate Type</option>
+                        <option value="" disabled>Select Id Proof Type</option>
                         <option value="aadhaar">Aadhaar</option>
                         <option value="pan">PAN</option>
                         <option value="voter">Voter ID</option>
@@ -83,21 +83,34 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="pujari_certificate">Pujari Certificate Number</label>
+                    <label for="pujari_certificate">ID Proof Number*</label>
                     <input type="text" class="form-control" [placeholder]="certificatePlaceholder" formControlName="pujari_certificate" [pattern]="certificatePattern">
                     <div *ngIf="memberform.get('pujari_certificate')?.invalid && (memberform.get('pujari_certificate')?.dirty || memberform.get('pujari_certificate')?.touched)" class="text-danger">
-                        Pujari certificate required or invalid format
+                        Pujari ID Proof Number required or invalid format
                     </div>
                 </div>
             </div>
                 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="working_temple">Working Temple</label>
                         
                             <input type="text" class="form-control" formControlName="working_temple" placeholder="Enter the pujari working temple">
                             <div *ngIf="memberform.get('working_temple')?.invalid && (memberform.get('working_temple')?.dirty || memberform.get('working_temple')?.touched)" class="text-danger">
                                 Working Temple required
+                              </div>
+                        
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="working_temple">Pujari Desgingination</label>
+                        
+                            <input type="text" class="form-control" formControlName="pujari_designation" placeholder="Enter the pujari working temple">
+                            <div *ngIf="memberform.get('pujari_designation')?.invalid && (memberform.get('pujari_designation')?.dirty || memberform.get('pujari_designation')?.touched)" class="text-danger">
+                                Pujari Desgingination required
                               </div>
                         
                     </div>
@@ -162,7 +175,7 @@
                 </div> -->
                 <div class="col-md-6">
                 <div class="form-group">
-                    <label for="certificate_type">Certificate Type</label>
+                    <label for="certificate_type">Certificate Type*</label>
                     <select class="form-control" formControlName="certificate_type" (change)="onCertificateTypeChange($event)">
                         <option value="" disabled>Select Certificate Type</option>
                         <option value="aadhaar">Aadhaar</option>
@@ -173,7 +186,7 @@
                 </div>
                 <div class="col-md-6">
                 <div class="form-group">
-                    <label for="pujari_certificate">Pujari Certificate Number</label>
+                    <label for="pujari_certificate">ID Proof Number*</label>
                     <input type="text" class="form-control" [placeholder]="certificatePlaceholder" formControlName="pujari_certificate" [pattern]="certificatePattern">
                     <div *ngIf="memberform.get('pujari_certificate')?.invalid && (memberform.get('pujari_certificate')?.dirty || memberform.get('pujari_certificate')?.touched)" class="text-danger">
                         Pujari certificate required or invalid format
@@ -181,13 +194,24 @@
                 </div>
                 </div>
                 
-                <div >
+                <div class="col-md-6" >
                     <div class="form-group">
                         <label for="working_temple">Working Temple</label>
                         
                             <input type="text" class="form-control" formControlName="working_temple" placeholder="Enter the pujari working temple">
                             <div *ngIf="memberform.get('working_temple')?.invalid && (memberform.get('working_temple')?.dirty || memberform.get('working_temple')?.touched)" class="text-danger">
                                 Working Temple required
+                              </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="working_temple">Pujari Desgingination</label>
+                        
+                            <input type="text" class="form-control" formControlName="pujari_designation" placeholder="Enter the pujari working temple">
+                            <div *ngIf="memberform.get('pujari_designation')?.invalid && (memberform.get('pujari_designation')?.dirty || memberform.get('pujari_designation')?.touched)" class="text-danger">
+                                Pujari Desgingination required
                               </div>
                         
                     </div>
