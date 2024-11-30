@@ -186,7 +186,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="father_name">Father's Name</label>
+          <label for="father_name">Father's Name*</label>
           <input id="father_name" formControlName="father_name" class="form-control" placeholder="Enter your father's name" />
           <div *ngIf="profileForm.controls['father_name'].invalid && profileForm.controls['father_name'].touched" class="text-danger">
             Father's Name is required.
@@ -285,15 +285,33 @@
           </div>
         </div>
       </div>
+
+
       <div class="col-md-6">
         <div class="form-group">
-          <label for="email">Email*</label>
-          <input id="email" type="email" formControlName="email" class="form-control" placeholder="Enter your email" />
-          <div *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched" class="text-danger">
-            A valid Email is required.
-          </div>
+            <label for="gender"> Visibility*</label>
+            <select class="form-control" formControlName="account_type">
+                <option value="" disabled selected></option>
+                <option value="PRIVATE">PRIVATE</option>
+                <option value="PUBLIC">PUBLIC</option>
+                
+            </select>
+            <div *ngIf="profileForm.get('account_type')?.invalid && (profileForm.get('account_type')?.dirty || profileForm.get('account_type')?.touched)" class="text-danger">
+                Gender required
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="email">Email*</label>
+        <input id="email" type="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+        <div *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched" class="text-danger">
+          A valid Email is required.
         </div>
       </div>
+    </div>
+
     </div>
     
   <div class="text-center mt-4">

@@ -50,8 +50,8 @@ export class AddgoshalaComponent {
 
 
   constructor(private goshalaservice:GoshalaService,
-     private fb :FormBuilder,
-      private templeservice:TempleserviceService,
+      private fb :FormBuilder,
+       private templeservice:TempleserviceService,
        private locationservice:LocationService,
        private router:Router,
        private spinner: NgxSpinnerService,
@@ -77,6 +77,7 @@ export class AddgoshalaComponent {
       address:['',Validators.required],
       user:localStorage.getItem('user'),
       status: ['INACTIVE'],
+      map_location: ['', Validators.required],
     
     })
    
@@ -245,6 +246,33 @@ export class AddgoshalaComponent {
 
 
     
+  }
+
+
+
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          this.goshalaForm.patchValue({
+            temple_map_location: `https://www.google.com/maps?q=${lat},${lng}`,
+          });
+        },
+        (error) => {
+          console.error('Error getting location', error);
+          alert('Unable to retrieve your location. Please try again.');
+        },
+        {
+          enableHighAccuracy: true, 
+          timeout: 10000, 
+          maximumAge: 0,  
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
   }
 
 

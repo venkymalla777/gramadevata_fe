@@ -5,7 +5,7 @@
 	</ngx-spinner>
     <div class="container  ">
         <div class="row mb-2 text-center">
-            <div class="col-12 " style="margin-top: 70px;">
+            <div class="col-12 " style="margin-top: 110px;">
                 <img src="../../../assets/gramdevatha-latest.jpg" class="img-fluid responsive-image" alt="Temple Image" style="border-radius: 31px; text-align: center;">
             </div>
         </div>
@@ -162,7 +162,7 @@
                             <h1 style="font-size: 30px; font-weight: bold;" class="text-center">Goshalas</h1>
                             <div class="row text-center">
                                 <div *ngFor="let goshalaCategory of goshalaCategories" class="col-6 col-md-3 mt-3">
-                                    <a (click)="navigateToGoshalaCategoryDetail()">
+                                    <a (click)="navigateToGoshalaFilterCategoryDetail(goshalaCategory._id)">
                                         <img [src]="goshalaCategory.pic ? goshalaCategory.pic : 'assets/ohm.jpg'"
                                              alt="image"
                                              class="img-fluid img-thumbnail mx-2"
@@ -186,7 +186,7 @@
                             <h1 style="font-size: 30px; font-weight: bold;" class="text-center">Events</h1>
                             <div class="row text-center">
                                 <div *ngFor="let eventcategorydata of eventCategories" class="col-6 col-md-3 mt-3">
-                                    <a (click)="navigateToEventsCategoryDetail()">
+                                    <a (click)="navigateToEventFilterCategoryDetail(eventcategorydata._id)">
                                         <img [src]="eventcategorydata.pic ? eventcategorydata.pic : 'assets/ohm.jpg'"
                                              alt="image"
                                              class="img-fluid img-thumbnail mx-2"

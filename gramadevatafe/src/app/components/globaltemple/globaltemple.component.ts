@@ -76,9 +76,9 @@ export class GlobaltempleComponent implements OnInit, OnDestroy {
 
   
     // If a category ID is selected, apply filters
-    if (this.selectedCategoryId) {
-      this.applyFilters();
-    }
+    // if (this.selectedCategoryId) {
+    //   this.applyFilters();
+    // }
 
   }
 

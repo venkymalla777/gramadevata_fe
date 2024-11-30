@@ -18,6 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NotificationHelper } from '../../commons/notification';
 
 @Component({
   selector: 'app-profile',
@@ -51,6 +52,12 @@ export class ProfileComponent {
   profile:any;
   user: any;
   Isuser: any;
+  templeId: any;
+  templeStatus: any;
+  goshalaId: any;
+  goshalaStatus: any;
+  eventId: any;
+  eventStatus: any;
 
 
   constructor(
@@ -62,7 +69,8 @@ export class ProfileComponent {
      private dialog:MatDialog,
      private sharedService:SharedService,
      private route:ActivatedRoute,
-     private modal:NzModalService
+     private modal:NzModalService,
+     private notificationHelper:NotificationHelper
     ){}
     ngOnInit(): void {
       // Subscribe to triggerFetchVillageData$ observable and call fetchprofiledata when triggered
@@ -341,8 +349,53 @@ imagePaths: string[] = [
   '../../../assets/village4.jpg'
 ];
 
-navigateTempleDetail(_id:string):void{
-  this.router.navigate(["getbytemples",_id])
+// navigateTempleDetail(_id:string):void{
+//   this.router.navigate(["getbytemples",_id])
+// }
+
+navigateTempleDetail(data: any): void {
+  this.templeId = data._id;
+  this.templeStatus = data.status;
+
+  
+  if (this.templeStatus === 'INACTIVE') {
+    this.notificationHelper.showSuccessNotification('This temple is under review', '');
+    return;
+  }
+
+
+  this.router.navigate(['getbytemples', this.templeId]);
+}
+
+navigateTogoshaladetail(goshaladata: any): void {
+  
+  this.goshalaId = goshaladata._id;
+  this.goshalaStatus = goshaladata.status;
+  console.log("deddec",this.goshalaStatus)
+
+  
+  if (this.goshalaStatus === 'INACTIVE') {
+    this.notificationHelper.showSuccessNotification('This goshala is under review', '');
+    return;
+  }
+
+
+  this.router.navigate(['getbygoshala', this.goshalaId])
+    .then(() => console.log("Navigation successful"))
+    .catch(error => console.error("Navigation failed:", error));
+}
+
+navigateEventdata(event:any):void{
+  this.eventId = event._id;
+  this.eventStatus = event.status;
+  console.log("deddec",this.goshalaStatus)
+
+  
+  if (this.eventStatus === 'INACTIVE') {
+    this.notificationHelper.showSuccessNotification('This event is under review', '');
+    return;
+  }
+  this.router.navigate(['detailviewevent',event])
 }
 
 navigateToVillageDetail(_id:any):void{
@@ -364,6 +417,7 @@ onsubmit(): void {
       console.log('Images added:', data);
       this.fetchprofiledata();
       this.bannerFileList = [];
+      this.imagesform.reset()
     },
     error: (err) => {
       console.error('Error adding images:', err);
@@ -399,18 +453,10 @@ updateroots(): void {
 }
 
 
-navigateTogoshaladetail(_id: string): void {
-  console.log("Clicked", _id);
-  console.log("Navigating to temples with ID:", _id);
-  this.router.navigate(['getbygoshala', _id])
-    .then(() => console.log("Navigation successful"))
-    .catch(error => console.error("Navigation failed:", error));
-}
 
 
-navigateEventdata(event:string):void{
-  this.router.navigate(['detailviewevent',event])
-}
+
+
 
 
 

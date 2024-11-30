@@ -24,6 +24,7 @@ export class OnlymemberComponent {
   isMemberIn = false
   isPujariIn = false
   full_name: any;
+  userId: any;
 
 
 
@@ -47,6 +48,7 @@ export class OnlymemberComponent {
   }
 
   ngOnInit():void{
+    this.getProfileData();
     this.initializeForm()
   }
 
@@ -66,7 +68,7 @@ export class OnlymemberComponent {
       
       father_name: ['', Validators.required],
      
-      contact_number: ['',Validators.required],
+      contact_number: ['', [Validators.required,Validators.pattern('^[0-9]{10}$'),],],
       // dob: ['',Validators.required],
       gender: ['',Validators.required],
       type:'MEMBER',
@@ -81,47 +83,37 @@ export class OnlymemberComponent {
    
   }
 
+  get contactNumber() {
+    return this.memberform.get('contact_number');
+  }
 
-  // onSubmit(): void {
-    
-  //     const userId = localStorage.getItem('user');
-     
+
+  getProfileData() {
+    this.userId = localStorage.getItem('user');
+    this.userservice.profiledata(this.userId).subscribe((response: any) => {
+      this.memberform.patchValue({
+        full_name: response.full_name,
+        father_name: response.father_name,
+        gender: response.gender,
+        // dob: response.dob,
+        contact_number: response.contact_number,
+        email: response.email,
+        marital_status:response.marital_status,
+        gotram:response.gotram,
+        siblings:response.siblings,
+        children:response.children,
+        wife:response.wife,
+        husband:response.husband,
+        account_type:response.account_type
+
+
+      });
+
       
-  //     const connectdata  = this.memberform.value;
-  
-  //     this.memberservice.AddMember(connectdata, userId).subscribe(
-  //       response => {
-  //         console.log('Member added successfully:', response);
-  //       this.userservice.isMemberIn = true
-  //         this.memberform.reset();
-  //         this.dialogRef.close();
-  //         // this.memberservice.refreshvillagedata();
-          
-  //         this.memberservice.connect(connectdata).subscribe(
-  //           response => {
-  //             console.log(response);
-  //             if (this.apicall=="Connection Temples"){
-  //               this.sharedservice.fetchTempleData()
-  //             }else {
-  //               this.sharedservice.fetchByTempleData()
-  //             }
-  //           },
-  //           error => {
-  //             console.error('Error connecting:', error);
-  //             // Handle connection error here
-  //           }
-  //         );
-  //       },
-  //       error => {
-  //         console.error('Error adding member:', error);
-  //         this.memberform.markAllAsTouched();
+    });
+  }
 
-  //         // Handle add member error here
-  //       }
-  //     );
-    
 
-  // }
 
 
   onSubmit(): void {

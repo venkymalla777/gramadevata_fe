@@ -267,7 +267,7 @@ export class UpdateprofileComponent {
   initializeForm() {
     this.profileForm = this.fb.group({
       full_name: ['', Validators.required],
-      father_name: [''],
+      father_name: ['',Validators.required],
       gender: [''],
       // dob: [''],
       contact_number: ['', Validators.required],
@@ -279,6 +279,7 @@ export class UpdateprofileComponent {
       husband: [''],
       wife: [''],
       children: [''],
+      account_type:['']
     });
   }
 
@@ -297,7 +298,8 @@ export class UpdateprofileComponent {
         siblings:response.siblings,
         children:response.children,
         wife:response.wife,
-        husband:response.husband
+        husband:response.husband,
+        account_type:response.account_type
 
 
       });
@@ -347,6 +349,7 @@ export class UpdateprofileComponent {
           this.router.navigate(['/profile', this.userId]); // Navigate to the updated profile
           this.full_name = this.profileForm.get('full_name')?.value || ''; 
           localStorage.setItem('full_name', this.full_name);
+          window.location.reload();
          
           if (this.dialogRef) {
             this.dialogRef.close(); // Close the dialog if open

@@ -1,15 +1,13 @@
 
-
-
-<nav class="navbar navbar-expand-lg py-2 bg-light fixed-top" style="z-index: 1;">
-    <div class="container">
+<nav class="navbar navbar-expand-lg py-2 bg-light fixed-top " style="z-index: 1;">
+    <div class="container" style="padding-top: 30px;">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="d-md-flex align-items-center logo-row d-none d-md-inline-block">
-            <img src="../../../assets/Screenshot 2024-08-07 105609.png" alt="Logo" routerLink="/home" style="width: 70px; height: 70px; vertical-align: middle; margin-right: 120px;">
+            <img src="../../../assets/Screenshot 2024-08-07 105609.png" alt="Logo" routerLink="/home" style="width: 70px; height: 70px; vertical-align:middle ; margin-right: 120px;">
 
             <a href="https://thehindusworld.com/home" target="_blank">
             <img src="../../../assets/THE HINDU'S WORLD logo.png" alt="HINDU PULSE logo" style="width: 70px; height: 70px;">
@@ -83,8 +81,6 @@
                     </ul>
                     
                     
-                    
-                    
                     <li class="nav-item">
                         <a data-bs-dismiss="offcanvas" class="nav-link " routerLink="globaltemples" routerLinkActive="custom-active" (click)="navigateToTempleFilters()">Temples</a>
                     </li>
@@ -97,12 +93,15 @@
                     <li class="nav-item">
                         <a data-bs-dismiss="offcanvas" class="nav-link" routerLink="villages" routerLinkActive="custom-active" (click)="openContectYourOrginDialog()">Connect Your Village/Area</a>
                     </li>
+                    <li class="nav-item dropdown mt-2">
 
-                    <li class="nav-item">
-                        <a data-bs-dismiss="offcanvas" class="nav-link" routerLink="connections"
-                             routerLinkActive="custom-active" (click)="openTempleDialog()">Connect Your Temple
-                            </a>
+                    <a
+                         aria-labelledby="navbarDropdownLanguage">
+                            <div id="google_translate_element" class=""></div>
+                    </a>
                     </li>
+
+                   
 
 
                     
@@ -111,36 +110,10 @@
                             <a data-bs-dismiss="offcanvas" id="signUp" [ngClass]="getButtonClasses()" (click)="openSignupDialog()" style="color: white; background-color: orange;">Sign In</a>
                         </li>
                     </div>
-                    <!-- <div *ngIf="authenticationService.isLoggedIn;" class="nav-item-container d-flex">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" id="navbarDropdown" role="button" style="margin-top: 0px;" data-bs-toggle="dropdown" aria-expanded="false">
-                                    
-                                    <img [src]="profile_pic || '../../../../assets/profile1.webp'"
-                                    class="rounded-circle"
-                                    [ngStyle]="{ 'height': '35px', 'width': '35px', 'border-radius': '50%',  }"
-                                    alt="profile image"
-                                    (error)="handleProfileImageError($event)">
-                               
-                                    <p>{{username}}</p>
-                                     
-                                </a>
-                                
-                                <ul class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
-                                    <li class="nav-item">
-                                        <a data-bs-dismiss="offcanvas" class="nav-link" (click)="navigateTo()" routerLinkActive="active">View Profile</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a data-bs-dismiss="offcanvas" class="nav-link" (click)="doLogout()" routerLinkActive="active">Logout</a>
-                                    </li>
-                                </ul>
-                              
-                                
-                                
-                                
-                            </li>
-                        </ul>
-                    </div> -->
+
+                    
+                      
+                  
                     <div *ngIf="authenticationService.isLoggedIn" class="nav-item-container d-flex align-items-center">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
@@ -148,7 +121,7 @@
                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img [src]="profile_pic || '../../../../assets/profile1.webp'"
                                          class="rounded-circle"
-                                         [ngStyle]="{ 'height': '35px', 'width': '35px', 'margin-top': '-10px' }"
+                                         [ngStyle]="{ 'height': '35px', 'width': '35px', 'margin-top': '-10px', }"
                                          alt="Profile image"
                                          (error)="handleProfileImageError($event)">
                                     <span class="mt-1">{{username}}</span>
@@ -165,12 +138,9 @@
                             </li>
                         </ul>
                     </div>
-                    
-                    
+ 
                 </ul>
             </div>
         </div>
     </div>
 </nav>
-
-

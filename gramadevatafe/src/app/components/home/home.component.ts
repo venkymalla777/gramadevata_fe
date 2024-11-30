@@ -223,6 +223,18 @@ navigateToTempleFilters():void{
   )
 }
 
+navigateToGoshalaFilterCategoryDetail(goshalaCategory: any): void {
+  let userId = this.authenticationService.getCurrentUser();
+    if (userId == undefined || userId == null) {
+      this.authenticationService.showLoginModal()
+      return;
+    }
+  
+  this.router.navigate(["goshala", goshalaCategory],)
+    .then(() => console.log("Navigation successful"))
+    .catch(error => console.error("Navigation failed:", error));
+}
+
 
 navigateToGoshalaCategoryDetail():void{
   let userId = this.authenticationService.getCurrentUser();
@@ -231,6 +243,19 @@ navigateToGoshalaCategoryDetail():void{
       return;
     }
   this.router.navigate(["goshala",'AllGoshalas'])
+  .then(() => console.log("Navigation successful"))
+    .catch(error => console.error("Navigation failed:", error));
+}
+
+
+
+navigateToEventFilterCategoryDetail(event:any):void{
+  let userId = this.authenticationService.getCurrentUser();
+    if (userId == undefined || userId == null) {
+      this.authenticationService.showLoginModal()
+      return;
+    }
+  this.router.navigate(["events",event])
   .then(() => console.log("Navigation successful"))
     .catch(error => console.error("Navigation failed:", error));
 }

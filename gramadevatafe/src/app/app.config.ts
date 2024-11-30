@@ -7,6 +7,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { tokenInterceptor } from './interceptors/token.interceptor';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),

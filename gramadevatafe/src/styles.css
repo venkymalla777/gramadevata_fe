@@ -1,2 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+
+/* Hide Google Translate branding */
+.goog-te-banner-frame.skiptranslate, 
+.goog-te-gadget span {
+    display: none !important;
+}
+
+/* Prevent extra spacing after hiding */
+body {
+    top: 0px !important;
+}
+/* Hide "Powered by Google Translate" */
+.goog-logo-link {
+    display: none !important;
+}
+
+/* Adjust the container after hiding */
+.goog-te-gadget {
+    font-size: 0 !important;
+}
+
+
+

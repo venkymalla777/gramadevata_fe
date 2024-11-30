@@ -1,4 +1,4 @@
-<div class="container py-4 header-m mt-5">
+<div class="container py-4 header-m " style="margin-top: 100px;">
   <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
 			type="ball-spin-clockwise">
 		</ngx-spinner>
@@ -29,7 +29,7 @@
                                 <option *ngFor="let option of goshalaCategoryoptions" [value]="option.value">{{ option.label }}</option>
                               </select>
                               <div *ngIf="goshalaForm.get('category')?.invalid && (goshalaForm.get('category')?.dirty || goshalaForm.get('category')?.touched)" class="text-danger">
-                                Goshala name is required
+                                Goshala Category is required
                               </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                           <label for="goshalanmae">Contact Name*</label>
                           <input type="text" class="form-control" id="templeName" formControlName="contact_name" placeholder="Enter the Contact's name">
                           <div *ngIf="goshalaForm.get('contact_name')?.invalid && (goshalaForm.get('contact_name')?.dirty || goshalaForm.get('contact_name')?.touched)" class="text-danger">
-                            Contact Name name is required
+                            Contact Name is required
                           </div>
                       </div>
                   </div>
@@ -63,6 +63,42 @@
                         </div>
                        </div> 
                     </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="map_location">Goshala Map Location (URL) *</label>
+                    <div class="input-group">
+                      <input
+                        type="url"
+                        class="form-control"
+                        id="map_location"
+                        formControlName="map_location"
+                        placeholder="https://example.com/map"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          type="button"
+                          class="btn btn-outline-secondary"
+                          (click)="getCurrentLocation()"
+                          title="Fetch Current Location"
+                        >
+                          📍 Get Location
+                        </button>
+                      </div>
+                    </div>
+                    <small class="form-text text-muted">
+                      Please provide a valid URL for the Goshala's map location.
+                    </small>
+                    <div
+                      *ngIf="goshalaForm.get('map_location')?.invalid && (goshalaForm.get('map_location')?.dirty || goshalaForm.get('map_location')?.touched)"
+                      class="text-danger"
+                    >
+                      Please enter a valid URL for the Goshala Map Location.
+                    </div>
+                  </div>
+                </div>
               </div>
 
                 <div class="row">

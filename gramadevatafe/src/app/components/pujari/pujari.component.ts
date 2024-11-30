@@ -29,6 +29,7 @@ export class PujariComponent {
   certificatePattern: string = '';
   isMemberIn = false
   isPujariIn = false
+  userId: any;
 
  
 
@@ -49,7 +50,7 @@ export class PujariComponent {
 
 
   ngOnInit(): void {
-    
+    this.getProfileData();
     this.initializeForm();
     this.connectionsForm();
     this.isMemberUser();
@@ -108,7 +109,8 @@ export class PujariComponent {
       father_name: ['', Validators.required],
       type:"PUJARI",
       is_member:"true",
-      contact_number: ['',Validators.required],
+      // contact_number: ['',Validators.required],
+      contact_number: ['', [Validators.required,Validators.pattern('^[0-9]{10}$'),],],
       // dob: ['',Validators.required],
       gender: ['',Validators.required],
       pujari_certificate: ["", Validators.required],
@@ -125,6 +127,36 @@ export class PujariComponent {
     });
     // this.villageroleoptions = enumToMap(your_role_in_our_village);
     // this.memberform.controls['your_role_in_our_village'].setValue('Villager');
+  }
+
+  get contactNumber() {
+    return this.memberform.get('contact_number');
+  }
+
+
+  getProfileData() {
+    this.userId = localStorage.getItem('user');
+    this.userservice.profiledata(this.userId).subscribe((response: any) => {
+      this.memberform.patchValue({
+        full_name: response.full_name,
+        father_name: response.father_name,
+        gender: response.gender,
+        // dob: response.dob,
+        contact_number: response.contact_number,
+        email: response.email,
+        marital_status:response.marital_status,
+        gotram:response.gotram,
+        siblings:response.siblings,
+        children:response.children,
+        wife:response.wife,
+        husband:response.husband,
+        account_type:response.account_type
+
+
+      });
+
+      
+    });
   }
 
 

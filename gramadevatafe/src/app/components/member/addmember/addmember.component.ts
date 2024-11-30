@@ -31,6 +31,7 @@ export class AddmemberComponent implements OnInit {
   isMember=false;
   isMemberIn=false
   full_name: any;
+  userId: any;
 
   
 
@@ -49,6 +50,7 @@ export class AddmemberComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getProfileData();
     this.initializeForm();
     this.connectionsForm();
     this.isMemberUser();
@@ -155,36 +157,37 @@ export class AddmemberComponent implements OnInit {
       email:['']
       
     });
-    // this.villageroleoptions = enumToMap(your_role_in_our_village);
-    // this.memberform.controls['your_role_in_our_village'].setValue('Villager');
+    
   }
 
-  // onSubmit(): void {
-  //   if(this.userservice.isMemberIn===false){}
-  //   const userId = localStorage.getItem('user');
-  //   console.log(userId,"uuuuuuuuuuuuu")
-  //   const {belongs_as,description,village,user, ...memberData} = this.memberform.value;
-  //   const {full_name,father_name,contact_number,dob, ...connectdata} = this.memberform.value
-  //   this.memberservice.AddMember(memberData,userId).subscribe(
-  //     response => {
-  //       console.log('Member added successfully:', response);
-  //       this.memberform.reset();
-  //       this.dialogRef.close();
-        
-  //       this.memberservice.connect(connectdata).subscribe(
-  //         response =>{
-  //           console.log(response)
-  //         }
-  //       )
-  //     },
+
+  getProfileData() {
+    this.userId = localStorage.getItem('user');
+    this.userservice.profiledata(this.userId).subscribe((response: any) => {
+      this.memberform.patchValue({
+        full_name: response.full_name,
+        father_name: response.father_name,
+        gender: response.gender,
+        // dob: response.dob,
+        contact_number: response.contact_number,
+        email: response.email,
+        marital_status:response.marital_status,
+        gotram:response.gotram,
+        siblings:response.siblings,
+        children:response.children,
+        wife:response.wife,
+        husband:response.husband,
+        account_type:response.account_type
+
+
+      });
+
       
-      
-  //     error => {
-  //       console.error('Error adding member:', error);
-  //       // Handle error here
-  //     }
-  //   );
-  // }
+    });
+  }
+
+
+ 
 
   onSubmit(): void {
     if (localStorage.getItem('is_member') === 'false') {

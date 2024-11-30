@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../../services/eventservice/event.service';
 import { AddSpace1Component } from '../add-space1/add-space1.component';
 import { AddSpaceComponent } from '../add-space/add-space.component';
+import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-detailviewevent',
@@ -27,6 +29,8 @@ export class DetailvieweventComponent {
     private fb:FormBuilder,
     private route:ActivatedRoute,
     private eventservice:EventService,
+    private dialog: MatDialog,
+
   ){}
 
   
@@ -56,26 +60,76 @@ export class DetailvieweventComponent {
   }
   
  
-  onSubmit() {
+  // onSubmit() {
     
-    const commentdata  = this.commentform.value;
+  //   const commentdata  = this.commentform.value;
 
-    this.commonservice.addcomment(commentdata).subscribe(
+  //   this.commonservice.addcomment(commentdata).subscribe(
+  //     response => {
+        
+  //       this.geteventdata();
+  //       this.commentform.reset();
+        
+  //       // Clear the comment text box or any other UI updates
+  //       this.commentText = '';
+  //     },
+  //     error => {
+  //       console.error('Error posting comment:', error);
+  //       // Handle error as needed
+  //     }
+  //   );
+  // }
+
+
+
+  onSubmit() {
+    const ismemberin = localStorage.getItem("is_member") === "true";
+    const commentdata  = this.commentform.value;
+ if(ismemberin){
+  
+ 
+
+    
+  const comment = {
+    body: commentdata.body,
+    event: this.route.snapshot.paramMap.get("id"),
+    user:localStorage.getItem('user')
+};
+
+  
+
+    this.commonservice.addcomment(comment).subscribe(
       response => {
         
         this.geteventdata();
         this.commentform.reset();
+        console.log(response,"11111111111111")
         
         // Clear the comment text box or any other UI updates
-        this.commentText = '';
+        // this.commentText = '';
       },
       error => {
         console.error('Error posting comment:', error);
         // Handle error as needed
       }
     );
+  }else {
+    this.openmemberDialog();
+  }
   }
   
+  openmemberDialog(): void {
+    console.log('sssssssssss');
+    const dialogRef = this.dialog.open(OnlymemberComponent, {
+      data: { displayName: 'signup' },
+      autoFocus: false,
+      backdropClass: 'dialog-backdrop',
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      // Handle after dialog close actions here
+    });
+  }
 
   handleImageError(event: Event) {
     const imgElement = event.target as HTMLImageElement;

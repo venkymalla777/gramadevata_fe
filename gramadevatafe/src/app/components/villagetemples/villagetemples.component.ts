@@ -54,6 +54,10 @@ export class VillagetemplesComponent {
   isPujariConnected : any;
   templeId: any;
   templeStatus: any;
+  goshalaId: any;
+  goshalaStatus: any;
+  eventId: any;
+  eventStatus: any;
   
 
 
@@ -357,23 +361,45 @@ navigateTotempleDetail(data: any): void {
 
 
 
-navigategoshaladata(goshala:string):void{
-  let userId = this.authenticationService.getCurrentUser();
-    if (userId == undefined || userId == null) {
-      this.authenticationService.showLoginModal()
-      return;
-    }
-  this.router.navigate(['detailviewgoshala'],{state:{goshala}})
+navigategoshaladata(goshala: any): void {
+  this.goshalaId = goshala._id;
+  this.goshalaStatus = goshala.status;
+  
+
+  // Check if the goshala is inactive
+  if (this.goshalaStatus === 'INACTIVE') {
+    this.notificationHelper.showSuccessNotification('This Goshala is under review', '');
+    return;
+  }
+
+  // Check if the user is logged in
+  const userId = this.authenticationService.getCurrentUser();
+  if (!userId) {
+    this.authenticationService.showLoginModal();
+    return;
+  }
+
+  // Navigate to the detail view with the goshala ID
+  this.router.navigate(['getbygoshala',this.goshalaId]);
 }
 
-navigateEventdata(event:string):void{
+
+navigateEventdata(event:any):void{
+
+  this.eventId = event._id;
+  this.eventStatus = event.status;
   
+  if (this.eventStatus === 'INACTIVE') {
+    this.notificationHelper.showSuccessNotification('This Event is under review', '');
+    return;
+  }
+
   let userId = this.authenticationService.getCurrentUser();
     if (userId == undefined || userId == null) {
       this.authenticationService.showLoginModal()
       return;
     }
-  this.router.navigate(['detailviewevent',event])
+  this.router.navigate(['detailviewevent',this.eventId])
 }
 
 disconnect(){
@@ -398,14 +424,14 @@ NavigateToChatRoom(): void {
   // Check if user is a member
   if (!isMemberIn) {
     // this.openmemberDialog();
-    this.notificationHelper.showSuccessNotification('please Conects as member in this village than Chat with vilage Members', '');
+    this.notificationHelper.showSuccessNotification('please Connects as member in this village than Chat with village Members', '');
     return;
   }
 
   // Check if the user is connected
   if (!this.isConnected) {
     // this.openmemberDialog();
-    this.notificationHelper.showSuccessNotification('please Conects as member in this village than Chat with vilage Members', '');
+    this.notificationHelper.showSuccessNotification('please Connects as member in this village than Chat with village Members', '');
     return;
   }
 

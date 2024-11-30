@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-group">
                         <label for="contact_number">Contact Number*</label>
                         <input type="text" class="form-control" formControlName="contact_number" placeholder="Enter the contact number">
@@ -58,7 +58,34 @@
                             Contact Number required
                           </div>
                     </div>
-                </div>
+                </div> -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="contact_number">Contact Number*</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="contact_number"
+                        placeholder="Enter the contact number"
+                      />
+                      <!-- Error messages for validation -->
+                      <div
+                        *ngIf="
+                          contactNumber?.invalid &&
+                          (contactNumber?.dirty || contactNumber?.touched)
+                        "
+                        class="text-danger"
+                      >
+                        <div *ngIf="contactNumber?.errors?.['required']">
+                          Contact Number is required
+                        </div>
+                        <div *ngIf="contactNumber?.errors?.['pattern']">
+                          Contact Number must be a 10-digit number
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
             </div>
             <div class="row mt-2">
                 <!-- <div class="col-md-6">

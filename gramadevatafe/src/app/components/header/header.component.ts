@@ -1,22 +1,6 @@
-// // import { Component } from '@angular/core';
-// // import { CommonModule } from '@angular/common';
-
-
-// // @Component({
-// //   selector: 'app-header',
-// //   standalone: true,
-// //   imports: [CommonModule],
-// //   templateUrl: './header.component.html',
-// //   styleUrl: './header.component.css'
-// // })
-// // export class HeaderComponent {
-
-// // }
-
-
 
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Renderer2 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
@@ -33,7 +17,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from '../../services/authenticationservice/authentication.service';
 import { ConnectyourtempleComponent } from '../connectyourtemple/connectyourtemple/connectyourtemple.component';
 import { UserService } from '../../services/userservice/user.service';
-import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
+import {  TranslateModule } from '@ngx-translate/core';
+
+
 
 
 @Component({
@@ -48,7 +34,10 @@ import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
            SignupComponent,
            ConnectyourorginComponent,
            NzAvatarModule,
-           NzDropDownModule
+           NzDropDownModule,
+           TranslateModule,
+           
+           
             ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -65,7 +54,8 @@ export class HeaderComponent {
     private dialog:MatDialog,
     protected authenticationService:AuthenticationService,
     private router:Router,
-    private userservice:UserService
+    private userservice:UserService,
+    private renderer: Renderer2
   ){
   }
 
@@ -76,7 +66,8 @@ export class HeaderComponent {
   }
 
   ngOnInit(){
-    this.profiledata()
+    this.profiledata();
+    this.loadGoogleTranslate();
     
   }
 
@@ -98,6 +89,34 @@ export class HeaderComponent {
       return ['btn', 'btn-primary', 'rounded-pill'];
     }
   }
+
+
+  loadGoogleTranslate() {
+    // Declare googleTranslateElementInit function if it doesn't exist
+    if (!(window as any).googleTranslateElementInit) {
+      (window as any).googleTranslateElementInit = () => {
+        new (window as any).google.translate.TranslateElement(
+          { pageLanguage: 'en', includedLanguages: 'en,te,hi,kn,ta,ml,or,bn,as,gu' },
+          'google_translate_element'
+        );
+      };
+    }
+
+    // Check if the Google Translate script is already loaded
+    if (!window.google || !window.google.translate) {
+      const script = this.renderer.createElement('script');
+      script.src =
+        '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.async = true;
+      this.renderer.appendChild(document.body, script);
+    } else {
+      // Manually trigger initialization if the script is already loaded
+      (window as any).googleTranslateElementInit();
+    }
+  }
+
+
+  
 
 
 

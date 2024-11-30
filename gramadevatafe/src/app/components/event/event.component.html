@@ -190,7 +190,7 @@
 </section> -->
 
 
-<div class="container mt-5">
+<div class="container" style="margin-top: 70px;">
   <div class="row">
 
 
@@ -225,7 +225,7 @@
                 <nz-form-item>
                   <nz-form-control nzErrorTip="Please select a Country">
                    
-                    <nz-select formControlName="country" nzPlaceHolder="Select Country Temples"
+                    <nz-select formControlName="country" nzPlaceHolder="Select Country Events"
                       [nzShowSearch]="true" >
                       <nz-option *ngFor="let option of CountryOptions"
                         [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
@@ -238,7 +238,7 @@
                 <nz-form-item>
                   <nz-form-control nzErrorTip="Please select a state">
                    
-                    <nz-select formControlName="state" nzPlaceHolder="Select State Temples"
+                    <nz-select formControlName="state" nzPlaceHolder="Select State Events"
                       [nzShowSearch]="true" >
                       <nz-option *ngFor="let option of StateOptions"
                         [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
@@ -250,7 +250,7 @@
                 <nz-form-item>
                   <nz-form-control nzErrorTip="Please select a District">
                   
-                    <nz-select formControlName="district" nzPlaceHolder="Select District Temples"
+                    <nz-select formControlName="district" nzPlaceHolder="Select District Events"
                       [nzShowSearch]="true" >
                       <nz-option *ngFor="let option of DistrictOptions"
                         [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
@@ -262,7 +262,7 @@
                 <nz-form-item>
                   <nz-form-control nzErrorTip="Please select a state">
                   
-                    <nz-select formControlName="mandal" nzPlaceHolder="Select Mandal Temples"
+                    <nz-select formControlName="mandal" nzPlaceHolder="Select Mandal Events"
                       [nzShowSearch]="true" >
                       <nz-option *ngFor="let option of MandalOptions"
                         [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
@@ -274,7 +274,7 @@
                 <nz-form-item>
                   <nz-form-control nzErrorTip="Please select a state">
                     
-                    <nz-select formControlName="village" nzPlaceHolder="Select village Temples"
+                    <nz-select formControlName="village" nzPlaceHolder="Select village Events"
                       [nzShowSearch]="true" >
                       <nz-option *ngFor="let option of VillageOptions"
                         [nzValue]="option.value" [nzLabel]="option.label"></nz-option>

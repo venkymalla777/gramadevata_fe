@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 120px; ">
+<div class="container" style="margin-top: 150px; ">
   <!-- <div class="row">
     <div class="col-md-4 col-sm-12 text-center">
       <img [src]="useraddedtemples?.profile_pic || '../../../../assets/profile1.webp'"
@@ -20,7 +20,7 @@
         <p class="text-start">Marital status  :{{useraddedtemples?.marital_status}}</p>
 
         <p class="text-start">gotram  :{{useraddedtemples?.gotram}}</p>
-        <p class="text-start">siblings  :{{useraddedtemples?.siblings}}</p>
+        <p cl ass="text-start">siblings  :{{useraddedtemples?.siblings}}</p>
         <p class="text-start">children  :{{useraddedtemples?.children}}</p>
         <p class="text-start">husband  :{{useraddedtemples?.husband}}</p>
         <p class="text-start">wife  :{{useraddedtemples?.wife}}</p>
@@ -82,6 +82,7 @@
             <p class="text-start" *ngIf="useraddedtemples?.children">Children: {{useraddedtemples.children}}</p>
             <p class="text-start" *ngIf="useraddedtemples?.husband">Husband: {{useraddedtemples.husband}}</p>
             <p class="text-start" *ngIf="useraddedtemples?.wife">Wife: {{useraddedtemples.wife}}</p>
+            <p class="text-start" *ngIf="useraddedtemples?.gotram">Wife: {{useraddedtemples.gotram}}</p>
           </div>
         </div>
         
@@ -176,7 +177,7 @@
           class="img-fluid rounded"
           alt="Image"
         />
-        <div class="overlay-icons">
+        <div class="overlay-icons" *ngIf="Isuser">
           <i nz-icon nzType="eye" class="icon-view-delete text-white me-2" (click)="onViewImage(i)"></i>
           <i nz-icon nzType="delete" class="icon-view-delete text-white" (click)="onDeleteImage(i)"></i>
         </div>
@@ -303,7 +304,7 @@
       <div>
           <div *ngFor="let addedtemples of addedtemples" style="display: inline-block; margin-right: 15px;">
               <div class="image-container" style="width: 10vh; text-align: center;">
-                  <a (click)="navigateTempleDetail(addedtemples._id)">
+                  <a (click)="navigateTempleDetail(addedtemples)">
                       <img [src]="addedtemples.image_location[0] ? addedtemples.image_location[0] : 'assets/ohm.jpg'" 
                            class="img-fluid rounded" 
                            style="height: 10vh; width: 10vh; border-radius: 20px;" 
@@ -326,19 +327,12 @@
     <div>
       <h4>Your Added Goshalas</h4>
     </div>
-    <!-- <div class="col-4 col-md-1 mb-3" *ngFor="let goshaladata of goshaladata;">
-      <div class="text-center">
-        <a (click)="navigateTogoshaladetail(goshaladata._id)" >
-          <img [src]="goshaladata.image_location ? goshaladata.image_location : 'assets/ohm.jpg'" style="height: 10vh; width: 10vh; border-radius:20px;" class="img-fluid rounded" alt="image" (error)="handleImageError($event)">
-      </a>
-        <p class="text-center">{{goshaladata.name}}</p>
-      </div>
-    </div> -->
+
     <div style="overflow-x: auto; white-space: nowrap;">
       <div>
           <div *ngFor="let goshaladata of goshaladata" style="display: inline-block; margin-right: 15px;">
               <div class="image-container" style="width: 10vh; text-align: center;">
-                  <a (click)="navigateTogoshaladetail(goshaladata._id)">
+                  <a (click)="navigateTogoshaladetail(goshaladata)">
                       <img [src]="goshaladata.image_location ? goshaladata.image_location : 'assets/ohm.jpg'" 
                            class="img-fluid rounded" 
                            style="height: 10vh; width: 10vh; border-radius: 20px;" 
@@ -365,7 +359,7 @@
       <div>
           <div *ngFor="let eventdata of eventdata" style="display: inline-block; margin-right: 15px;">
               <div class="image-container" style="width: 10vh; text-align: center;">
-                  <a (click)="navigateEventdata(eventdata._id)">
+                  <a (click)="navigateEventdata(eventdata)">
                       <img [src]="eventdata.image_location ? eventdata.image_location : 'assets/ohm.jpg'" 
                            class="img-fluid rounded" 
                            style="height: 10vh; width: 10vh; border-radius: 20px;" 

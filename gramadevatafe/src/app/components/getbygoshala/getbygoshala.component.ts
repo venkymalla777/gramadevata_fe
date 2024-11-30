@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule,NgxSpinnerService } from 'ngx-spinner';
 import { AddSpaceComponent } from '../add-space/add-space.component';
 import { AddSpace1Component } from '../add-space1/add-space1.component';
+import { OnlymemberComponent } from '../member/onlymember/onlymember.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -34,6 +36,8 @@ export class GetbygoshalaComponent {
      private commanservice:CommonService, 
      private fb:FormBuilder,
      private spinner: NgxSpinnerService,
+     private dialog: MatDialog,
+
     ){}
 
   ngOnInit():void{
@@ -60,34 +64,94 @@ export class GetbygoshalaComponent {
       }
     )
   }
-  openMap(url: string): void {
-    window.open(url, '_blank');
+  openMap(mapLocation: string) {
+    if (mapLocation) {
+      window.open(mapLocation, '_blank');
+    } else {
+      console.error('Map location URL is invalid');
+    }
   }
 
-  onSubmit() {
-    
-    const commentdata  = this.commentform.value;
+  // onSubmit() {
+  //       // const ismemberin = localStorage.getItem("is_member") === "true";
 
-    this.commanservice.addcomment(commentdata).subscribe(
+  //   const commentdata  = this.commentform.value;
+
+  //   this.commanservice.addcomment(commentdata).subscribe(
+  //     response => {
+        
+  //       this.fetchgoshala();
+  //       this.commentform.reset();
+        
+  //       // Clear the comment text box or any other UI updates
+  //       this.commentText = '';
+  //     },
+  //     error => {
+  //       console.error('Error posting comment:', error);
+  //       // Handle error as needed
+  //     }
+  //   );
+  // }
+
+
+    onSubmit() {
+    const ismemberin = localStorage.getItem("is_member") === "true";
+    const commentdata  = this.commentform.value;
+ if(ismemberin){
+  
+ 
+
+    
+  const comment = {
+    body: commentdata.body,
+    goshala: this.route.snapshot.paramMap.get("id"),
+    user:localStorage.getItem('user')
+};
+
+  
+
+    this.commanservice.addcomment(comment).subscribe(
       response => {
         
         this.fetchgoshala();
         this.commentform.reset();
+        console.log(response,"11111111111111")
         
         // Clear the comment text box or any other UI updates
-        this.commentText = '';
+        // this.commentText = '';
       },
       error => {
         console.error('Error posting comment:', error);
         // Handle error as needed
       }
     );
+  }else {
+    this.openmemberDialog();
+  }
+  }
+
+
+
+  openmemberDialog(): void {
+    console.log('sssssssssss');
+    const dialogRef = this.dialog.open(OnlymemberComponent, {
+      data: { displayName: 'signup' },
+      autoFocus: false,
+      backdropClass: 'dialog-backdrop',
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      // Handle after dialog close actions here
+    });
   }
 
   handleImageError(event: Event) {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = 'assets/g5.jpg';
   }
+
+
+  
   
   sharegetbytemple(temple: any) {
     if (!temple || !temple._id) {

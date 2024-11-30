@@ -3,7 +3,7 @@
 
 
 <section class="header-m">
-  <div class="container-fluid p-5 mt-5 ">
+  <div class="container-fluid p-5 " style="margin-top: 70px;">
       <div class="row">
 
             <div [ngClass]="{'d-none': !filtersVisible, 'd-md-block': true}" class="col-md-3 col-xl-2 mt-3 mb-4">
@@ -33,7 +33,7 @@
                     <div class="">
                       <nz-form-item>
                         <nz-form-control nzErrorTip="Please select a Country">
-                          <nz-select formControlName="country" nzPlaceHolder="Select Country Temples"
+                          <nz-select formControlName="country" nzPlaceHolder="Select Country Gosalas"
                             [nzShowSearch]="true" >
                             <nz-option *ngFor="let option of CountryOptions"
                               [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
@@ -45,7 +45,7 @@
                     <div class="">
                       <nz-form-item>
                         <nz-form-control nzErrorTip="Please select a state">
-                          <nz-select formControlName="state" nzPlaceHolder="Select State Temples"
+                          <nz-select formControlName="state" nzPlaceHolder="Select State Gosalas"
                             [nzShowSearch]="true" >
                             <nz-option *ngFor="let option of StateOptions"
                               [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
@@ -56,7 +56,7 @@
                     <div >
                       <nz-form-item>
                         <nz-form-control nzErrorTip="Please select a District">
-                          <nz-select formControlName="district" nzPlaceHolder="Select District Temples"
+                          <nz-select formControlName="district" nzPlaceHolder="Select District Gosalas"
                             [nzShowSearch]="true" >
                             <nz-option *ngFor="let option of DistrictOptions"
                               [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
@@ -67,7 +67,7 @@
                     <div >
                       <nz-form-item>
                         <nz-form-control nzErrorTip="Please select a state">
-                          <nz-select formControlName="mandal" nzPlaceHolder="Select Mandal Temples"
+                          <nz-select formControlName="mandal" nzPlaceHolder="Select Mandal Gosalas"
                             [nzShowSearch]="true" >
                             <nz-option *ngFor="let option of MandalOptions"
                               [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
@@ -78,7 +78,7 @@
                     <div >
                       <nz-form-item>
                         <nz-form-control nzErrorTip="Please select a state">
-                          <nz-select formControlName="village" nzPlaceHolder="Select village Temples"
+                          <nz-select formControlName="village" nzPlaceHolder="Select village Gosalas"
                             [nzShowSearch]="true" >
                             <nz-option *ngFor="let option of VillageOptions"
                               [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
